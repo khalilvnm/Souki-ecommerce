@@ -1,0 +1,53 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap'); */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Outfit", sans-serif;
+}
+
+.botnavbar>a.active {
+  color: #fff;
+  position: relative;
+}
+
+.botnavbar>a.active::before {
+  content: "";
+  height: 1px;
+  width: 70%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+}
+
+.search-section::-webkit-scrollbar {
+  width: 7px;
+}
+
+.search-section::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.search-section::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.sidebar .links a.active {
+  background-color: #006988;
+}
+
+.sidebar .links a.active svg {
+  color: white;
+}
+
+.sidebar .links a.active p {
+  color: white;
+}
+
+.botnavbar-responsive>a.active {
+  background-color: #006988;
+}
