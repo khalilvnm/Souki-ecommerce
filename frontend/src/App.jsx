@@ -3,12 +3,12 @@ import TopNavbar from './components/TopNavbar';
 import BotNavbar from './components/BotNavbar';
 import { Route, Routes, useMatch } from 'react-router-dom';
 import Home from './pages/Home';
-import Fashion from './pages/Fashion';
-import VideoGames from './pages/VideoGames';
-import Perfumes from './pages/Perfumes';
+import Vetement from './pages/Vetement';
+import Cuisine from './pages/Cuisine';
+import Accessoire from './pages/Accessoire';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
-import Electronics from './pages/Electronics';
+import Decoration from './pages/Decoration';
 import { ToastContainer } from 'react-toastify';
 import Footer from './components/Footer';
 import SingleProduct from './pages/SingleProduct';
@@ -42,14 +42,14 @@ const App = () => {
       }
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/fashion' element={<Fashion />} />
-        <Route path='/fashion/:category' element={<Fashion />} />
-        <Route path='/electronics' element={<Electronics />} />
-        <Route path='/electronics/:category' element={<Electronics />} />
-        <Route path='/video-games' element={<VideoGames />} />
-        <Route path='/video-games/:category' element={<VideoGames />} />
-        <Route path='/perfumes' element={<Perfumes />} />
-        <Route path='/perfumes/:category' element={<Perfumes />} />
+        <Route path='/vetement' element={<Vetement />} />
+        <Route path='/vetement/:category' element={<Vetement />} />
+        <Route path='/decoration' element={<Decoration />} />
+        <Route path='/decoration/:category' element={<Decoration />} />
+        <Route path='/Cuisine' element={<Cuisine />} />
+        <Route path='/Cuisine/:category' element={<Cuisine />} />
+        <Route path='/accessoire' element={<Accessoire />} />
+        <Route path='/accessoire/:category' element={<Accessoire />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/shop' element={<Shop />} />

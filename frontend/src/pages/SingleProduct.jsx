@@ -9,7 +9,7 @@ import LoadingPage from './LoadingPage/LoadingPage';
 
 const SingleProduct = () => {
   const { allProducts, currency, calculateProductDiscount,
-    addToCartItemsFashion, addToCartItems, addAndRemoveWishList, wishlistItems, backend_url } = useContext(AppContext);
+    addToCartItemsVetement, addToCartItems, addAndRemoveWishList, wishlistItems, backend_url } = useContext(AppContext);
   const { productId } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
@@ -79,9 +79,9 @@ const SingleProduct = () => {
                   <p className='capitalize'><span className='text-gray-900 capitalize'>Type:</span> {singleProduct.type}</p>                  {singleProduct.subCategory && <p className='capitalize'><span className='text-gray-900 capitalize'>SubCategory:</span> {singleProduct.subCategory}</p>}
                   <p className='capitalize'><span className='text-gray-900 capitalize'>Color:</span> {singleProduct.color}</p>
                 </div>
-                {/* If This Product Is Fashion We Shoud Add Sizes */}
+                {/* If This Product Is Vetement We Shoud Add Sizes */}
                 {
-                  singleProduct.type === "fashion" ?
+                  singleProduct.type === "vetement" ?
                     <div className='flex items-center gap-2 my-5'>
                       {
                         singleProduct.sizes.map((size, index) => (
@@ -94,9 +94,9 @@ const SingleProduct = () => {
                 {/* Add To Cart & Add To Wishlist */}
                 <div className='flex flex-col gap-3 mt-5'>
                   <button onClick={() => {
-                    if (singleProduct.type === "fashion") {
+                    if (singleProduct.type === "vetement") {
                       if (productSize) {
-                        addToCartItemsFashion(singleProduct._id, productSize);
+                        addToCartItemsVetement(singleProduct._id, productSize);
                       } else {
                         toast.info("Please Select Your Product Size.");
                       }

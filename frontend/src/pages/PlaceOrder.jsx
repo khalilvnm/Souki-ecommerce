@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
-  const { allProducts, cartItemsFashion, cartItems, delivery_fees, currency,
+  const { allProducts, cartItemsVetement, cartItems, delivery_fees, currency,
     backend_url, token } = useContext(AppContext);
   const [productsOrder, setProductsOrder] = useState([]);
   const [address, setAddress] = useState({
@@ -32,13 +32,13 @@ const PlaceOrder = () => {
   // Collect Products Order
   const collectProductsOrder = () => {
     let productsData = [];
-    // Collect From CartItemsFashion first {a: { s:1, m:1 }, b:{ s:1, m:1 }}
+    // Collect From CartItemsVetement first {a: { s:1, m:1 }, b:{ s:1, m:1 }}
     allProducts.map((product) => {
-      for (const items in cartItemsFashion) {
-        for (const item in cartItemsFashion[items]) {
-          if (product._id === items && cartItemsFashion[items][item] > 0) {
+      for (const items in cartItemsVetement) {
+        for (const item in cartItemsVetement[items]) {
+          if (product._id === items && cartItemsVetement[items][item] > 0) {
             productsData.push({
-              ...product, size: item, quantity: cartItemsFashion[items][item]
+              ...product, size: item, quantity: cartItemsVetement[items][item]
             });
           }
         }
@@ -76,7 +76,7 @@ const PlaceOrder = () => {
 
   useEffect(() => {
     collectProductsOrder();
-  }, [allProducts, cartItemsFashion, cartItems]);
+  }, [allProducts, cartItemsVetement, cartItems]);
 
   // Add Order Handler
   const addOrderHandler = async (event) => {

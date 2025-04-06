@@ -10,7 +10,7 @@ const AppContextProvider = (props) => {
   const delivery_fees = 5;
   const [allProducts, setAllProducts] = useState([]);
   const [allProductsDashboard, setAllProductsDashboard] = useState([]);
-  const [cartItemsFashion, setCartItemsFashion] = useState({});// {a:3,  b:{} }
+  const [cartItemsVetement, setCartItemsVetement] = useState({});// {a:3,  b:{} }
   const [cartItems, setCartItems] = useState({});
   const [wishlistItems, setWishListItems] = useState([]);
   const [ordersDashboard, setOrdersDashboard] = useState([]);
@@ -65,9 +65,9 @@ const AppContextProvider = (props) => {
     }
   };
 
-  // Add To Cart Items Fashion
-  const addToCartItemsFashion = async (productId, size) => {
-    let cartData = structuredClone(cartItemsFashion);
+  // Add To Cart Items Vetement
+  const addToCartItemsVetement = async (productId, size) => {
+    let cartData = structuredClone(cartItemsVetement);
     if (cartData[productId]) { // { a: {s:1} }
       if (cartData[productId][size]) {
         cartData[productId][size] += 1;
@@ -78,9 +78,9 @@ const AppContextProvider = (props) => {
       cartData[productId] = {};
       cartData[productId][size] = 1;
     }
-    setCartItemsFashion(cartData);
+    setCartItemsVetement(cartData);
     if (token) {
-      const response = await axios.post(backend_url + "/api/cart/add-fashion", { productId: productId, size: size }, {
+      const response = await axios.post(backend_url + "/api/cart/add-vetement", { productId: productId, size: size }, {
         headers: { authorization: "Bearer " + token }
       });
       if (response.data.success) {
@@ -115,13 +115,13 @@ const AppContextProvider = (props) => {
     }
   };
 
-  // Remove To Cart Items Fashion
-  const removeToCartItemsFashion = (productId, size) => {
-    let cartData = structuredClone(cartItemsFashion);
+  // Remove To Cart Items Vetement
+  const removeToCartItemsVetement = (productId, size) => {
+    let cartData = structuredClone(cartItemsVetement);
     if (cartData[productId][size] > 0) {
       cartData[productId][size] -= 1;
     }
-    setCartItemsFashion(cartData);
+    setCartItemsVetement(cartData);
   };
 
 
@@ -135,11 +135,11 @@ const AppContextProvider = (props) => {
   };
 
   // Delete Product From Cart
-  const deleteProductFashionFromCart = (productId, size) => {
-    let productDataFashion = structuredClone(cartItemsFashion);
+  const deleteProductVetementFromCart = (productId, size) => {
+    let productDataVetement = structuredClone(cartItemsVetement);
     // { a: {s:1, m:1} }
-    delete productDataFashion[productId][size];
-    setCartItemsFashion(productDataFashion);
+    delete productDataVetement[productId][size];
+    setCartItemsVetement(productDataVetement);
   };
 
   const deleteProductFromCart = (productId) => {
@@ -152,9 +152,9 @@ const AppContextProvider = (props) => {
   const calculateCartItemsCount = () => {
     let cartCount = 0;
     // CartItems Fashiom;
-    for (const items in cartItemsFashion) { // {a: {s:1, m:1}, b:{s:1,m:3}}
-      for (const item in cartItemsFashion[items]) {
-        cartCount += cartItemsFashion[items][item];
+    for (const items in cartItemsVetement) { // {a: {s:1, m:1}, b:{s:1,m:3}}
+      for (const item in cartItemsVetement[items]) {
+        cartCount += cartItemsVetement[items][item];
       }
     }
     // Cart Items;
@@ -164,14 +164,14 @@ const AppContextProvider = (props) => {
     return cartCount;
   };
 
-  // Get Cart Data For Fashion And Normal Items
+  // Get Cart Data For Vetement And Normal Items
   const getCartData = async () => {
     try {
       const response = await axios.post(backend_url + "/api/cart/get", {}, {
         headers: { authorization: "Bearer " + token }
       });
       if (response.data.success) {
-        setCartItemsFashion(response.data.cart.cartDataFashion);
+        setCartItemsVetement(response.data.cart.cartDataVetement);
         setCartItems(response.data.cart.cartData);
       }
     } catch (error) {
@@ -260,14 +260,14 @@ const AppContextProvider = (props) => {
     calculateProductDiscount: calculateProductDiscount,
     currency: currency,
     calculateAverageRatings: calculateAverageRatings,
-    addToCartItemsFashion: addToCartItemsFashion,
+    addToCartItemsVetement: addToCartItemsVetement,
     addToCartItems: addToCartItems,
-    cartItemsFashion: cartItemsFashion,
+    cartItemsVetement: cartItemsVetement,
     cartItems: cartItems,
     calculateCartItemsCount: calculateCartItemsCount,
-    removeToCartItemsFashion: removeToCartItemsFashion,
+    removeToCartItemsVetement: removeToCartItemsVetement,
     removeToCartItems: removeToCartItems,
-    deleteProductFashionFromCart: deleteProductFashionFromCart,
+    deleteProductVetementFromCart: deleteProductVetementFromCart,
     deleteProductFromCart: deleteProductFromCart,
     delivery_fees: delivery_fees,
     addAndRemoveWishList: addAndRemoveWishList,

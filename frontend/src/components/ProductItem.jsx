@@ -17,7 +17,7 @@ const ProductItem = ({ id, description, images, price, discount}) => {
         <div>
           <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{description}</p>
           <div>
-            <span className="text-red-700 font-semibold mr-3">-{discount} Off</span><span className="font-semibold">{currency}{calculateProductDiscount(price, discount)}</span>
+            <span className="text-red-700 font-semibold mr-3">{discount} Off</span><span className="font-semibold">{currency}{calculateProductDiscount(price, discount)}</span>
             <p className="line-through text-gray-600 font-semibold">{currency}{price}</p>
           </div>
         </div>

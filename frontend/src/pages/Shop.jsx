@@ -48,14 +48,14 @@ const Shop = () => {
           <p className='mb-3 font-semibold'>Category</p>
           <div className="flex flex-col items-start justify-start gap-2">
             <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"fashion"} id="fashion" className="cursor-pointer"
+              <input type="checkbox" value={"vetement"} id="vetement" className="cursor-pointer"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="fashion" className="cursor-pointer">Fashion</label>
+              <label htmlFor="vetement" className="cursor-pointer">Vetement</label>
             </div>
             <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"electronics"} id="electronics" className="cursor-pointer"
+              <input type="checkbox" value={"decoration"} id="decoration" className="cursor-pointer"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="electronics" className="cursor-pointer">Electronics</label>
+              <label htmlFor="decoration" className="cursor-pointer">Decoration</label>
             </div>
             <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
               <input type="checkbox" value={"Vide games"} id="Vide games" className="cursor-pointer"
@@ -63,9 +63,9 @@ const Shop = () => {
               <label htmlFor="Vide games" className="cursor-pointer">Vide Games</label>
             </div>
             <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"perfumes"} id="perfumes" className="cursor-pointer"
+              <input type="checkbox" value={"accessoire"} id="accessoire" className="cursor-pointer"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="perfumes" className="cursor-pointer">Perfumes</label>
+              <label htmlFor="accessoire" className="cursor-pointer">Accessoire</label>
             </div>
           </div>
         </div>

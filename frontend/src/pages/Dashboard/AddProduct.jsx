@@ -41,12 +41,12 @@ const AddProduct = () => {
     if (type === "Select Type") {
       toast.info("Please Select Your Product Type.");
     }
-    if (type === "fashion" && sizes.length === 0) {
+    if (type === "vetement" && sizes.length === 0) {
       toast.info("Please Select Your Product Size.");
       return null;
     }
     try {
-      if (type === "fashion") {
+      if (type === "vetement") {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
@@ -177,16 +177,16 @@ const AddProduct = () => {
             <select value={type} onChange={(event) => { setType(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'>
               <option value={"Select Type"} className='text-gray-600 text-sm'>Select Type</option>
-              <option value={"fashion"}>Fashion</option>
-              <option value={"electronics"}>Electronics</option>
-              <option value={"Video games"}>Video Games</option>
-              <option value={"perfumes"}>Perfumes</option>
+              <option value={"vetement"}>Vetement</option>
+              <option value={"decoration"}>Decoration</option>
+              <option value={"Cuisine"}>Cuisine</option>
+              <option value={"accessoire"}>Accessoire</option>
             </select>
           </div>
         </div>
         {/* Size */}
         {
-          type === "fashion" &&
+          type === "vetement" &&
           <div className='flex items-center gap-2'>
             <div className='w-1/2'>
               <label htmlFor='sizes' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Sizes</label>

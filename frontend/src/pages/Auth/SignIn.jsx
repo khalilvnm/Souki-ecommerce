@@ -10,7 +10,7 @@ import axios from "axios";
 import Loading from '../../components/Loading/Loading';
 
 const SignIn = () => {
-  const { token, setToken, backend_url } = useContext(AppContext);
+  const { setToken, backend_url } = useContext(AppContext);
   const [showPassword, setShowPassword] = useState("password");
   const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);

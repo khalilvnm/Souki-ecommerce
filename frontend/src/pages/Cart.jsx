@@ -3,22 +3,22 @@ import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const { allProducts, cartItemsFashion, cartItems, calculateProductDiscount,
-    currency, addToCartItemsFashion, addToCartItems, removeToCartItemsFashion,
-    removeToCartItems, deleteProductFashionFromCart, deleteProductFromCart, delivery_fees } = useContext(AppContext);
+  const { allProducts, cartItemsVetement, cartItems, calculateProductDiscount,
+    currency, addToCartItemsVetement, addToCartItems, removeToCartItemsVetement,
+    removeToCartItems, deleteProductVetementFromCart, deleteProductFromCart, delivery_fees } = useContext(AppContext);
   const [productsCart, setProductsCart] = useState([]);
 
 
   // Collect Products Cart
   const collectProductsCart = () => {
     let productsData = [];
-    // Get Products From CartItemsFashion
+    // Get Products From CartItemsVetement
     allProducts.map((product) => {
-      for (const items in cartItemsFashion) { // {a:{s:1, m:0}}
-        for (const item in cartItemsFashion[items]) {
-          if (product._id === items && cartItemsFashion[items][item] > 0) {
+      for (const items in cartItemsVetement) { // {a:{s:1, m:0}}
+        for (const item in cartItemsVetement[items]) {
+          if (product._id === items && cartItemsVetement[items][item] > 0) {
             productsData.push({
-              ...product, size: item, quantity: cartItemsFashion[items][item]
+              ...product, size: item, quantity: cartItemsVetement[items][item]
             });
           }
         }
@@ -49,7 +49,7 @@ const Cart = () => {
 
   useEffect(() => {
     collectProductsCart();
-  }, [cartItemsFashion, cartItems, allProducts]);
+  }, [cartItemsVetement, cartItems, allProducts]);
 
   return (
     <>
@@ -69,8 +69,8 @@ const Cart = () => {
                   <div className='flex items-center text-center overflow-hidden gap-2 border border-gray-300 rounded-md'>
                     <button className='flex-1 p-1 bg-gray-200'
                       onClick={() => {
-                        if (product.type === "fashion") {
-                          removeToCartItemsFashion(product._id, product.size);
+                        if (product.type === "vetement") {
+                          removeToCartItemsVetement(product._id, product.size);
                         } else {
                           removeToCartItems(product._id);
                         }
@@ -79,8 +79,8 @@ const Cart = () => {
                     <p className='flex-1 p-1 '>{product.quantity}</p>
                     <button className='flex-1 p-1 bg-gray-200'
                       onClick={() => {
-                        if (product.type === "fashion") {
-                          addToCartItemsFashion(product._id, product.size);
+                        if (product.type === "vetement") {
+                          addToCartItemsVetement(product._id, product.size);
                         } else {
                           addToCartItems(product._id);
                         }
@@ -91,8 +91,8 @@ const Cart = () => {
                   <p className='text-[15px] font-semibold text-gray-800'>Total: {currency}{product.quantity * calculateProductDiscount(product.price, product.discount)}</p>
                   {/* Remove */}
                   <p onClick={() => {
-                    if (product.type === "fashion") {
-                      deleteProductFashionFromCart(product._id, product.size);
+                    if (product.type === "vetement") {
+                      deleteProductVetementFromCart(product._id, product.size);
                     } else {
                       deleteProductFromCart(product._id);
                     }

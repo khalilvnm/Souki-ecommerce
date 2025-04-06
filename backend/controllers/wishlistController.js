@@ -16,7 +16,7 @@ const addToWishlist = async (req, res) => {
     } else {
       wishlistData.push(productId);
       await UserModel.findByIdAndUpdate(userDetails.id, { wishlistData: wishlistData });
-      return res.status(200).json({ success: true, user: user, message: "Product Addded Wishlist Successfully." });
+      return res.status(200).json({ success: true, user: user, message: "Product Added Wishlist Successfully." });
     }
 
   } catch (error) {
