@@ -10,7 +10,6 @@ const AppContextProvider = (props) => {
   const delivery_fees = 5;
   const [allProducts, setAllProducts] = useState([]);
   const [allProductsDashboard, setAllProductsDashboard] = useState([]);
-  const [cartItemsVetement, setCartItemsVetement] = useState({});// {a:3,  b:{} }
   const [cartItems, setCartItems] = useState({});
   const [wishlistItems, setWishListItems] = useState([]);
   const [ordersDashboard, setOrdersDashboard] = useState([]);
@@ -52,47 +51,6 @@ const AppContextProvider = (props) => {
     return finallyPrice;
   };
 
-  // Calculate Average Users Ratings
-  const calculateAverageRatings = (product) => {
-    let ratesCount = 0;
-    if (product.userRatings && product.userRatings.length > 0) {
-      product.userRatings.map((item) => {
-        ratesCount += item.ratings;
-      });
-      return (ratesCount / product.userRatings.length).toFixed(0);
-    } else {
-      return 0;
-    }
-  };
-
-  // Add To Cart Items Vetement
-  const addToCartItemsVetement = async (productId, size) => {
-    let cartData = structuredClone(cartItemsVetement);
-    if (cartData[productId]) { // { a: {s:1} }
-      if (cartData[productId][size]) {
-        cartData[productId][size] += 1;
-      } else {
-        cartData[productId][size] = 1;
-      }
-    } else {
-      cartData[productId] = {};
-      cartData[productId][size] = 1;
-    }
-    setCartItemsVetement(cartData);
-    if (token) {
-      const response = await axios.post(backend_url + "/api/cart/add-vetement", { productId: productId, size: size }, {
-        headers: { authorization: "Bearer " + token }
-      });
-      if (response.data.success) {
-        console.log(response);
-        toast.success(response.data.message);
-      } else {
-        console.log(response);
-        toast.error(response.response.data.message || response.message);
-      }
-    }
-  };
-
   // Add To CartItmes
   const addToCartItems = async (productId) => {
     let cartData = structuredClone(cartItems);
@@ -115,32 +73,33 @@ const AppContextProvider = (props) => {
     }
   };
 
-  // Remove To Cart Items Vetement
-  const removeToCartItemsVetement = (productId, size) => {
-    let cartData = structuredClone(cartItemsVetement);
-    if (cartData[productId][size] > 0) {
-      cartData[productId][size] -= 1;
-    }
-    setCartItemsVetement(cartData);
-  };
 
-
-  // Remove To CartItmes
-  const removeToCartItems = (productId) => {
-    let cartData = structuredClone(cartItems);
-    if (cartData[productId] > 0) {
-      cartData[productId] -= 1;
+  const removeToCartItems = async (productId) => {
+    try {
+      // Create copy of current cart
+      const updatedCart = {...cartItems};
+      
+      // Remove the product
+      delete updatedCart[productId];
+      
+      // Update local state immediately
+      setCartItems(updatedCart);
+      
+      // Sync with backend if logged in
+      if (token) {
+        await axios.post(
+          `${backend_url}/api/cart/remove`, 
+          { productId },
+          { headers: { authorization: "Bearer " + token } }
+        );
+      }
+    } catch (error) {
+      console.error("Delete failed:", error);
+      toast.error("Failed to remove item");
     }
-    setCartItems(cartData);
   };
 
   // Delete Product From Cart
-  const deleteProductVetementFromCart = (productId, size) => {
-    let productDataVetement = structuredClone(cartItemsVetement);
-    // { a: {s:1, m:1} }
-    delete productDataVetement[productId][size];
-    setCartItemsVetement(productDataVetement);
-  };
 
   const deleteProductFromCart = (productId) => {
     let productData = structuredClone(cartItems);
@@ -151,12 +110,6 @@ const AppContextProvider = (props) => {
   // Calculte Cart Items count
   const calculateCartItemsCount = () => {
     let cartCount = 0;
-    // CartItems Fashiom;
-    for (const items in cartItemsVetement) { // {a: {s:1, m:1}, b:{s:1,m:3}}
-      for (const item in cartItemsVetement[items]) {
-        cartCount += cartItemsVetement[items][item];
-      }
-    }
     // Cart Items;
     for (const items in cartItems) { // {a:1, b:1}
       cartCount += cartItems[items];
@@ -164,14 +117,13 @@ const AppContextProvider = (props) => {
     return cartCount;
   };
 
-  // Get Cart Data For Vetement And Normal Items
+  // Get Cart Data 
   const getCartData = async () => {
     try {
       const response = await axios.post(backend_url + "/api/cart/get", {}, {
         headers: { authorization: "Bearer " + token }
       });
       if (response.data.success) {
-        setCartItemsVetement(response.data.cart.cartDataVetement);
         setCartItems(response.data.cart.cartData);
       }
     } catch (error) {
@@ -246,7 +198,6 @@ const AppContextProvider = (props) => {
 
   useEffect(() => {
     getAllProducts();
-    // getWishlistItems(); //Fetch wishlist even if user is not logged in
   }, []);
 
   const value = {
@@ -259,15 +210,10 @@ const AppContextProvider = (props) => {
     backend_url: backend_url,
     calculateProductDiscount: calculateProductDiscount,
     currency: currency,
-    calculateAverageRatings: calculateAverageRatings,
-    addToCartItemsVetement: addToCartItemsVetement,
     addToCartItems: addToCartItems,
-    cartItemsVetement: cartItemsVetement,
     cartItems: cartItems,
     calculateCartItemsCount: calculateCartItemsCount,
-    removeToCartItemsVetement: removeToCartItemsVetement,
     removeToCartItems: removeToCartItems,
-    deleteProductVetementFromCart: deleteProductVetementFromCart,
     deleteProductFromCart: deleteProductFromCart,
     delivery_fees: delivery_fees,
     addAndRemoveWishList: addAndRemoveWishList,

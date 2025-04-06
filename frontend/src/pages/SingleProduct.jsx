@@ -9,13 +9,10 @@ import LoadingPage from './LoadingPage/LoadingPage';
 
 const SingleProduct = () => {
   const { allProducts, currency, calculateProductDiscount,
-    addToCartItemsVetement, addToCartItems, addAndRemoveWishList, wishlistItems, backend_url } = useContext(AppContext);
+    addToCartItems, addAndRemoveWishList, wishlistItems, backend_url } = useContext(AppContext);
   const { productId } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
-
-  // Collect Product Data
-  const [productSize, setProductSize] = useState("");
 
   // Get Single Product
   const getSingleProduct = async () => {
@@ -74,35 +71,14 @@ const SingleProduct = () => {
                   <p className='text-xl text-gray-600 line-through'>{currency}{singleProduct.price}</p>
                 </div>
                 <hr className='border-none h-[1px] w-full bg-gray-200 my-4' />
-                {/* Type  color  */}
+                {/* Type*/}
                 <div className='flex flex-col gap-1 text-gray-600 font-medium'>
                   <p className='capitalize'><span className='text-gray-900 capitalize'>Type:</span> {singleProduct.type}</p>                  {singleProduct.subCategory && <p className='capitalize'><span className='text-gray-900 capitalize'>SubCategory:</span> {singleProduct.subCategory}</p>}
-                  <p className='capitalize'><span className='text-gray-900 capitalize'>Color:</span> {singleProduct.color}</p>
                 </div>
-                {/* If This Product Is Vetement We Shoud Add Sizes */}
-                {
-                  singleProduct.type === "vetement" ?
-                    <div className='flex items-center gap-2 my-5'>
-                      {
-                        singleProduct.sizes.map((size, index) => (
-                          <p key={index} className={`index  border border-gray-300 rounded-md py-2 px-3 cursor-pointer ${productSize === size ? "bg-black text-white" : ""}`} onClick={() => { setProductSize(size); }}>{size}</p>
-                        ))
-                      }
-                    </div>
-                    : null
-                }
                 {/* Add To Cart & Add To Wishlist */}
                 <div className='flex flex-col gap-3 mt-5'>
                   <button onClick={() => {
-                    if (singleProduct.type === "vetement") {
-                      if (productSize) {
-                        addToCartItemsVetement(singleProduct._id, productSize);
-                      } else {
-                        toast.info("Please Select Your Product Size.");
-                      }
-                    } else {
-                      addToCartItems(singleProduct._id);
-                    }
+                  addToCartItems(singleProduct._id);
                   }} className='h-[42px] py-1.5 px-7 border border-gray-100 text-[15px] font-medium bg-black rounded-md text-white w-[180px] transition-all duration-300 hover:bg-[#454545]'>Add To Cart</button>
                   {
                     wishlistItems.includes(singleProduct._id)

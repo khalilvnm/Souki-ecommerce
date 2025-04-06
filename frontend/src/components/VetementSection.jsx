@@ -34,7 +34,6 @@ const VetementSection = () => {
                   discount={product.discount} 
                   images={product.images} 
                   type={product.type} 
-                  category={product.category} 
                 />
               </div>
             ))

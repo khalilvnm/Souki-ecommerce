@@ -26,7 +26,7 @@ const AccessoireSection = () => {
           {
             accessoireProducts.map((product, index) => (
               <div className='mr-3' key={index}>
-                <ProductItem id={product._id} title={product.title} description={product.description} price={product.price} discount={product.discount} images={product.images} type={product.type} category={product.category} />
+                <ProductItem id={product._id} title={product.title} description={product.description} price={product.price} discount={product.discount} images={product.images} type={product.type} />
               </div>
             ))
           }

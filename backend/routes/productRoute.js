@@ -1,5 +1,5 @@
 import express from "express";
-import { addProductHandler, deleteProduct, getProductsListDashboard, getProductsListFrontend, getSingleProduct , updatedSizes } from "../controllers/productController.js";
+import { addProductHandler, deleteProduct, getProductsListDashboard, getProductsListFrontend, getSingleProduct } from "../controllers/productController.js";
 import upload from './../middlewares/multer.js';
 import userAuth from './../middlewares/UserAuth.js';
 
@@ -11,7 +11,5 @@ productRouter.get("/list-frontend", getProductsListFrontend);
 
 productRouter.post("/delete", userAuth, deleteProduct);
 productRouter.post("/single-product", getSingleProduct);
-
-productRouter.post("/update", updatedSizes);
 
 export default productRouter;

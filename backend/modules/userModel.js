@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   password: { type: String, requried: true },
   image: { type: String, required: true },
   cartData: { type: Object, default: {} },
-  cartDataFashion: { type: Object, default: {} },
 }, { minimize: false, timestamps: true });
 
 // User Model

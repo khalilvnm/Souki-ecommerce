@@ -21,7 +21,7 @@ const CuisineSection = () => {
 
       {/* عرض جميع المنتجات */}
       <div>
-        <p className='mb-3 text-xl font-semibold text-gray-800'>Cuisine</p>
+        <p className='mb-3 text-xl font-semibold text-gray-800'>Cuisine Products</p>
         <Carousel responsive={productResponsive}>
           {
             cuisineProducts.map((product, index) => (

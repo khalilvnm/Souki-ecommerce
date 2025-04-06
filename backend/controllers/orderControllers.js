@@ -20,7 +20,7 @@ const placeOrder = async (req, res) => {
     const order = await newOrder.save();
 
     // Get User And Update User By MakeThe CartData Empty
-    await UserModel.findByIdAndUpdate(userDetails.id, { cartData: {}, cartDataFashion: {} });
+    await UserModel.findByIdAndUpdate(userDetails.id, { cartData: {} });
     return res.status(200).json({ success: true, order: order, message: "Order Added Successfully." });
 
   } catch (error) {

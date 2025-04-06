@@ -1,4 +1,6 @@
 import { FaHandHoldingHeart, FaUsers, FaHandshake } from "react-icons/fa";
+import logo from '../assets/LOGO.png';
+
 
 const AboutUs = () => {
   return (
@@ -12,11 +14,11 @@ const AboutUs = () => {
       </div>
 
       {/* Our Story Section */}
-      <div className="bg-brown-50 p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
+      <div className="bg-primary p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
         <img
-          src="https://source.unsplash.com/500x300/?handmade,craft"
+          src={logo}
           alt="Handcraft"
-          className="rounded-lg shadow-md w-full md:w-1/2"
+          className="rounded-lg bg-second shadow-md w-full md:w-1/2"
         />
         <div>
           <h2 className="text-3xl font-semibold text-brown-700 mb-4">Our Story</h2>
@@ -68,7 +70,7 @@ const AboutUs = () => {
       {/* Contact Section */}
       <div className="mt-16 text-center">
         <h2 className="text-3xl font-semibold text-brown-700">Get in Touch</h2>
-        <p className="text-gray-600 mt-2">For inquiries, reach us at <span className="text-brown-700 font-semibold">info@handcraft.com</span></p>
+        <p className="text-gray-600 mt-2">For inquiries, reach us at <span className="text-brown-700 font-semibold">Souki@artisanal.com</span></p>
       </div>
     </div>
   );

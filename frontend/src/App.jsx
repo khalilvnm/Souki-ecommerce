@@ -42,14 +42,11 @@ const App = () => {
       }
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/vetement' element={<Vetement />} />
-        <Route path='/vetement/:category' element={<Vetement />} />
         <Route path='/decoration' element={<Decoration />} />
-        <Route path='/decoration/:category' element={<Decoration />} />
         <Route path='/Cuisine' element={<Cuisine />} />
-        <Route path='/Cuisine/:category' element={<Cuisine />} />
         <Route path='/accessoire' element={<Accessoire />} />
-        <Route path='/accessoire/:category' element={<Accessoire />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/shop' element={<Shop />} />

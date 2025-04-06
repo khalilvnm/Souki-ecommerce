@@ -8,7 +8,7 @@ import "dotenv/config";
 
 // -------------- Add Product -------------- //
 const addProductHandler = async (req, res) => {
-  const { userDetails, title, description, price, discount, type  , sizes, color } = await req.body;
+  const { userDetails, title, description, price, discount, type} = await req.body;
   const images = await req.files;
   const image1 = images.image1 && images.image1[0];
   const image2 = images.image2 && images.image2[0];
@@ -22,10 +22,9 @@ const addProductHandler = async (req, res) => {
     price: z.string({ required_error: "Price Is Required." }).min(0),
     discount: z.string({ required_error: "Discount Is Required." }).min(0),
     type: z.string({ required_error: "Type Is Required." }).min(2, { message: "Type Must Be At Least 2 Characters." }),
-    color: z.string({ required_error: "Color Is Required." }).min(2, { message: "Color Must Be At Least 2 Characters." })
   });
 
-  const validation = schema.safeParse({ userDetails, title, description, price, discount, type, color });
+  const validation = schema.safeParse({ userDetails, title, description, price, discount, type });
 
   if (!validation.success) {
     return res.status(400).json({ success: false, message: validation.error.errors[0].message });
@@ -45,7 +44,6 @@ const addProductHandler = async (req, res) => {
     }));
 
   // Create new Porudct
-  if (type === "fashion") {
     const newProduct = new ProductModel({
       userId: userDetails.id,
       title: title,
@@ -54,29 +52,11 @@ const addProductHandler = async (req, res) => {
       price: Number(price),
       discount: Number(discount),
       type: type,
-      sizes: JSON.parse(sizes),
-      color: color
-    });
-    // Save Product
-    const product = await newProduct.save();
-    return res.status(200).json({ success: true, product: product, message: "Product Added Successfully." });
-  } else {
-    const newProduct = new ProductModel({
-      userId: userDetails.id,
-      title: title,
-      description: description,
-      images: images_url,
-      price: Number(price),
-      discount: Number(discount),
-      type: type,
-      color: color
     });
     // Save Product
     const product = await newProduct.save();
     return res.status(200).json({ success: true, product: product, message: "Product Added Successfully." });
   }
-
-};
 
 
 // -------------- Get Product Based On User Or Admin -------------- //
@@ -148,17 +128,7 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
-// Update Sizes In Products
-const updatedSizes = async (req, res) => {
-  const { newSizes } = await req.body;
 
-  const products = await ProductModel.updateMany(
-    { type: "fashion" },
-    { $set: { sizes: JSON.parse(newSizes) } }
-  );
-  return res.status(200).json({ success: true, products: products, message: "updated successfully!" });
-
-};
 
 export {
   addProductHandler,
@@ -166,5 +136,4 @@ export {
   deleteProduct,
   getProductsListFrontend,
   getSingleProduct,
-  updatedSizes
 };

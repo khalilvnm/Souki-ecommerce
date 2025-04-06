@@ -3,136 +3,151 @@ import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const { allProducts, cartItemsVetement, cartItems, calculateProductDiscount,
-    currency, addToCartItemsVetement, addToCartItems, removeToCartItemsVetement,
-    removeToCartItems, deleteProductVetementFromCart, deleteProductFromCart, delivery_fees } = useContext(AppContext);
+  const { allProducts, cartItems, calculateProductDiscount,
+    currency, addToCartItems, removeToCartItems, delivery_fees } = useContext(AppContext);
   const [productsCart, setProductsCart] = useState([]);
 
-
-  // Collect Products Cart
+  // Collect Products Cart - Add debug logging
   const collectProductsCart = () => {
-    let productsData = [];
-    // Get Products From CartItemsVetement
-    allProducts.map((product) => {
-      for (const items in cartItemsVetement) { // {a:{s:1, m:0}}
-        for (const item in cartItemsVetement[items]) {
-          if (product._id === items && cartItemsVetement[items][item] > 0) {
-            productsData.push({
-              ...product, size: item, quantity: cartItemsVetement[items][item]
-            });
-          }
-        }
-      }
-    });
-    // Get Products From CartItems
-    allProducts.map((product) => {
-      for (const items in cartItems) { // {a:1,b:2,c:3}
-        if (product._id === items && cartItems[items] > 0) {
-          productsData.push({
-            ...product, quantity: cartItems[items]
-          });
-        }
-      }
-    });
+    console.log('Current cartItems:', cartItems); // Debug log
+    console.log('All product IDs:', allProducts.map(p => p._id)); // Debug log
+    
+    const productsData = allProducts.filter(product => {
+      const hasItem = cartItems[product._id] > 0;
+      console.log(`Product ${product._id}:`, { 
+        inCart: cartItems[product._id], 
+        exists: hasItem 
+      }); // Debug log
+      return hasItem;
+    }).map(product => ({
+      ...product,
+      quantity: cartItems[product._id]
+    }));
+    
+    console.log('Final productsData:', productsData); // Debug log
     setProductsCart(productsData);
   };
 
-  // Collect Cart Products Amount
+  // Calculate total only if products exist
   const getProductsCartAmount = () => {
-    let productsAmount = 0;
-    productsCart.map((product) => {
-      let productPrice = (product.price - (product.price * (product.discount / 100))).toFixed(2);
-      productsAmount += productPrice * product.quantity;
-    });
-    return productsAmount;
+    if (productsCart.length === 0) return '0.00'; // Changed to return string '0.00'
+    return productsCart.reduce((total, product) => {
+      const productPrice = calculateProductDiscount(product.price, product.discount);
+      return total + (productPrice * product.quantity);
+    }, 0).toFixed(2);
   };
 
   useEffect(() => {
     collectProductsCart();
-  }, [cartItemsVetement, cartItems, allProducts]);
+  }, [cartItems, allProducts]);
+
+  // Only change: More accurate empty state check
+  const shouldShowEmpty = Object.keys(cartItems).length === 0 || productsCart.length === 0;
 
   return (
     <>
-      {
-        productsCart.length > 0 ? <div className='py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
-          <p className='mb-10 text-2xl font-semibold text-gray-800'>Your Cart</p>
-          {/* Show Products Cart */}
-          <div className='flex flex-col gap-4'>
-            {
-              productsCart.map((product, index) => (
-                <div key={index} className='p-5 border border-gray-200 items-center rounded-md shadow-md grid grid-cols-[1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] gap-3'>
-                  <img src={product.images[0]} alt='product-image' className='max-w-[100%] w-full sm:w-24' />
-                  <p className='text-sm text-gray-700 font-semibold'>{product.title}</p>
-                  {/* Price */}
-                  <p className='text-gray-800 text-[15px] font-semibold'>Price: {currency}{calculateProductDiscount(product.price, product.discount)}</p>
-                  {/* Quantity */}
-                  <div className='flex items-center text-center overflow-hidden gap-2 border border-gray-300 rounded-md'>
-                    <button className='flex-1 p-1 bg-gray-200'
-                      onClick={() => {
-                        if (product.type === "vetement") {
-                          removeToCartItemsVetement(product._id, product.size);
-                        } else {
-                          removeToCartItems(product._id);
-                        }
-                      }}
-                    >-</button>
-                    <p className='flex-1 p-1 '>{product.quantity}</p>
-                    <button className='flex-1 p-1 bg-gray-200'
-                      onClick={() => {
-                        if (product.type === "vetement") {
-                          addToCartItemsVetement(product._id, product.size);
-                        } else {
-                          addToCartItems(product._id);
-                        }
-                      }}
-                    >+</button>
-                  </div>
-                  {/* Total Price */}
-                  <p className='text-[15px] font-semibold text-gray-800'>Total: {currency}{product.quantity * calculateProductDiscount(product.price, product.discount)}</p>
-                  {/* Remove */}
-                  <p onClick={() => {
-                    if (product.type === "vetement") {
-                      deleteProductVetementFromCart(product._id, product.size);
-                    } else {
-                      deleteProductFromCart(product._id);
-                    }
-                  }} className='mx-auto w-[25px] flex items-center justify-center h-[25px] rounded-full border border-gray-800 transition-all duration-300 hover:bg-red-700 hover:text-white cursor-pointer text-sm'>X</p>
-                </div>
-              ))
-            }
-          </div>
-          {/* Total Cart */}
-          <div className='w-full sm:w-[450px] p-5 rounded-md bg-gray-100 mt-10'>
-            <p className='text-xl font-semibold text-gray-800 mb-5'>Cart Total</p>
-            <div className='flex flex-col gap-2'>
-              <div className='flex items-center justify-between'>
-                <p className='text-gray-700 text-[15px]'>Subtotal</p>
-                <p>{currency}{getProductsCartAmount()}</p>
-              </div>
-              <hr className='border-none h-[1px] w-full bg-gray-200' />
-              <div className='flex items-center justify-between'>
-                <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
-                <p>{currency}{getProductsCartAmount() > 0 ? delivery_fees : 0}</p>
-              </div>
-              <hr className='border-none h-[1px] w-full bg-gray-200' />
-              <div className='flex items-center justify-between'>
-                <p className='text-gray-700 text-[15px]'>Total</p>
-                <p>{currency}{getProductsCartAmount() > 0 ? getProductsCartAmount() + delivery_fees : 0}</p>
-              </div>
-              <hr className='border-none h-[1px] w-full bg-gray-200' />
-              <Link to={"/placeorder"} className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md'>Proceed To Checkout</Link>
+      {!shouldShowEmpty ? (
+      <div className='py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
+      <p className='mb-10 text-2xl font-semibold text-gray-800'>Your Cart</p>
+      <div className='flex flex-col gap-4'>
+        {productsCart.map((product) => (
+          <div key={product._id} className='p-5 border border-gray-200 items-center rounded-md shadow-md grid grid-cols-[1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] gap-3'>
+            {/* Product Image */}
+            <img 
+              src={product.images[0]} 
+              alt={product.title} 
+              className='max-w-[100%] w-full sm:w-24 h-auto object-contain'
+            />
+            
+            {/* Product Title */}
+            <p className='text-sm text-gray-700 font-semibold line-clamp-2'>
+              {product.title}
+            </p>
+            
+            {/* Price */}
+            <p className='text-gray-800 text-[15px] font-semibold'>
+              Price: {currency}{calculateProductDiscount(product.price, product.discount)}
+            </p>
+            
+            {/* Quantity Controls */}
+            <div className='flex items-center text-center overflow-hidden gap-2 border border-gray-300 rounded-md'>
+              <button 
+                className='flex-1 p-1 bg-gray-200 hover:bg-gray-300 transition'
+                onClick={() => removeToCartItems(product._id)}
+              >
+                -
+              </button>
+              <p className='flex-1 p-1'>
+                {product.quantity}
+              </p>
+              <button 
+                className='flex-1 p-1 bg-gray-200 hover:bg-gray-300 transition'
+                onClick={() => addToCartItems(product._id)}
+              >
+                +
+              </button>
             </div>
+            
+            {/* Total Price */}
+            <p className='text-[15px] font-semibold text-gray-800'>
+              Total: {currency}{(product.quantity * calculateProductDiscount(product.price, product.discount)).toFixed(2)}
+            </p>
+            
+            {/* Remove Button */}
 
+            <button 
+              onClick={() => {
+                removeToCartItems(product._id);
+              }}
+              className='mx-auto w-[25px] h-[25px] flex items-center justify-center rounded-full border border-gray-800 hover:bg-red-700 hover:text-white hover:border-red-700 transition-all duration-300 cursor-pointer text-sm'
+              aria-label="Remove item"
+            >
+              ×
+            </button>
           </div>
-
-        </div> :
-          <div className='py-20 min-h-[70vh] text-center'>
-            <p className='text-3xl text-gray-800 font-semibold mb-5'>Your Cart Is Empty!</p>
-            <Link to={"/"} className='w-fit bg-black text-white py-2 px-5 rounded-md'>Go To Shopping</Link>
+        ))}
+      </div>
+      
+      {/* Cart Total Section */}
+      <div className='w-full sm:w-[450px] p-5 rounded-md bg-gray-100 mt-10'>
+        <p className='text-xl font-semibold text-gray-800 mb-5'>Cart Total</p>
+        <div className='flex flex-col gap-2'>
+          <div className='flex items-center justify-between'>
+            <p className='text-gray-700 text-[15px]'>Subtotal</p>
+            <p>{currency}{getProductsCartAmount()}</p>
           </div>
-      }
+          <hr className='border-none h-[1px] w-full bg-gray-200' />
+          <div className='flex items-center justify-between'>
+            <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
+            <p>{currency}{productsCart.length > 0 ? delivery_fees : 0}</p>
+          </div>
+          <hr className='border-none h-[1px] w-full bg-gray-200' />
+          <div className='flex items-center justify-between'>
+            <p className='text-gray-700 text-[15px]'>Total</p>
+            <p>{currency}{productsCart.length > 0 ? (Number(getProductsCartAmount()) + delivery_fees).toFixed(2) : 0}</p>
+          </div>
+          <hr className='border-none h-[1px] w-full bg-gray-200' />
+          <Link 
+            to={"/placeorder"} 
+            className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md hover:bg-gray-800 transition'
+          >
+            Proceed To Checkout
+          </Link>
+        </div>
+      </div>
+    </div>
+      ) : (
+        <div className='py-20 min-h-[70vh] text-center'>
+          <p className='text-3xl text-gray-800 font-semibold mb-5'>Your Cart Is Empty!</p>
+          <Link 
+            to={"/"} 
+            className='w-fit bg-black text-white py-2 px-5 rounded-md hover:bg-gray-800 transition'
+          >
+            Go To Shopping
+          </Link>
+        </div>
+      )}
     </>
-
   );
 };
 

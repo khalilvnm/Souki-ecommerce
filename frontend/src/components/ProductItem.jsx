@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { FaStar } from "react-icons/fa";
 
 
-const ProductItem = ({ id, description, images, price, discount}) => {
+const ProductItem = ({ id, title, images, price, discount}) => {
   const { calculateProductDiscount, currency, addAndRemoveWishList, wishlistItems } = useContext(AppContext);
 
   return (
@@ -15,7 +15,7 @@ const ProductItem = ({ id, description, images, price, discount}) => {
         <img src={images[0]} alt="product-image" className="h-[180px] mx-auto" />
         <hr className="border-none h-[1px] w-full bg-gray-300 my-3" />
         <div>
-          <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{description}</p>
+          <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{title}</p>
           <div>
             <span className="text-red-700 font-semibold mr-3">{discount} Off</span><span className="font-semibold">{currency}{calculateProductDiscount(price, discount)}</span>
             <p className="line-through text-gray-600 font-semibold">{currency}{price}</p>

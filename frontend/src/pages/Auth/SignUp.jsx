@@ -10,7 +10,7 @@ import { AppContext } from './../../context/AppContext';
 import axios from "axios";
 import Loading from './../../components/Loading/Loading';
 
-const SignIn = () => {
+const SignUp = () => {
   const { setToken, backend_url } = useContext(AppContext);
   const [showPassword, setShowPassword] = useState("password");
   const [image, setImage] = useState("");
@@ -127,4 +127,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

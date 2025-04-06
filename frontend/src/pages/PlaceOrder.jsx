@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
-  const { allProducts, cartItemsVetement, cartItems, delivery_fees, currency,
+  const { allProducts, cartItems, delivery_fees, currency,
     backend_url, token } = useContext(AppContext);
   const [productsOrder, setProductsOrder] = useState([]);
   const [address, setAddress] = useState({
@@ -32,18 +32,6 @@ const PlaceOrder = () => {
   // Collect Products Order
   const collectProductsOrder = () => {
     let productsData = [];
-    // Collect From CartItemsVetement first {a: { s:1, m:1 }, b:{ s:1, m:1 }}
-    allProducts.map((product) => {
-      for (const items in cartItemsVetement) {
-        for (const item in cartItemsVetement[items]) {
-          if (product._id === items && cartItemsVetement[items][item] > 0) {
-            productsData.push({
-              ...product, size: item, quantity: cartItemsVetement[items][item]
-            });
-          }
-        }
-      }
-    });
     // Collect From CartItems {a: 1, b:2, c:3}
     allProducts.map((product) => {
       for (const items in cartItems) {
@@ -76,7 +64,7 @@ const PlaceOrder = () => {
 
   useEffect(() => {
     collectProductsOrder();
-  }, [allProducts, cartItemsVetement, cartItems]);
+  }, [allProducts, cartItems]);
 
   // Add Order Handler
   const addOrderHandler = async (event) => {

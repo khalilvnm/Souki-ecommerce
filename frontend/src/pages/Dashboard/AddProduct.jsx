@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { AppContext } from './../../context/AppContext';
 import axios from "axios";
 
-
 const AddProduct = () => {
   const { getAllProducts } = useContext(AppContext);
   const [image1, setImage1] = useState("");
@@ -16,106 +15,62 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
   const [type, setType] = useState("Select Type");
-  const [sizes, setSizes] = useState([]);
-  const [color, setColor] = useState("");
   const { token, backend_url, getAllProductsDashboard } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
-
-  // Add Sizes
-  const addSizes = (size) => {
-    if (sizes.includes(size)) {
-      setSizes(sizes.filter((item) => item !== size));
-    } else {
-      setSizes((prev) => ([...prev, size]));
-    }
-  };
 
   // OnSubmit Handler
   const osSubmitHandler = async (event) => {
     event.preventDefault();
     setLoading(true);
-    if (!image1 && !image2 && image3 && !image4) {
+    
+    if (!image1 && !image2 && !image3 && !image4) {
       toast.info("Please Select Your Product Image.");
+      setLoading(false);
       return null;
     }
+
     if (type === "Select Type") {
       toast.info("Please Select Your Product Type.");
+      setLoading(false);
+      return;
     }
-    if (type === "vetement" && sizes.length === 0) {
-      toast.info("Please Select Your Product Size.");
-      return null;
-    }
+
     try {
-      if (type === "vetement") {
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("image1", image1);
-        formData.append("image2", image2);
-        formData.append("image3", image3);
-        formData.append("image4", image4);
-        formData.append("price", price);
-        formData.append("discount", discount);
-        formData.append("type", type);
-        formData.append("sizes", JSON.stringify(sizes));
-        formData.append("color", color);
-        const response = await axios.post(backend_url + "/api/product/add", formData, {
-          headers: { authorization: "Bearer " + token }
-        });
-        setLoading(false);
-        if (response.data.success) {
-          toast.success(response.data.message);
-          getAllProductsDashboard();
-          setImage1("");
-          setImage2("");
-          setImage3("");
-          setImage4("");
-          setTitle("");
-          setDescription("");
-          setPrice("");
-          setDiscount("");
-          setType("Select Type");
-          setSizes([]);
-          setColor("");
-        }
-      } else {
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("image1", image1);
-        formData.append("image2", image2);
-        formData.append("image3", image3);
-        formData.append("image4", image4);
-        formData.append("price", price);
-        formData.append("discount", discount);
-        formData.append("type", type);
-        formData.append("color", color);
-        const response = await axios.post(backend_url + "/api/product/add", formData, {
-          headers: { authorization: "Bearer " + token }
-        });
-        if (response.data.success) {
-          toast.success(response.data.message);
-          getAllProductsDashboard();
-          getAllProducts();
-          setImage1("");
-          setImage2("");
-          setImage3("");
-          setImage4("");
-          setTitle("");
-          setDescription("");
-          setPrice("");
-          setDiscount("");
-          setType("Select Type");
-          setColor("");
-          setLoading(false);
-        }
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("image1", image1);
+      formData.append("image2", image2);
+      formData.append("image3", image3);
+      formData.append("image4", image4);
+      formData.append("price", price);
+      formData.append("discount", discount);
+      formData.append("type", type);
+
+      const response = await axios.post(backend_url + "/api/product/add", formData, {
+        headers: { authorization: "Bearer " + token }
+      });
+
+      setLoading(false);
+      if (response.data.success) {
+        toast.success(response.data.message);
+        getAllProductsDashboard();
+        getAllProducts();
+        setImage1("");
+        setImage2("");
+        setImage3("");
+        setImage4("");
+        setTitle("");
+        setDescription("");
+        setPrice("");
+        setDiscount("");
+        setType("Select Type");
       }
     } catch (error) {
       console.log(error);
       toast.error(error.message);
       setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -141,6 +96,7 @@ const AddProduct = () => {
             <input type='file' id='image4' hidden />
           </label>
         </div>
+        
         {/* Title */}
         <div>
           <label htmlFor='title' className='block text-gray-800 font-Semibold text-base mb-1 ml-1'>Title</label>
@@ -148,6 +104,7 @@ const AddProduct = () => {
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'
             onChange={(event) => { setTitle(event.target.value); }} />
         </div>
+        
         {/* Description */}
         <div>
           <label htmlFor='description' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Description</label>
@@ -155,6 +112,7 @@ const AddProduct = () => {
             onChange={(event) => { setDescription(event.target.value); }}
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
         </div>
+        
         {/* Price And Discount */}
         <div className='flex gap-2 items-center'>
           <div className='w-1/2'>
@@ -170,6 +128,7 @@ const AddProduct = () => {
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
           </div>
         </div>
+        
         {/* Type And Category */}
         <div className='flex items-center gap-2'>
           <div className='w-1/2'>
@@ -184,31 +143,7 @@ const AddProduct = () => {
             </select>
           </div>
         </div>
-        {/* Size */}
-        {
-          type === "vetement" &&
-          <div className='flex items-center gap-2'>
-            <div className='w-1/2'>
-              <label htmlFor='sizes' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Sizes</label>
-              <div className='full flex justify-between items-center'>
-                <p className={`border border-gray-400 py-1 px-3 rounded-md cursor-pointer ${sizes.includes("S") ? "bg-black text-white" : ""}`} onClick={() => { addSizes("S"); }}>S</p>
-                <p className={`border border-gray-400 py-1 px-3 rounded-md cursor-pointer ${sizes.includes("M") ? "bg-black text-white" : ""}`} onClick={() => { addSizes("M"); }}>M</p>
-                <p className={`border border-gray-400 py-1 px-3 rounded-md cursor-pointer ${sizes.includes("L") ? "bg-black text-white" : ""}`} onClick={() => { addSizes("L"); }}>L</p>
-                <p className={`border border-gray-400 py-1 px-3 rounded-md cursor-pointer ${sizes.includes("XL") ? "bg-black text-white" : ""}`} onClick={() => { addSizes("XL"); }}>XL</p>
-                <p className={`border border-gray-400 py-1 px-3 rounded-md cursor-pointer ${sizes.includes("XXL") ? "bg-black text-white" : ""}`} onClick={() => { addSizes("XXL"); }}>XXL</p>
-              </div>
-            </div>
-          </div>
-        }
-
-        {/* Color */}
-        <div>
-          <label htmlFor='color'>Color</label>
-          <input type='text' id='color' placeholder='Type Here.' value={color}
-            onChange={(event) => { setColor(event.target.value); }}
-            className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
-        </div>
-
+        
         {/* Button */}
         {
           loading

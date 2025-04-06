@@ -34,8 +34,8 @@ const Footer = () => {
           <div>
             <p className="text-xl font-semibold text-gray-200 mb-5">Get In Touch</p>
             <div className="text-gray-300 text-sm mb-5">
-              <p>+213-558-981-691</p>
-              <p>hemmaz.djilalikhalil@gmail.com</p>
+              <p>+213-511-223-344</p>
+              <p>Souki@artisanal.com</p>
             </div>
             <div className="flex items-center justify-left text-gray-300 gap-3 text-4xl">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
@@ -54,7 +54,7 @@ const Footer = () => {
 
       {/* Copy Right */}
       <div className="border-t border-gray-600 py-3 text-center">
-        <p className="text-gray-300 text-[15px]">All rights reserved Copyright &copy;2025 Designed By Mostafa Yassin</p>
+        <p className="text-gray-300 text-[15px]">All rights reserved Copyright &copy;2025 Designed By Hemmaz,Mansouri</p>
       </div>
     </footer>
   );
