@@ -69,7 +69,7 @@ const TopNavbar = () => {
           />
           <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
         </div>
-        {/* SignUp An Cart And Wishlist */}
+        {/* SignUp And Cart And Wishlist */}
         <div className="w-fit flex items-center gap-4">
           {/* Cart And Wishlist */}
           <div className="flex items-center gap-2">
@@ -108,21 +108,28 @@ const TopNavbar = () => {
                   >
                     Orders
                   </NavLink>
+                  <NavLink
+                    to={"/dashboard"}
+                    className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                  >
+                    Dashboard
+                  </NavLink>
                   <button
                     onClick={logoutHandler}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
                     Logout
                   </button>
+                  
                 </div>
               </div>
             </div>
           ) : (
             <Link
-              to={"/signup"}
-              className="bg-primary text-white py-2 px-5 w-[100px] rounded-full transition-all duration-300 hover:bg-blue-900"
+              to={"/signin"}
+              className="bg-primary text-white py-2 px-5 w-[100px] rounded-full transition-all duration-300 hover:bg-slate-500"
             >
-              Sign Up
+              Sign In
             </Link>
           )}
         </div>

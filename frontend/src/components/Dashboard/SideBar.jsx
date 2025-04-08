@@ -28,18 +28,17 @@ const SideBar = () => {
           <CiCircleList className="text-2xl text-gray-800 md:text-[22px]" />
           <p className="text-[15px] text-gray-700 font-medium hidden md:block">Products List</p>
         </NavLink>
-
-        <NavLink to={"/dashboard/users"} className="flex items-center gap-4 py-3  w-full border-b border-gray-300 px-[3vw]">
-          <LiaUsersSolid className="text-2xl text-gray-800 md:text-[22px]" />
-          <p className="text-[15px] text-gray-700 font-medium hidden md:block">Users</p>
-        </NavLink>
-
-        {
-          orderMessage === "Admin" &&
-          <NavLink to={"/dashboard/orders"} className="flex items-center gap-4 py-3 w-full border-b border-gray-300 px-[3vw]">
+        
+        <NavLink to={"/dashboard/orders"} className="flex items-center gap-4 py-3 w-full border-b border-gray-300 px-[3vw]">
             <IoCheckmarkCircleOutline className="text-2xl text-gray-800 md:text-[22px]" />
             <p className="text-[15px] text-gray-700 font-medium hidden md:block">Orders</p>
           </NavLink>
+        {
+          orderMessage === "Admin" &&
+          <NavLink to={"/dashboard/users"} className="flex items-center gap-4 py-3  w-full border-b border-gray-300 px-[3vw]">
+          <LiaUsersSolid className="text-2xl text-gray-800 md:text-[22px]" />
+          <p className="text-[15px] text-gray-700 font-medium hidden md:block">Users</p>
+        </NavLink>
         }
 
       </div>

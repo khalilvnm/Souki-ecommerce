@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react';
+import {useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppContext } from '../context/AppContext';
 import { RiMenu3Fill } from "react-icons/ri";
 
 const BotNavbar = () => {
-  const { token } = useContext(AppContext);
   const [showNavbar, setShowNavbar] = useState(false);
   return (
     <div className='relative botnavbar py-3 px-[3vw] sm:px-[3vw] md:px-[7vw] lg:px-[9vw] bg-primary'>
@@ -17,9 +15,6 @@ const BotNavbar = () => {
         <NavLink to={"/accessoire"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Accessoire</NavLink>
         <NavLink to={"/about-us"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">About Us</NavLink>
         <NavLink to={"/contact-us"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Contact Us</NavLink>
-        {token &&
-          <NavLink to={"/dashboard"} className="py-1 px-2 transition-all duration-300">Dashboard</NavLink>
-        }
       </div>
       {/* Add Responsive Screen */}
       <div className='flex md:hidden justify-end overflow-hidden'>
@@ -34,9 +29,6 @@ const BotNavbar = () => {
           <NavLink to={"/accessoire"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Accessoire</NavLink>
           <NavLink to={"/about-us"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>About Us</NavLink>
           <NavLink to={"/contact-us"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Contact Us</NavLink>
-          {token &&
-            <NavLink to={"/dashboard"} className="py-1 px-2 transition-all duration-300">Dashboard</NavLink>
-          }
         </div>
       </div>
     </div>
