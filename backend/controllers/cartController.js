@@ -15,7 +15,7 @@ const addToCartItems = async (req, res) => {
       cartItemsData[productId] = 1;
     }
     await UserModel.findByIdAndUpdate(userDetails.id, { cartData: cartItemsData });
-    return res.status(200).json({ success: true, user: user, message: "Product Added Successfully." });
+    // return res.status(200).json({ success: true, user: user, message: "Product Added Successfully." });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
