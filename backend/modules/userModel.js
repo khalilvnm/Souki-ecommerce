@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, requried: true },
   image: { type: String, required: true },
-  cartData: { type: Object, default: {} },
+  cartData: { type: Object, default: {} }
 }, { minimize: false, timestamps: true });
 
 // User Model

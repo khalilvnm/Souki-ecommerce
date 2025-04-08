@@ -50,7 +50,7 @@ const orderPayment = async (req, res) => {
     // Create Line Items
     const line_items = items.map((item) => ({
       price_data: {
-        currency: "USD",
+        currency: "DZ",
         product_data: {
           name: item.title
         },
@@ -61,7 +61,7 @@ const orderPayment = async (req, res) => {
     // Order Charges
     line_items.push({
       price_data: {
-        currency: "USD",
+        currency: "Dz",
         product_data: {
           name: "Delivery Charges"
         },

@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext";
-import ProductItem from "../components/ProductItem";
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../context/AppContext';
+import 'react-multi-carousel/lib/styles.css';
+import ProductItem from '../components/ProductItem';
 
 const Cuisine = () => {
   const { allProducts, getAllProducts } = useContext(AppContext);
@@ -8,15 +9,19 @@ const Cuisine = () => {
 
   useEffect(() => {
     const loadProducts = async () => {
-      if (allProducts.length === 0) {
-        await getAllProducts();
-      }
 
-      const filtered = allProducts.filter(product => 
-        product.type?.toLowerCase() === "cuisine"
-      );
+        // Ensure products are loaded
+        if (allProducts.length === 0) {
+          await getAllProducts();
+        }
+
+        // Filter products where type exactly matches "Cuisine"
+        const filtered = allProducts.filter(
+          product => product.type?.toLowerCase() === "cuisine"
+        );
+        
+        setCuisineProducts(filtered);
       
-      setCuisineProducts(filtered);
     };
 
     loadProducts();
@@ -24,7 +29,7 @@ const Cuisine = () => {
 
   return (
     <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-      <p className='text-xl font-semibold mb-5 ml-1'>Cuisine Products</p>
+      <p className='text-xl font-semibold mb-5 ml-1'>cuisine Products</p>
       
       {cuisineProducts.length === 0 ? (
         <div className="text-center py-10 text-gray-500">

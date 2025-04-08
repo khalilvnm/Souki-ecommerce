@@ -3,7 +3,7 @@ import UserModel from './../modules/userModel.js';
 // Add To Wishlist
 const addToWishlist = async (req, res) => {
   try {
-    const { userDetails, productId } = await req.body;
+    const { userDetails, productId } = req.body;
     // Get User 
     const user = await UserModel.findById(userDetails.id);
     let wishlistData = await user.wishlistData;

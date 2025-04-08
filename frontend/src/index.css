@@ -6,22 +6,6 @@ body {
   font-family: "Outfit", sans-serif;
 }
 
-.botnavbar>a.active {
-  color: #fff;
-  position: relative;
-}
-
-.botnavbar>a.active::before {
-  content: "";
-  height: 1px;
-  width: 70%;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-}
-
 .search-section::-webkit-scrollbar {
   width: 7px;
 }
@@ -48,5 +32,5 @@ body {
 }
 
 .botnavbar-responsive>a.active {
-  background-color: #006988;
+  background-color: black;
 }

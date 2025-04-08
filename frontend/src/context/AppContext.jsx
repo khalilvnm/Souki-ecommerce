@@ -6,7 +6,7 @@ export const AppContext = createContext(null);
 
 const AppContextProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "");
-  const currency = "$";
+  const currency = "Dz";
   const delivery_fees = 5;
   const [allProducts, setAllProducts] = useState([]);
   const [allProductsDashboard, setAllProductsDashboard] = useState([]);

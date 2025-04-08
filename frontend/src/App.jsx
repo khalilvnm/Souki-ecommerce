@@ -23,7 +23,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Details from './pages/Dashboard/Details';
 import AddProduct from './pages/Dashboard/AddProduct';
 import ProductsList from './pages/Dashboard/ProductsList';
-import Users from './pages/Dashboard/Users';import Verify from './pages/Verify';
+import Users from './pages/Dashboard/Users';
+import Verify from './pages/Verify';
 import Orders from './pages/Dashboard/Orders';
 import Shop from './pages/Shop';
 
@@ -59,7 +60,6 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/verify' element={<Verify />} />
-
         <Route path='/dashboard' element={<Dashboard />}>
           <Route path='/dashboard' element={<Details />} />
           <Route path='add-product' element={<AddProduct />} />

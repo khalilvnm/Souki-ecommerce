@@ -25,7 +25,7 @@ const Wishlist = () => {
                           <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{product.description}</p>
                           <div>
                             <span className="text-red-700 font-semibold mr-3">-{product.discount} Off</span><span className="font-semibold">{currency}{calculateProductDiscount(product.price, product.discount)}</span>
-                            <p className="line-through text-gray-600 font-semibold">{currency}{product.price}</p>
+                            <p className="line-through text-gray-600 font-semibold">{product.price}{currency}</p>
                           </div>
                         </div>
                         <Link to={`/single-product/${product._id}`} className="bg-black text-center text-white rounded-full block w-full text-[15px] border border-gray-300 mt-3 py-1 px-3">Quick Look</Link>

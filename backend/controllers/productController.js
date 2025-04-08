@@ -60,28 +60,53 @@ const addProductHandler = async (req, res) => {
 
 
 // -------------- Get Product Based On User Or Admin -------------- //
+
+
+// const getProductsListDashboard = async (req, res) => {
+//   try {
+//     const { userDetails } = await req.body;
+//     console.log(userDetails);
+//     // Get User From DB
+//     const user = await UserModel.findById(userDetails.id);
+
+//     // Compare UserPw From DB With PW Coming From Token
+//     const comparePassword = await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+
+//     if (user && comparePassword) {
+//       const products = await ProductModel.find({});
+//       return res.status(200).json({ success: true, products: products });
+//     } else {
+//       const products = await ProductModel.find({ userId: userDetails.id });
+//       return res.status(200).json({ success: true, products: products });
+//     }
+
+
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+//   }
+// };
+
 const getProductsListDashboard = async (req, res) => {
   try {
-    const { userDetails } = await req.body;
-    console.log(userDetails);
-    // Get User From DB
+    const { userDetails } = req.body;
+
     const user = await UserModel.findById(userDetails.id);
-
-    // Compare UserPw From DB With PW Coming From Token
-    const comparePassword = await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
-
-    if (user && comparePassword) {
-      const products = await ProductModel.find({});
-      return res.status(200).json({ success: true, products: products });
-    } else {
-      const products = await ProductModel.find({ userId: userDetails.id });
-      return res.status(200).json({ success: true, products: products });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
+    const isAdmin = user.email === "admin@gmail.com"; 
+
+    const products = isAdmin
+      ? await ProductModel.find({})
+      : await ProductModel.find({ userId: user._id }); 
+
+    return res.status(200).json({ success: true, products });
 
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 

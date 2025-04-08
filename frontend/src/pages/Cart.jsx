@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 
 const Cart = () => {
   const { allProducts, cartItems, calculateProductDiscount,
@@ -47,7 +48,10 @@ const Cart = () => {
   return (
     <>
       {!shouldShowEmpty ? (
-      <div className='py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
+      <div className='relative py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
+      <div className="absolute top-auto left-5 z-10">
+        <BackButton />
+      </div>
       <p className='mb-10 text-2xl font-semibold text-gray-800'>Your Cart</p>
       <div className='flex flex-col gap-4'>
         {productsCart.map((product) => (
@@ -66,7 +70,29 @@ const Cart = () => {
             
             {/* Price */}
             <p className='text-gray-800 text-[15px] font-semibold'>
-              Price: {currency}{calculateProductDiscount(product.price, product.discount)}
+              {product.discount > 0 ? (
+                <>
+                  <span className="text-red-600">
+                    {currency}{calculateProductDiscount(product.price, product.discount)}
+                  </span>
+                  <span className="text-sm text-gray-500 line-through ml-2">
+                    {currency}{product.price}
+                  </span>
+                  <span className="text-xs text-red-600 ml-2">
+                    ({product.discount}% OFF)
+                  </span>
+                </>
+              ) : (
+                `${currency}${product.price}`
+              )}
+            </p>
+
+            {/* Total Price */}
+            <p className='text-[15px] font-semibold text-gray-800'>
+              Total: {currency}{(
+                product.quantity * 
+                calculateProductDiscount(product.price, product.discount)
+              ).toFixed(2)}
             </p>
             
             {/* Quantity Controls */}
@@ -88,10 +114,10 @@ const Cart = () => {
               </button>
             </div>
             
-            {/* Total Price */}
+            {/* Total Price
             <p className='text-[15px] font-semibold text-gray-800'>
               Total: {currency}{(product.quantity * calculateProductDiscount(product.price, product.discount)).toFixed(2)}
-            </p>
+            </p> */}
             
             {/* Remove Button */}
 
@@ -114,17 +140,17 @@ const Cart = () => {
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Subtotal</p>
-            <p>{currency}{getProductsCartAmount()}</p>
+            <p>{getProductsCartAmount()}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
-            <p>{currency}{productsCart.length > 0 ? delivery_fees : 0}</p>
+            <p>{productsCart.length > 0 ? delivery_fees : 0}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
-            <p>{currency}{productsCart.length > 0 ? (Number(getProductsCartAmount()) + delivery_fees).toFixed(2) : 0}</p>
+            <p>{productsCart.length > 0 ? (Number(getProductsCartAmount()) + delivery_fees).toFixed(2) : 0}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <Link 

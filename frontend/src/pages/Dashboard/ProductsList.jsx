@@ -51,7 +51,7 @@ const ProductsList = () => {
               <p>{index + 1}</p>
               <p><img src={product.images[0]} alt="product-image" className="w-20" /></p>
               <p>{product.title}</p>
-              <p>{currency}{product.price}</p>
+              <p>{product.price}{currency}</p>
               <p>{product.type}</p>
               <p onClick={() => { removeProduct(product._id); }} className="w-8 mx-auto h-8 bg-white cursor-pointer transition-all duration-300 hover:bg-red-700 hover:text-white border border-gray-300 rounded-full flex items-center justify-center">X</p>
             </div>

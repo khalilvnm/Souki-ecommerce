@@ -27,6 +27,7 @@ const BotNavbar = () => {
         {/* Links */}
         <div className={`overflow-hidden botnavbar-responsive ${showNavbar ? "w-full" : "w-0"} pb-5 absolute top-[100%] py-3 right-0 transition-all duration-300 bg-second border-t border-gray-800 flex flex-col gap-2 z-[9000] text-gray-100`}>
           <NavLink to={"/"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Home</NavLink>
+          <NavLink to={"/shop"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Shop</NavLink>
           <NavLink to={"/vetement"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Vetement</NavLink>
           <NavLink to={"/decoration"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Decoration</NavLink>
           <NavLink to={"/cuisine"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Cuisine</NavLink>

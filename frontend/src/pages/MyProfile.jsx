@@ -26,7 +26,7 @@ const MyProfile = () => {
 
   // Logout Handler
   const logoutHandler = () => {
-    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("token");  
     setToken("");
     navigate("/");
   };

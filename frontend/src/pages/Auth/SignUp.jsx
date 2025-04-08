@@ -10,7 +10,7 @@ import { AppContext } from './../../context/AppContext';
 import axios from "axios";
 import Loading from './../../components/Loading/Loading';
 
-const SignUp = () => {
+const SignIn = () => {
   const { setToken, backend_url } = useContext(AppContext);
   const [showPassword, setShowPassword] = useState("password");
   const [image, setImage] = useState("");
@@ -104,7 +104,7 @@ const SignUp = () => {
                 :
                 <div className='flex flex-col justify-center items-center'>
                   <FaCloudUploadAlt className='text-primary text-5xl' />
-                  <p className='text-gray-700'>Upload Image</p>
+                  <p className='text-gray-700'>l'image de profile</p>
                 </div>
             }
             <input type='file' id='image' hidden onChange={(event) => { setImage(event.target.files[0]); }} />
@@ -127,4 +127,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

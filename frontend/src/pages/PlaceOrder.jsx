@@ -3,10 +3,18 @@ import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 
 const PlaceOrder = () => {
-  const { allProducts, cartItems, delivery_fees, currency,
-    backend_url, token } = useContext(AppContext);
+  const {
+    allProducts,
+    cartItems,
+    delivery_fees,
+    currency,
+    backend_url,
+    token
+  } = useContext(AppContext);
+
   const [productsOrder, setProductsOrder] = useState([]);
   const [address, setAddress] = useState({
     firstName: "",
@@ -22,22 +30,26 @@ const PlaceOrder = () => {
 
   const navigate = useNavigate();
 
+  // Redirect if not logged in
   useEffect(() => {
     if (!token) {
-      navigate("/cart");
+      navigate("/signin");
     }
-  }, [token]);
+  }, [token, navigate]);
 
+  useEffect(() => {
+    collectProductsOrder();
+  }, [allProducts, cartItems]);
 
   // Collect Products Order
   const collectProductsOrder = () => {
     let productsData = [];
-    // Collect From CartItems {a: 1, b:2, c:3}
-    allProducts.map((product) => {
+    allProducts.forEach((product) => {
       for (const items in cartItems) {
         if (product._id === items) {
           productsData.push({
-            ...product, quantity: cartItems[items]
+            ...product,
+            quantity: cartItems[items]
           });
         }
       }
@@ -45,54 +57,65 @@ const PlaceOrder = () => {
     setProductsOrder(productsData);
   };
 
-  // Collect Products Order Amount 
+  // Calculate total product amount
   const collectProductsAmount = () => {
     let productsAmount = 0;
-    productsOrder.map((product) => {
-      let productPrice = (product.price - (product.price * (product.discount / 100))).toFixed(2);
+    productsOrder.forEach((product) => {
+      let productPrice = (
+        product.price -
+        product.price * (product.discount / 100)
+      ).toFixed(2);
       productsAmount += productPrice * product.quantity;
     });
     return productsAmount;
   };
 
-  // On Change Handler
+  // Input change handler
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     setAddress((prev) => ({ ...prev, [name]: value }));
   };
 
-  useEffect(() => {
-    collectProductsOrder();
-  }, [allProducts, cartItems]);
-
-  // Add Order Handler
+  // Submit order
   const addOrderHandler = async (event) => {
     event.preventDefault();
     try {
       const orderDetails = {
         address: address,
         items: productsOrder,
-        amount: collectProductsAmount() + 5
+        amount: collectProductsAmount() + delivery_fees
       };
-      const response = await axios.post(backend_url + "/api/order/place-order", orderDetails, {
-        headers: { authorization: "Bearer " + token }
-      });
+      const response = await axios.post(
+        backend_url + "/api/order/place-order",
+        orderDetails,
+        {
+          headers: { authorization: "Bearer " + token }
+        }
+      );
       if (response.data.success) {
         toast.success(response.data.message);
         window.location.replace("/my-orders");
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message || error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
+  if (!token) return null; 
+
   return (
-    <form onSubmit={addOrderHandler} className="py-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] flex items-start justify-between gap-5">
-      {/* Left Side */}
+    <form
+      onSubmit={addOrderHandler}
+      className="py-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] flex items-start justify-between gap-5"
+    >
+      {/* Address Form */}
       <div className="w-full md:w-[60%]">
-        <p className="text-xl font-semibold text-gray-800 mb-5">Address</p>
+      <div className="relative -left-12 ">
+        <BackButton />
+      </div>
+        <p className="text-xl font-semibold text-gray-800 mt-3">Address</p>
+      
         <div className="flex flex-col gap-3 w-full">
           <div className="flex items-center justify-between gap-2">
             <input required type="text" placeholder="FirstName" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="firstName" onChange={onChangeHandler} />
@@ -113,23 +136,24 @@ const PlaceOrder = () => {
           <input required type="number" placeholder="Phone" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="phone" onChange={onChangeHandler} />
         </div>
       </div>
-      {/* Right Side */}
-      <div className="w-full  md:w-[40%]">
+
+      {/* Cart Summary */}
+      <div className="w-full  md:w-[40%] ">
         <p className="text-xl font-semibold text-gray-800 mb-5">Cart Total</p>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Subtotal</p>
-            <p>{currency}{collectProductsAmount()}</p>
+            <p>{collectProductsAmount()}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
-            <p>{currency}{collectProductsAmount() > 0 ? delivery_fees : 0}</p>
+            <p>{collectProductsAmount() > 0 ? delivery_fees : 0}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
-            <p>{currency}{collectProductsAmount() > 0 ? collectProductsAmount() + delivery_fees : 0}</p>
+            <p>{collectProductsAmount() > 0 ? collectProductsAmount() + delivery_fees : 0}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <button type="submit" className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md'>Proceed To Checkout</button>

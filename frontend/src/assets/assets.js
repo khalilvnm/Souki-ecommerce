@@ -6,23 +6,6 @@ export const hero_images = [
   hero_1, hero_2, hero_3
 ];
 
-
-export const categoryResponsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 6,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 4,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 2,
-  }
-};
-
-
 export const productResponsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -38,10 +21,8 @@ export const productResponsive = {
   }
 };
 
-import user_profile from "../assets/user-profile.png";
 import upload_area from "../assets/upload_area.png";
 
 export const assets = {
-  user_profile,
   upload_area
 };

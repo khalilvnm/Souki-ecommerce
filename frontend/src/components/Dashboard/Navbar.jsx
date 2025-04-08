@@ -30,7 +30,11 @@ const Navbar = () => {
       </Link>
       {/* UserProfile */}
       <div className='relative group w-[40px] h-[40px]'>
-        <img src={userImage} alt='user-profile' className='max-w-[100%] rounded-full border-2 border-primary cursor-pointer' />
+        <img
+              src={userImage}
+              alt="user-profile"
+              className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
+        />
       </div>
     </div>
   );

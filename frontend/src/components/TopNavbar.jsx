@@ -19,7 +19,7 @@ const TopNavbar = () => {
   const [userImage, setUserImage] = useState(null);
 
   const navigate = useNavigate();
-
+  
   // Get User
   const getUser = async () => {
     const response = await axios.post(
@@ -48,7 +48,7 @@ const TopNavbar = () => {
   }, [token]);
 
   return (
-    <div className="relative bg-second py-5 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] border-b border-gray-300">
+    <div className="relative bg-second py-5 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <div className="flex items-center justify-between gap-10">
         {/* Logo */}
 
@@ -89,11 +89,11 @@ const TopNavbar = () => {
           {/* Switch Between Signup and User Profile */}
           {token ? (
             <div className="relative group w-[40px] h-[40px]">
-              <img
-                src={userImage}
-                alt="user-profile"
-                className="max-w-[100%] rounded-full border-2 border-primary cursor-pointer"
-              />
+            <img
+              src={userImage}
+              alt="user-profile"
+              className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
+            />
               <div className="hidden group-hover:block absolute top-[100%] right-[-5px] bg-transition  z-[3000] p-5 w-[230px]">
                 <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md  gap-2 ">
                   <NavLink

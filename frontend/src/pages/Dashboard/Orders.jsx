@@ -49,7 +49,7 @@ const Orders = () => {
             {/* Product Count & Amount */}
             <div>
               <p>Items Count: {order.items.length}</p>
-              <p>Items Amount: <span className="text-primary font-semibold">{currency}{order.amount}</span></p>
+              <p>Items Amount: <span className="text-primary font-semibold">{order.amount}{currency}</span></p>
             </div>
             {/* Order Payment */}
             <p>Payment: <span className={`font-semibold ${order.payment ? "text-green-700" : "text-red-700"}`}>{order.payment ? "Paid" : "Not Paid"}</span> </p>

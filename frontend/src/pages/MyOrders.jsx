@@ -45,6 +45,16 @@ const MyOrders = () => {
 
   return (
     <div className='py-20 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      {/* <div className="absolute top-0 left-0">
+      <BackButton />
+      </div> */}
+
+      <div className="relative">
+        <div className="absolute top-0 left-0">
+          <BackButton />
+        </div>
+        <p className='text-gray-800 text-2xl mb-10 font-semibold pl-10'>My Orders</p>
+      </div>
       <p className='text-gray-800 text-2xl mb-10 font-semibold'>My Orders</p>
       <div className='flex flex-col gap-5'>
         {
@@ -62,7 +72,7 @@ const MyOrders = () => {
               {/* Items Count & Amount */}
               <div className='text-gray-700 font-medium'>
                 <p>Items Count: <span className='text-gray-800 font-semibold text-base'>{order.items.length}</span></p>
-                <p>Items Amount: <span className='text-gray-800 font-semibold text-base'>{currency}{order.amount}</span></p>
+                <p>Items Amount: <span className='text-gray-800 font-semibold text-base'>{order.amount}{currency}</span></p>
               </div>
               {/* Order Payment */}
               <p className={`font-semibold text-center text-[15px] ${order.payment ? "text-green-800" : "text-red-800"}`}>{order.payment ? "Paid" : "Not Paid"}</p>
