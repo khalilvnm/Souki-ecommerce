@@ -10,7 +10,7 @@ import BackButton from '../components/BackButton';
 
 const SingleProduct = () => {
   const { allProducts, currency, calculateProductDiscount,
-    addToCartItems, addAndRemoveWishList, wishlistItems, backend_url } = useContext(AppContext);
+    addToCartItems, backend_url } = useContext(AppContext);
   const { productId } = useParams();
   const [singleProduct, setSingleProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
@@ -112,26 +112,9 @@ const SingleProduct = () => {
                 >
                   Add To Cart
                 </button>
-                
-                {wishlistItems.includes(singleProduct._id) ? (
-                  <button 
-                    onClick={() => addAndRemoveWishList(singleProduct._id)}
-                    className='h-[42px] py-1.5 px-2 border border-gray-100 text-red-700 text-sm font-medium bg-gray-300 w-[180px] rounded-md transition-all duration-300 hover:bg-[#aaa]'
-                  >
-                    Remove From WishList
-                  </button>
-                ) : (
-                  <button 
-                    onClick={() => addAndRemoveWishList(singleProduct._id)}
-                    className='h-[42px] py-1.5 px-7 border border-gray-100 text-[15px] font-medium bg-gray-300 w-[180px] rounded-md transition-all duration-300 hover:bg-[#aaa]'
-                  >
-                    Add To WishList
-                  </button>
-                )}
               </div>
             </div>
           </div>
-          
           {/* Related Products */}
           <RelatedProducts type={singleProduct.type} singleProduct={singleProduct} />
         </>

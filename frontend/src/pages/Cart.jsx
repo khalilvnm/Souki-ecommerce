@@ -5,7 +5,7 @@ import BackButton from '../components/BackButton';
 
 const Cart = () => {
   const { allProducts, cartItems, calculateProductDiscount,
-    currency, addToCartItems, removeToCartItems, delivery_fees } = useContext(AppContext);
+    currency, addToCartItems, removeToCartItems } = useContext(AppContext);
   const [productsCart, setProductsCart] = useState([]);
 
   // Collect Products Cart - Add debug logging
@@ -78,6 +78,7 @@ const Cart = () => {
                   <span className="text-sm text-gray-500 line-through ml-2">
                     {currency}{product.price}
                   </span>
+
                   <span className="text-xs text-red-600 ml-2">
                     ({product.discount}% OFF)
                   </span>
@@ -112,13 +113,7 @@ const Cart = () => {
               >
                 +
               </button>
-            </div>
-            
-            {/* Total Price
-            <p className='text-[15px] font-semibold text-gray-800'>
-              Total: {currency}{(product.quantity * calculateProductDiscount(product.price, product.discount)).toFixed(2)}
-            </p> */}
-            
+            </div>  
             {/* Remove Button */}
 
             <button 
@@ -139,18 +134,8 @@ const Cart = () => {
         <p className='text-xl font-semibold text-gray-800 mb-5'>Cart Total</p>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
-            <p className='text-gray-700 text-[15px]'>Subtotal</p>
-            <p>{getProductsCartAmount()}{currency}</p>
-          </div>
-          <hr className='border-none h-[1px] w-full bg-gray-200' />
-          <div className='flex items-center justify-between'>
-            <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
-            <p>{productsCart.length > 0 ? delivery_fees : 0}{currency}</p>
-          </div>
-          <hr className='border-none h-[1px] w-full bg-gray-200' />
-          <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
-            <p>{productsCart.length > 0 ? (Number(getProductsCartAmount()) + delivery_fees).toFixed(2) : 0}{currency}</p>
+            <p>{getProductsCartAmount()}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <Link 

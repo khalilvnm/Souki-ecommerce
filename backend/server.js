@@ -4,7 +4,6 @@ import connectCloudainry from "./config/cloudinary.js";
 import connectDB from "./config/mongoose.js";
 import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
-import wishlistRouter from "./routes/wishlistRoute.js";
 import productRouter from "./routes/productRoute.js";
 import orderRouter from './routes/orderRoute.js';
 import detailsRouter from "./routes/detailsRoute.js";
@@ -23,7 +22,6 @@ app.use(cors());
 
 app.use("/api/users", userRouter);
 app.use("/api/cart", cartRouter);
-app.use("/api/wishlist", wishlistRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/details", detailsRouter);

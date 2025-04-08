@@ -9,23 +9,16 @@ const PlaceOrder = () => {
   const {
     allProducts,
     cartItems,
-    delivery_fees,
     currency,
     backend_url,
     token
   } = useContext(AppContext);
 
   const [productsOrder, setProductsOrder] = useState([]);
-  const [address, setAddress] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    state: "",
-    country: "",
-    city: "",
-    street: "",
-    zipCode: "",
-    phone: ""
+  const [infos, setInfos] = useState({
+    nomprenom: "",
+    phone: "",
+    adresse: ""
   });
 
   const navigate = useNavigate();
@@ -73,7 +66,7 @@ const PlaceOrder = () => {
   // Input change handler
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setAddress((prev) => ({ ...prev, [name]: value }));
+    setInfos((prev) => ({ ...prev, [name]: value }));
   };
 
   // Submit order
@@ -81,9 +74,9 @@ const PlaceOrder = () => {
     event.preventDefault();
     try {
       const orderDetails = {
-        address: address,
+        infos: infos,
         items: productsOrder,
-        amount: collectProductsAmount() + delivery_fees
+        amount: collectProductsAmount()
       };
       const response = await axios.post(
         backend_url + "/api/order/place-order",
@@ -109,51 +102,33 @@ const PlaceOrder = () => {
       onSubmit={addOrderHandler}
       className="py-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] flex items-start justify-between gap-5"
     >
-      {/* Address Form */}
+      {/* infos Form */}
       <div className="w-full md:w-[60%]">
-      <div className="relative -left-12 ">
+      <div className="relative -left-16">
         <BackButton />
       </div>
-        <p className="text-xl font-semibold text-gray-800 mt-3">Address</p>
+        <p className="text-xl font-semibold text-gray-800 mt-4">Infos</p>
       
-        <div className="flex flex-col gap-3 w-full">
+        <div className="flex flex-col mt-7 gap-3 w-full">
           <div className="flex items-center justify-between gap-2">
-            <input required type="text" placeholder="FirstName" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="firstName" onChange={onChangeHandler} />
-            <input required type="text" placeholder="LastName" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="lastName" onChange={onChangeHandler} />
+            <input required type="text" placeholder="Nom et Prenom" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="nomprenom" onChange={onChangeHandler} />
           </div>
           <div className="flex items-center gap-2">
-            <input required type="email" placeholder="email" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="email" onChange={onChangeHandler} />
-            <input required type="text" placeholder="State" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="state" onChange={onChangeHandler} />
+            <input required type="number" placeholder="Télephone" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="phone" onChange={onChangeHandler} />
           </div>
           <div className="flex items-center gap-2">
-            <input required type="text" placeholder="Country" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="country" onChange={onChangeHandler} />
-            <input required type="text" placeholder="City" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="city" onChange={onChangeHandler} />
+            <input required type="text" placeholder="Adresse" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="adresse" onChange={onChangeHandler} />
           </div>
-          <div className="flex items-center gap-2">
-            <input required type="text" placeholder="Street" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="street" onChange={onChangeHandler} />
-            <input required type="number" placeholder="Zip Code" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="zipCode" onChange={onChangeHandler} />
-          </div>
-          <input required type="number" placeholder="Phone" className="block w-full border border-gray-300 rounded-md shadow-md py-2 px-3" name="phone" onChange={onChangeHandler} />
         </div>
       </div>
 
       {/* Cart Summary */}
-      <div className="w-full  md:w-[40%] ">
+      <div className="w-full mt-16 md:w-[40%] ">
         <p className="text-xl font-semibold text-gray-800 mb-5">Cart Total</p>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
-            <p className='text-gray-700 text-[15px]'>Subtotal</p>
-            <p>{collectProductsAmount()}{currency}</p>
-          </div>
-          <hr className='border-none h-[1px] w-full bg-gray-200' />
-          <div className='flex items-center justify-between'>
-            <p className='text-gray-700 text-[15px]'>Delivery Fees</p>
-            <p>{collectProductsAmount() > 0 ? delivery_fees : 0}{currency}</p>
-          </div>
-          <hr className='border-none h-[1px] w-full bg-gray-200' />
-          <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
-            <p>{collectProductsAmount() > 0 ? collectProductsAmount() + delivery_fees : 0}{currency}</p>
+            <p>{collectProductsAmount()}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
           <button type="submit" className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md'>Proceed To Checkout</button>

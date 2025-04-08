@@ -40,22 +40,18 @@ const Orders = () => {
             </div>
             {/* User details */}
             <div>
-              <p>Username: {order.address.firstName + " " + order.address.lastName} </p>
-              <p>Address: </p>
-              <p>Country: {order.address.country} - City: {order.address.city}</p>
-              <p>Street: {order.address.street}</p>
-              <p>phone: {order.address.phone}</p>
+              <p>Username: {order.infos.nomprenom} </p>
+              <p>Phone: {order.infos.phone}</p>
+              <p>Adresse: {order.infos.adresse}</p>
             </div>
             {/* Product Count & Amount */}
             <div>
               <p>Items Count: {order.items.length}</p>
               <p>Items Amount: <span className="text-primary font-semibold">{order.amount}{currency}</span></p>
             </div>
-            {/* Order Payment */}
-            <p>Payment: <span className={`font-semibold ${order.payment ? "text-green-700" : "text-red-700"}`}>{order.payment ? "Paid" : "Not Paid"}</span> </p>
             {/* Order Status */}
             <select value={order.status} onChange={(event) => { updateOrderStatus(event, order._id); }}
-              className="border border-gray-400  py-1.5 px-3 shadow-sm rounded-sm cursor-pointer outline-none w-fit">
+              className="border border-gray-400 py-1.5 px-2 shadow-sm rounded-sm cursor-pointer outline-none w-fit">
               <option value={"Order Processing"}>Order Processing</option>
               <option value={"Order Shipped"}>Order Shipped</option>
               <option value={"Out For Delivery"}>Out For Delivery</option>

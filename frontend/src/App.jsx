@@ -18,13 +18,11 @@ import MyOrders from './pages/MyOrders';
 import SignUp from './pages/Auth/SignUp';
 import SignIn from './pages/Auth/SignIn';
 import MyProfile from './pages/MyProfile';
-import Wishlist from './pages/Wishlist';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Details from './pages/Dashboard/Details';
 import AddProduct from './pages/Dashboard/AddProduct';
 import ProductsList from './pages/Dashboard/ProductsList';
 import Users from './pages/Dashboard/Users';
-import Verify from './pages/Verify';
 import Orders from './pages/Dashboard/Orders';
 import Shop from './pages/Shop';
 
@@ -53,13 +51,11 @@ const App = () => {
         <Route path='/shop' element={<Shop />} />
         <Route path='/single-product/:productId' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/wishlist' element={<Wishlist />} />
         <Route path='/placeorder' element={<PlaceOrder />} />
         <Route path='/my-orders' element={<MyOrders />} />
         <Route path='/my-profile' element={<MyProfile />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
-        <Route path='/verify' element={<Verify />} />
         <Route path='/dashboard' element={<Dashboard />}>
           <Route path='/dashboard' element={<Details />} />
           <Route path='add-product' element={<AddProduct />} />

@@ -13,7 +13,6 @@ const TopNavbar = () => {
     token,
     setToken,
     backend_url,
-    wishlistItems,
   } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState("");
   const [userImage, setUserImage] = useState(null);
@@ -69,20 +68,14 @@ const TopNavbar = () => {
           />
           <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
         </div>
-        {/* SignUp And Cart And Wishlist */}
+        {/* SignUp And Cart*/}
         <div className="w-fit flex items-center gap-4">
-          {/* Cart And Wishlist */}
+          {/* Cart */}
           <div className="flex items-center gap-2">
             <Link to={"/cart"} className="relative cursor-pointer">
               <FiShoppingBag className="text-2xl text-primary" />
               <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
                 {calculateCartItemsCount()}
-              </p>
-            </Link>
-            <Link to={"/wishlist"} className="relative cursor-pointer">
-              <FaRegStar className="text-2xl text-primary" />
-              <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
-                {wishlistItems?.length || 0}
               </p>
             </Link>
           </div>

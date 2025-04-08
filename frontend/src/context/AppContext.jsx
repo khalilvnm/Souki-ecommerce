@@ -7,11 +7,9 @@ export const AppContext = createContext(null);
 const AppContextProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "");
   const currency = "Dz";
-  const delivery_fees = 5;
   const [allProducts, setAllProducts] = useState([]);
   const [allProductsDashboard, setAllProductsDashboard] = useState([]);
   const [cartItems, setCartItems] = useState({});
-  const [wishlistItems, setWishListItems] = useState([]);
   const [ordersDashboard, setOrdersDashboard] = useState([]);
   const [orderMessage, setOrderMessage] = useState("");
 
@@ -73,19 +71,19 @@ const AppContextProvider = (props) => {
     }
   };
 
-
+  // remove To CartItmes
   const removeToCartItems = async (productId) => {
     try {
-      // Create copy of current cart
-      const updatedCart = {...cartItems};
-      
-      // Remove the product
-      delete updatedCart[productId];
-      
-      // Update local state immediately
+      const updatedCart = { ...cartItems };
+  
+      if (updatedCart[productId] > 1) {
+        updatedCart[productId] -= 1;
+      } else {
+        delete updatedCart[productId];
+      }
+  
       setCartItems(updatedCart);
-      
-      // Sync with backend if logged in
+  
       if (token) {
         await axios.post(
           `${backend_url}/api/cart/remove`, 
@@ -95,7 +93,7 @@ const AppContextProvider = (props) => {
       }
     } catch (error) {
       console.error("Delete failed:", error);
-      toast.error("Failed to remove item");
+      toast.error("Failed to update cart");
     }
   };
 
@@ -133,44 +131,6 @@ const AppContextProvider = (props) => {
     }
   };
 
-  // Add To Wishlist
-  const addAndRemoveWishList = async (productId) => {
-    let wishListData = wishlistItems.slice(); // []
-    if (wishListData.includes(productId)) {
-      wishListData = wishListData.filter((item) => item !== productId);
-    } else {
-      wishListData.push(productId);
-    }
-    setWishListItems(wishListData);
-
-    if (token) {
-      const response = await axios.post(backend_url + "/api/wishlist/add-remove", { productId: productId }, {
-        headers: { authorization: "Bearer " + token }
-      });
-      if (response.data.success) {
-        toast.success(response.data.message);
-      } else {
-        console.log(response);
-        toast.error(response.response.data.message || response.message);
-      }
-    }
-  };
-
-  // Get Wishlist Items
-  const getWishlistItems = async () => {
-    try {
-      const response = await axios.post(backend_url + "/api/wishlist/get", {}, {
-        headers: { authorization: "Bearer " + token }
-      });
-      if (response.data.success) {
-        setWishListItems(response.data.wishlistData);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message || error.message);
-    }
-  };
-
   // Get Orders Dashboard
   const getOrdersDashboard = async () => {
     try {
@@ -190,7 +150,6 @@ const AppContextProvider = (props) => {
   useEffect(() => {
     if (token) {
       getCartData();
-      getWishlistItems();
       getOrdersDashboard();
     }
   }, [token]);
@@ -215,9 +174,6 @@ const AppContextProvider = (props) => {
     calculateCartItemsCount: calculateCartItemsCount,
     removeToCartItems: removeToCartItems,
     deleteProductFromCart: deleteProductFromCart,
-    delivery_fees: delivery_fees,
-    addAndRemoveWishList: addAndRemoveWishList,
-    wishlistItems: wishlistItems || [],
     getOrdersDashboard: getOrdersDashboard,
     ordersDashboard: ordersDashboard,
     orderMessage: orderMessage
