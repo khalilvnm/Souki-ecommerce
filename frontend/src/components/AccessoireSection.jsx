@@ -34,6 +34,7 @@ const AccessoireSection = () => {
                 discount={product.discount} 
                 images={product.images} 
                 type={product.type} 
+                userName={product.userId?.username}
               />
             </div>
           ))}

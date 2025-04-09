@@ -26,14 +26,13 @@ const DecorationSection = () => {
           {decorationProducts.map((product, index) => (
             <div className='mr-3' key={index}>
               <ProductItem 
-                id={product._id} 
-                title={product.title} 
-                description={product.description} 
-                price={product.price} 
-                discount={product.discount} 
-                images={product.images} 
-                type={product.type} 
-              />
+          id={product._id}
+          title={product.title}
+          images={product.images}
+          price={product.price}
+          discount={product.discount}
+          userName={product.userId?.username}
+        />
             </div>
           ))}
         </Carousel>

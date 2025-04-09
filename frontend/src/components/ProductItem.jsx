@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-const ProductItem = ({ id, title, images, price, discount }) => {
+const ProductItem = ({ id, title, images, price, discount, userName }) => {
   const { calculateProductDiscount, currency, addToCartItems,cartItems , removeToCartItems} = useContext(AppContext);
   const [inCart, setInCart] = useState(false);
     // Check if product is already in cart
@@ -23,21 +23,6 @@ const ProductItem = ({ id, title, images, price, discount }) => {
   return (
     <div className="bg-white block border p-3 border-gray-200 rounded-xl shadow-lg cursor-pointer transition-all duration-300">
       <div className="relative">
-      {/* <div 
-        onClick={() => {
-          addToCartItems(id);
-          setAddedToCart(true);
-        }}
-        className={`absolute flex items-center justify-center w-8 h-8 rounded-full cursor-pointer top-[-8px] right-[-8px]
-          transition-all duration-300 border 
-          ${addedToCart 
-            ? "bg-black text-white border-black" 
-            : "bg-transparent text-gray-500 border-gray-300 hover:bg-gray-100"
-          }`}
-        title="Ajouter au panier"
-      >
-        <FaShoppingCart size={14} />
-      </div> */}
     <button
       onClick={toggleCart}
       className="absolute top-[-8px] right-[-8px] p-1 rounded-full transition-all"
@@ -56,6 +41,7 @@ const ProductItem = ({ id, title, images, price, discount }) => {
         <hr className="border-none h-[1px] w-full bg-gray-300 my-3" />
         <div>
           <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{title}</p>
+          <p className="text-xs text-gray-500 mb-1">Added by: {userName}</p>
           <div>
             {discount > 0 ? (
               <>

@@ -46,6 +46,7 @@ const Accessoire = () => {
               price={product.price} 
               discount={product.discount} 
               images={product.images} 
+              userName={product.userId?.username}
             />
           ))}
         </div>

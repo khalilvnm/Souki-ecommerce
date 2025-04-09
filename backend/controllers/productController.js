@@ -113,13 +113,15 @@ const getProductsListDashboard = async (req, res) => {
 // Get Products List Frontend
 const getProductsListFrontend = async (req, res) => {
   try {
-    const products = await ProductModel.find({});
-    return res.status(200).json({ success: true, products: products });
+    const products = await ProductModel.find({}).populate("userId", "username"); 
+    return res.status(200).json({ success: true, products });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
   }
 };
+
+
 
 // -------------- Delete Product Based On User Or Admin -------------- //
 const deleteProduct = async (req, res) => {

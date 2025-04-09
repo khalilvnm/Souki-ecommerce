@@ -43,7 +43,8 @@ const Decoration = () => {
                 description={product.description} 
                 price={product.price} 
                 discount={product.discount} 
-                images={product.images} 
+                images={product.images}
+                userName={product.userId?.username}
               />
             ))}
           </div>
