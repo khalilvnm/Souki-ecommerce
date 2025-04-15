@@ -1,5 +1,6 @@
 import OrderModel from './../modules/orderModel.js';
 import UserModel from './../modules/userModel.js';
+import ProductModel from './../modules/productModel.js';
 import bcrypt from 'bcrypt';
 import "dotenv/config";
 
@@ -9,11 +10,20 @@ const placeOrder = async (req, res) => {
   try {
     const { userDetails, infos, items, amount } = await req.body;
 
+    // Get product owner information for each item
+    const itemsWithOwners = await Promise.all(items.map(async (item) => {
+      const product = await ProductModel.findById(item.productId);
+      return {
+        ...item,
+        productOwnerId: product.userId
+      };
+    }));
+
     // Add New Order
     const newOrder = new OrderModel({
       userId: userDetails.id,
       infos: infos,
-      items: items,
+      items: itemsWithOwners,
       amount: Number(amount)
     });
     const order = await newOrder.save();
@@ -60,10 +70,32 @@ const getOrdersDashboard = async (req, res) => {
   }
 };
 
-
+// Get Orders for Product Owners
+const getOrdersForProductOwners = async (req, res) => {
+  try {
+    const { userDetails } = await req.body;
+    
+    // Find all orders where any item belongs to this user
+    const orders = await OrderModel.find({
+      'items.productOwnerId': userDetails.id
+    }).populate('items.productId', 'title price images');
+    
+    return res.status(200).json({ 
+      success: true, 
+      orders: orders 
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ 
+      success: false, 
+      message: `Internal Server Error => ${error.message}` 
+    });
+  }
+};
 
 export {
   placeOrder,
   getOrdersForUsers,
   getOrdersDashboard,
+  getOrdersForProductOwners,
 };

@@ -1,65 +1,125 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Orders = () => {
-  const { ordersDashboard, currency, backend_url, token, getOrdersDashboard } = useContext(AppContext);
+  const { backend_url, token} = useContext(AppContext);
+  const [orders, setOrders] = useState([]);
+  const [sellerOrders, setSellerOrders] = useState([]);
 
-  // Update Order Status
-  const updateOrderStatus = async (event, orderId) => {
-    const value = event.target.value;
-    try {
-      const response = await axios.post(backend_url + "/api/order/status-update", { value: value, orderId: orderId }, {
-        headers: { authorization: "Bearer " + token }
-      });
-      if (response.data.success) {
-        toast.success(response.data.message);
-        getOrdersDashboard();
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        // Fetch regular orders
+        const response = await axios.post(
+          backend_url + "/api/order/orders-list",
+          { userDetails: { id: localStorage.getItem('userId') } },
+          {
+            headers: { authorization: "Bearer " + token }
+          }
+        );
+        
+        if (response.data.success) {
+          setOrders(response.data.orders);
+        }
+
+        // Fetch seller orders
+        const sellerResponse = await axios.post(
+          backend_url + "/api/order/product-owner-orders",
+          { userDetails: { id: localStorage.getItem('userId') } },
+          {
+            headers: { authorization: "Bearer " + token }
+          }
+        );
+        
+        if (sellerResponse.data.success) {
+          setSellerOrders(sellerResponse.data.orders);
+        }
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        toast.error('Failed to fetch orders');
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message || error.message);
-    }
-  };
+    };
 
-  return ordersDashboard.length > 0 && (
-    <div className="py-5 px-[3vw] flex flex-col gap-5">
-      {
-        ordersDashboard.map((order, index) => (
-          <div key={index} className="grid md:grid-cols-[0.5fr_2fr_2fr_1fr_1fr_1fr] gap-3 border border-gray-200 shadow-md py-5 px-3 items-center text-sm font-medium text-gray-800">
-            {/* Index */}
-            <p className="text-center font-semibold hidden md:block">{index + 1}</p>
-            {/* Product details */}
-            <div>
-              {
-                order.items.map((item, index) => (
-                  <p key={index}>{item.title} x{item.quantity}</p>
-                ))
-              }
-            </div>
-            {/* User details */}
-            <div>
-              <p>Username: {order.infos.nomprenom} </p>
-              <p>Phone: {order.infos.phone}</p>
-              <p>Adresse: {order.infos.adresse}</p>
-            </div>
-            {/* Product Count & Amount */}
-            <div>
-              <p>Items Count: {order.items.length}</p>
-              <p>Items Amount: <span className="text-primary font-semibold">{order.amount}{currency}</span></p>
-            </div>
-            {/* Order Status */}
-            <select value={order.status} onChange={(event) => { updateOrderStatus(event, order._id); }}
-              className="border border-gray-400 py-1.5 px-2 shadow-sm rounded-sm cursor-pointer outline-none w-fit">
-              <option value={"Order Processing"}>Order Processing</option>
-              <option value={"Order Shipped"}>Order Shipped</option>
-              <option value={"Out For Delivery"}>Out For Delivery</option>
-              <option value={"Order Delivered"}>Order Delivered</option>
-            </select>
+    fetchOrders();
+  }, [backend_url, token]);
+
+  return (
+    <div className="p-4">
+      {/* Regular Orders */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Your Orders</h2>
+        {orders.length === 0 ? (
+          <p className="text-gray-500">No orders yet</p>
+        ) : (
+          <div className="space-y-4">
+            {orders.map((order) => (
+              <div key={order._id} className="border p-4 rounded-lg shadow">
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Order ID</h3>
+                    <p>{order._id}</p>
+                    <p>Total Amount: {order.amount} DZ</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Your Info</h3>
+                    <p>Name: {order.infos.nomprenom}</p>
+                    <p>Phone: {order.infos.phone}</p>
+                    <p>Address: {order.infos.adresse}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Ordered Products</h3>
+                    {order.items.map((item, index) => (
+                      <div key={index} className="bg-gray-50 p-2 rounded mb-2">
+                        <p className="font-medium">{item.productId.title}</p>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Price: {item.price} DZ</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        ))
-      }
+        )}
+      </div>
+
+      {/* Seller Orders */}
+      {sellerOrders.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-bold mb-4">Orders for Your Products</h2>
+          <div className="space-y-4">
+            {sellerOrders.map((order) => (
+              <div key={order._id} className="border p-4 rounded-lg shadow">
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Order ID</h3>
+                    <p>{order._id}</p>
+                    <p>Total Amount: {order.amount} DZ</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Customer Info</h3>
+                    <p>Name: {order.infos.nomprenom}</p>
+                    <p>Phone: {order.infos.phone}</p>
+                    <p>Address: {order.infos.adresse}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Ordered Products</h3>
+                    {order.items.map((item, index) => (
+                      <div key={index} className="bg-gray-50 p-2 rounded mb-2">
+                        <p className="font-medium">{item.productId.title}</p>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Price: {item.price} DZ</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

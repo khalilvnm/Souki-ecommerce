@@ -74,8 +74,13 @@ const PlaceOrder = () => {
     event.preventDefault();
     try {
       const orderDetails = {
+        userDetails: { id: localStorage.getItem('userId') },
         infos: infos,
-        items: productsOrder,
+        items: productsOrder.map(item => ({
+          productId: item._id,
+          quantity: item.quantity,
+          price: item.price
+        })),
         amount: collectProductsAmount()
       };
       const response = await axios.post(
