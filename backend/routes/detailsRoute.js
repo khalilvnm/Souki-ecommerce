@@ -1,9 +1,9 @@
 import express from "express";
 import userAuth from './../middlewares/UserAuth.js';
-import { productsCount } from "../controllers/detailsController.js";
+import { getDetails } from "../controllers/detailsController.js";
 
 const detailsRouter = express.Router();
 
-detailsRouter.post("/details", userAuth, productsCount);
+detailsRouter.post("/details", userAuth, getDetails);
 
 export default detailsRouter;

@@ -42,7 +42,11 @@ const placeOrder = async (req, res) => {
 const getOrdersForUsers = async (req, res) => {
   try {
     const { userDetails } = await req.body;
-    const orders = await OrderModel.find({ userId: userDetails.id });
+    const orders = await OrderModel.find({ userId: userDetails.id })
+      .populate({
+        path: 'items.productId',
+        select: 'title price images'
+      });
     return res.status(200).json({ success: true, orders: orders });
   } catch (error) {
     console.log(error);
@@ -56,17 +60,29 @@ const getOrdersDashboard = async (req, res) => {
     const { userDetails } = await req.body;
     const user = await UserModel.findById(userDetails.id);
     const comparePassword = await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+    
     if (user && user.email === process.env.ADMIN_EMAIL && comparePassword) {
-      const orders = await OrderModel.find({});
+      // For admin, get all orders with populated details
+      const orders = await OrderModel.find({})
+        .populate({
+          path: 'userId',
+          model: 'User',
+          select: 'name email'
+        })
+        .populate({
+          path: 'items.productId',
+          model: 'Product',
+          select: 'title price images userId'
+        })
+        .sort({ createdAt: -1 }); // Most recent orders first
+
       return res.status(200).json({ success: true, orders: orders, message: "Admin" });
     } else {
       return res.status(200).json({ success: true, orders: [], message: "User" });
     }
-
-
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ success: false, message: `Internal Serevr Error => ${error}` });
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error}` });
   }
 };
 
@@ -93,9 +109,61 @@ const getOrdersForProductOwners = async (req, res) => {
   }
 };
 
+// Delete Order
+const deleteOrder = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { userDetails } = req.body;
+
+    // Find the order
+    const order = await OrderModel.findById(orderId);
+    
+    if (!order) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Order not found" 
+      });
+    }
+
+    // Check if user is admin
+    const user = await UserModel.findById(userDetails.id);
+    const isAdmin = user && user.email === process.env.ADMIN_EMAIL && 
+                   await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+
+    // Check if user is authorized to delete (admin, buyer, or seller of any product in the order)
+    const isAuthorized = 
+      isAdmin || // Admin
+      order.userId.toString() === userDetails.id || // Buyer
+      order.items.some(item => item.productOwnerId.toString() === userDetails.id); // Seller
+
+    if (!isAuthorized) {
+      return res.status(403).json({ 
+        success: false, 
+        message: "Not authorized to delete this order" 
+      });
+    }
+
+    // Delete the order
+    await OrderModel.findByIdAndDelete(orderId);
+
+    return res.status(200).json({ 
+      success: true, 
+      message: "Order deleted successfully" 
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ 
+      success: false, 
+      message: `Internal Server Error => ${error.message}` 
+    });
+  }
+};
+
 export {
   placeOrder,
   getOrdersForUsers,
   getOrdersDashboard,
   getOrdersForProductOwners,
+  deleteOrder,
 };

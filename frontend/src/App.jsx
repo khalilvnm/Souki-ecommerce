@@ -24,6 +24,7 @@ import AddProduct from './pages/Dashboard/AddProduct';
 import ProductsList from './pages/Dashboard/ProductsList';
 import Users from './pages/Dashboard/Users';
 import Orders from './pages/Dashboard/Orders';
+import Messages from './pages/Dashboard/Messages';
 import Shop from './pages/Shop';
 
 const App = () => {
@@ -62,8 +63,8 @@ const App = () => {
           <Route path='products-list' element={<ProductsList />} />
           <Route path='users' element={<Users />} />
           <Route path='orders' element={<Orders />} />
+          <Route path='messages' element={<Messages />} />
         </Route>
-
       </Routes>
 
       {

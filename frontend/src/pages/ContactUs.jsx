@@ -1,20 +1,51 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
+  const { backend_url } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // يمكنك إرسال البيانات إلى الـ backend هنا
+    setLoading(true);
+    try {
+      console.log('Sending message to:', `${backend_url}/api/message/send`);
+      console.log('Message data:', formData);
+      
+      const response = await axios.post(
+        `${backend_url}/api/message/send`,
+        formData
+      );
+
+      console.log('Server response:', response.data);
+
+      if (response.data.success) {
+        toast.success("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // Clear form
+      } else {
+        toast.error(response.data.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error details:", error.response || error);
+      toast.error(
+        error.response?.data?.message || 
+        error.message || 
+        "Failed to send message"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,9 +94,12 @@ const ContactUs = () => {
 
         <button
           type="submit"
-          className="w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-800 transition"
+          disabled={loading}
+          className={`w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold transition ${
+            loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-800'
+          }`}
         >
-          Send Message
+          {loading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </div>

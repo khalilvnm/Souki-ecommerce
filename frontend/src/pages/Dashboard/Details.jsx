@@ -5,6 +5,7 @@ import { AppContext } from './../../context/AppContext';
 import { AiOutlineProduct } from "react-icons/ai"; // product
 import { FiBox } from "react-icons/fi"; //order
 import { LiaUsersSolid } from "react-icons/lia"; // users
+import { FaEnvelope } from "react-icons/fa"; // messages
 import LoadingPage from './../LoadingPage/LoadingPage';
 
 const Details = () => {
@@ -14,17 +15,20 @@ const Details = () => {
   // Get Details
   const getDetailsHandler = async () => {
     try {
-      const response = await axios.post(backend_url + "/api/details/details", {}, {
-        headers: { authorization: "Bearer " + token }
-      });
+      const response = await axios.post(
+        backend_url + "/api/details/details", 
+        { userDetails: { id: localStorage.getItem('userId') } },
+        { headers: { authorization: "Bearer " + token } }
+      );
       if (response.data.success) {
         setDetails(response.data.details);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message || error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
+
   useEffect(() => {
     getDetailsHandler();
   }, []);
@@ -49,10 +53,18 @@ const Details = () => {
         }
         {/* Orders Count */}
         {
-          details.ordersCount!== undefined  &&
+          details.ordersCount !== undefined &&
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <FiBox className='text-4xl text-primary' />
-            <p className="text-gray-700">Orders: <span className="text-primary font-semibold text-[17px]">{details.ordersCount}</span> </p>
+            <p className="text-gray-700">Orders: <span className="text-primary font-semibold text-[17px]">{details.ordersCount || "0"}</span> </p>
+          </div>
+        }
+        {/* Messages Count */}
+        {
+          details.messagesCount !== undefined &&
+          <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
+            <FaEnvelope className='text-4xl text-primary' />
+            <p className="text-gray-700">Messages: <span className="text-primary font-semibold text-[17px]">{details.messagesCount || "0"}</span> </p>
           </div>
         }
       </div>

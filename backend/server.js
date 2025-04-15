@@ -7,6 +7,7 @@ import cartRouter from "./routes/cartRoute.js";
 import productRouter from "./routes/productRoute.js";
 import orderRouter from './routes/orderRoute.js';
 import detailsRouter from "./routes/detailsRoute.js";
+import messageRouter from "./routes/messageRoute.js";
 import "dotenv/config";
 
 // App
@@ -25,6 +26,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/details", detailsRouter);
+app.use("/api/message", messageRouter);
 
 app.get("/", async (req, res) => {
   return res.send("API Working.");
