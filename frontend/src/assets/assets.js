@@ -1,6 +1,6 @@
-import hero_1 from "../assets/hero/hero-1.jpg";
-import hero_2 from "../assets/hero/hero-2.jpg";
-import hero_3 from "../assets/hero/hero-3.jpg";
+import hero_1 from "../assets/hero/hero-1.png";
+import hero_2 from "../assets/hero/hero-2.png";
+import hero_3 from "../assets/hero/hero-3.png";
 
 export const hero_images = [
   hero_1, hero_2, hero_3
