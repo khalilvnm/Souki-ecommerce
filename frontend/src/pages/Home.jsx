@@ -9,12 +9,14 @@ import DecorationSection from '../components/DecorationSection';
 
 const Home = () => {
   return (
-    <div className='py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] '>
-      <Hero />
+    <div className='w-full'>
+    <Hero />
+      <div className='py-[18px] px-[48px]'>
       <DecorationSection />
       <CuisineSection />
       <VetementSection />
       <AccessoireSection />
+      </div>
     </div>
   );
 };

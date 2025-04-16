@@ -7,6 +7,7 @@ import { AppContext } from "../context/AppContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 const TopNavbar = () => {
   const {
     calculateCartItemsCount,
@@ -53,7 +54,7 @@ const TopNavbar = () => {
 
         <Link to={"/"} className="flex items-center text-3xl w-fit">
           <p className="text-white font-semibold">
-            Sou<span className="text-primary">k</span>i
+            SOU<span className="text-primary">K</span>I
           </p>
         </Link>
         {/* Search Bar */}
