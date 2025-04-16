@@ -10,9 +10,15 @@ const placeOrder = async (req, res) => {
   try {
     const { userDetails, infos, items, amount } = await req.body;
 
-    // Get product owner information for each item
+    // Get product owner information for each item and check quantities
     const itemsWithOwners = await Promise.all(items.map(async (item) => {
       const product = await ProductModel.findById(item.productId);
+      if (!product) {
+        throw new Error(`Product ${item.productId} not found`);
+      }
+      if (product.quantity < item.quantity) {
+        throw new Error(`Not enough quantity available for product ${product.title}. Available: ${product.quantity}, Requested: ${item.quantity}`);
+      }
       return {
         ...item,
         productOwnerId: product.userId
@@ -27,6 +33,14 @@ const placeOrder = async (req, res) => {
       amount: Number(amount)
     });
     const order = await newOrder.save();
+
+    // Update product quantities
+    await Promise.all(items.map(async (item) => {
+      await ProductModel.findByIdAndUpdate(
+        item.productId,
+        { $inc: { quantity: -item.quantity } }
+      );
+    }));
 
     // Get User And Update User By MakeThe CartData Empty
     await UserModel.findByIdAndUpdate(userDetails.id, { cartData: {} });

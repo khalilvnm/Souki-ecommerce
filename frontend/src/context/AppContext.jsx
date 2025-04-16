@@ -51,23 +51,43 @@ const AppContextProvider = (props) => {
 
   // Add To CartItmes
   const addToCartItems = async (productId) => {
-    let cartData = structuredClone(cartItems);
-    if (cartData[productId]) {
-      cartData[productId] += 1;
-    } else {
-      cartData[productId] = 1;
-    }
-    setCartItems(cartData);
-    if (token) {
-      const response = await axios.post(backend_url + "/api/cart/add", { productId: productId }, {
-        headers: { authorization: "Bearer " + token }
-      });
-      if (response.data.success) {
-        toast.success(response.data.message);
-      } else {
-        console.log(response);
-        toast.error(response.response.data.message || response.message);
+    try {
+      // First check if we can add the item
+      const product = allProducts.find(p => p._id === productId);
+      if (!product) {
+        toast.error("Product not found");
+        return;
       }
+
+      const currentQuantity = cartItems[productId] || 0;
+      if (currentQuantity + 1 > product.quantity) {
+        toast.error(`Only ${product.quantity} items available. You already have ${currentQuantity} in your cart.`);
+        return;
+      }
+
+      let cartData = structuredClone(cartItems);
+      if (cartData[productId]) {
+        cartData[productId] += 1;
+      } else {
+        cartData[productId] = 1;
+      }
+      
+      if (token) {
+        const response = await axios.post(backend_url + "/api/cart/add", { productId: productId }, {
+          headers: { authorization: "Bearer " + token }
+        });
+        if (response.data.success) {
+          setCartItems(cartData);
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        setCartItems(cartData);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 

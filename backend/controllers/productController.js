@@ -8,7 +8,7 @@ import "dotenv/config";
 
 // -------------- Add Product -------------- //
 const addProductHandler = async (req, res) => {
-  const { userDetails, title, description, price, discount, type} = await req.body;
+  const { userDetails, title, description, price, discount, type, quantity } = await req.body;
   const images = await req.files;
   const image1 = images.image1 && images.image1[0];
   const image2 = images.image2 && images.image2[0];
@@ -22,9 +22,10 @@ const addProductHandler = async (req, res) => {
     price: z.string({ required_error: "Price Is Required." }).min(0),
     discount: z.string({ required_error: "Discount Is Required." }).min(0),
     type: z.string({ required_error: "Type Is Required." }).min(2, { message: "Type Must Be At Least 2 Characters." }),
+    quantity: z.string({ required_error: "Quantity Is Required." }).min(1, { message: "Quantity Must Be At Least 1." }),
   });
 
-  const validation = schema.safeParse({ userDetails, title, description, price, discount, type });
+  const validation = schema.safeParse({ userDetails, title, description, price, discount, type, quantity });
 
   if (!validation.success) {
     return res.status(400).json({ success: false, message: validation.error.errors[0].message });
@@ -40,23 +41,23 @@ const addProductHandler = async (req, res) => {
         console.log(error);
         return null;
       }
-
     }));
 
   // Create new Porudct
-    const newProduct = new ProductModel({
-      userId: userDetails.id,
-      title: title,
-      description: description,
-      images: images_url,
-      price: Number(price),
-      discount: Number(discount),
-      type: type,
-    });
-    // Save Product
-    const product = await newProduct.save();
-    return res.status(200).json({ success: true, product: product, message: "Product Added Successfully." });
-  }
+  const newProduct = new ProductModel({
+    userId: userDetails.id,
+    title: title,
+    description: description,
+    images: images_url,
+    price: Number(price),
+    discount: Number(discount),
+    type: type,
+    quantity: Number(quantity),
+  });
+  // Save Product
+  const product = await newProduct.save();
+  return res.status(200).json({ success: true, product: product, message: "Product Added Successfully." });
+}
 
 
 // -------------- Get Product Based On User Or Admin -------------- //
