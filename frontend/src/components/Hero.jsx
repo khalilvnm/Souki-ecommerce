@@ -21,15 +21,17 @@ const Hero = () => {
   };
 
   return (
-    <div>
-      <Carousel responsive={responsive}
+    <div className="relative z-0">
+      <Carousel 
+        responsive={responsive}
         showDots={true}
         infinite={true}
         autoPlay={true}
+        className="relative z-0"
       >
         {
           hero_images.map((image, index) => (
-            <img src={image} key={index} />
+            <img src={image} key={index} alt="hero" className="w-full" />
           ))
         }
       </Carousel>

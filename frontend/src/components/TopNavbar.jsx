@@ -4,7 +4,7 @@ import SearchSection from "./SearchSection";
 import { FaRegStar } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import { AppContext } from "../context/AppContext";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 
@@ -17,6 +17,7 @@ const TopNavbar = () => {
   } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState("");
   const [userImage, setUserImage] = useState(null);
+  const location = useLocation();
 
   const navigate = useNavigate();
   
@@ -47,8 +48,13 @@ const TopNavbar = () => {
     }
   }, [token]);
 
+  // Clear search when route changes
+  useEffect(() => {
+    setSearchValue("");
+  }, [location.pathname]);
+
   return (
-    <div className="relative bg-second py-5 px-[50px]">
+    <div className="fixed top-0 left-0 right-0 z-[1000] bg-second py-5 px-[50px]">
       <div className="flex items-center justify-between gap-10">
         {/* Logo */}
         <Link to={"/"} className="flex items-center text-3xl w-fit">
@@ -62,6 +68,7 @@ const TopNavbar = () => {
             type="text"
             placeholder="Recherche... "
             className="w-full block outline-none bg-transparent text-[#683718] placeholder-[#683718]"
+            value={searchValue}
             onChange={(event) => {
               setSearchValue(event.target.value);
             }}
