@@ -6,36 +6,44 @@ import { toast } from 'react-toastify';
 
 const Cart = () => {
   const { allProducts, cartItems, calculateProductDiscount,
-    currency, addToCartItems, removeToCartItems } = useContext(AppContext);
+    currency, addToCartItems, removeToCartItems, deleteProductFromCart } = useContext(AppContext);
   const [productsCart, setProductsCart] = useState([]);
 
   // Collect Products Cart - Add debug logging
   const collectProductsCart = () => {
-    console.log('Current cartItems:', cartItems); // Debug log
-    console.log('All product IDs:', allProducts.map(p => p._id)); // Debug log
-    
     const productsData = allProducts.filter(product => {
-      const hasItem = cartItems[product._id] > 0;
-      console.log(`Product ${product._id}:`, { 
-        inCart: cartItems[product._id], 
-        exists: hasItem 
-      }); // Debug log
-      return hasItem;
-    }).map(product => ({
-      ...product,
-      quantity: cartItems[product._id]
-    }));
+      return cartItems[product._id] > 0;
+    }).map(product => {
+      // Ensure cart quantity doesn't exceed available quantity
+      const cartQuantity = cartItems[product._id];
+      if (cartQuantity > product.quantity) {
+        // Automatically adjust cart quantity if it exceeds available
+        setTimeout(() => {
+          toast.warning(`Quantity adjusted for ${product.title} due to stock availability`);
+          // Update to maximum available
+          addToCartItems(product._id, product.quantity);
+        }, 0);
+        return {
+          ...product,
+          quantity: product.quantity,
+          cartQuantity: product.quantity
+        };
+      }
+      return {
+        ...product,
+        cartQuantity: cartQuantity
+      };
+    });
     
-    console.log('Final productsData:', productsData); // Debug log
     setProductsCart(productsData);
   };
 
   // Calculate total only if products exist
   const getProductsCartAmount = () => {
-    if (productsCart.length === 0) return '0.00'; // Changed to return string '0.00'
+    if (productsCart.length === 0) return '0.00';
     return productsCart.reduce((total, product) => {
       const productPrice = calculateProductDiscount(product.price, product.discount);
-      return total + (productPrice * product.quantity);
+      return total + (productPrice * product.cartQuantity);
     }, 0).toFixed(2);
   };
 
@@ -92,7 +100,7 @@ const Cart = () => {
             {/* Total Price */}
             <p className='text-[15px] font-semibold text-gray-800'>
               Total: {currency}{(
-                product.quantity * 
+                product.cartQuantity * 
                 calculateProductDiscount(product.price, product.discount)
               ).toFixed(2)}
             </p>
@@ -106,31 +114,40 @@ const Cart = () => {
                 -
               </button>
               <p className='flex-1 p-1'>
-                {product.quantity}
+                {product.cartQuantity}
               </p>
               <button 
                 className={`flex-1 p-1 bg-gray-200 transition ${
-                  cartItems[product._id] >= product.quantity 
+                  product.cartQuantity >= product.quantity 
                     ? 'opacity-50 cursor-not-allowed' 
                     : 'hover:bg-gray-300'
                 }`}
                 onClick={() => {
-                  if (cartItems[product._id] >= product.quantity) {
-                    toast.error(`Only ${product.quantity} items available`);
+                  if (product.cartQuantity >= product.quantity) {
+                    toast.error(`Maximum quantity reached. Only ${product.quantity} items available in stock.`);
                     return;
                   }
                   addToCartItems(product._id);
                 }}
-                disabled={cartItems[product._id] >= product.quantity}
+                disabled={product.cartQuantity >= product.quantity}
               >
                 +
               </button>
             </div>  
-            {/* Remove Button */}
 
+            {/* Stock Status */}
+            <div className="text-sm text-gray-600">
+              {product.quantity > 0 ? (
+                <span>In Stock: {product.quantity}</span>
+              ) : (
+                <span className="text-red-500">Out of Stock</span>
+              )}
+            </div>
+
+            {/* Remove Button */}
             <button 
               onClick={() => {
-                removeToCartItems(product._id);
+                deleteProductFromCart(product._id);
               }}
               className='mx-auto w-[25px] h-[25px] flex items-center justify-center rounded-full border border-gray-800 hover:bg-red-700 hover:text-white hover:border-red-700 transition-all duration-300 cursor-pointer text-sm'
               aria-label="Remove item"

@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Decoration from './pages/Decoration';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer';
 import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
@@ -38,25 +39,30 @@ const App = () => {
           <div>
             <TopNavbar />
             <BotNavbar />
+            <div className="pt-[136px]">
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/vetement' element={<Vetement />} />
+                <Route path='/decoration' element={<Decoration />} />
+                <Route path='/Cuisine' element={<Cuisine />} />
+                <Route path='/accessoire' element={<Accessoire />} />
+                <Route path='/about-us' element={<AboutUs />} />
+                <Route path='/contact-us' element={<ContactUs />} />
+                <Route path='/shop' element={<Shop />} />
+                <Route path='/single-product/:productId' element={<SingleProduct />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/placeorder' element={<PlaceOrder />} />
+                <Route path='/my-orders' element={<MyOrders />} />
+                <Route path='/my-profile' element={<MyProfile />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/signin' element={<SignIn />} />
+              </Routes>
+              {!isDashboard && <Footer />}
+            </div>
           </div>
       }
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/' element={<Home />} />
-        <Route path='/vetement' element={<Vetement />} />
-        <Route path='/decoration' element={<Decoration />} />
-        <Route path='/Cuisine' element={<Cuisine />} />
-        <Route path='/accessoire' element={<Accessoire />} />
-        <Route path='/about-us' element={<AboutUs />} />
-        <Route path='/contact-us' element={<ContactUs />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/single-product/:productId' element={<SingleProduct />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/placeorder' element={<PlaceOrder />} />
-        <Route path='/my-orders' element={<MyOrders />} />
-        <Route path='/my-profile' element={<MyProfile />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/signin' element={<SignIn />} />
+      {isDashboard && (
         <Route path='/dashboard' element={<Dashboard />}>
           <Route path='/dashboard' element={<Details />} />
           <Route path='add-product' element={<AddProduct />} />
@@ -65,11 +71,7 @@ const App = () => {
           <Route path='orders' element={<Orders />} />
           <Route path='messages' element={<Messages />} />
         </Route>
-      </Routes>
-
-      {
-        isDashboard ? null : <Footer />
-      }
+      )}
     </div>
   );
 };
