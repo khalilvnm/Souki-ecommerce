@@ -11,7 +11,6 @@ import logo from '../assets/LOGO.png';
 
 const Footer = () => {
   return (
-<<<<<<< HEAD
     <footer className="bg-second ">
       <div className="px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <div className="flex flex-col sm:flex-row items-start gap-5 pt-10 pb-16">
@@ -19,10 +18,6 @@ const Footer = () => {
         <div  className="w-[30%] pr-[5vw]">
           <img src={logo}/>
         </div>
-=======
-    <footer className="bg-second px-[2vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-      <div className="flex flex-col sm:flex-row items-start gap-5 pt-8 pb-14">
->>>>>>> 10d7919c73129aad2ffbed9b81319a4c14f9a143
         {/* Left Side */}
         <div className="w-full sm:w-[40%] ">
           <p className="text-3xl flex items-center font-playfair font-bold text-white mb-5 drop-shadow-lg">SOU<span className="text-primary">K</span>I</p>
@@ -87,13 +82,8 @@ const Footer = () => {
       </div>
 
       {/* Copy Right */}
-<<<<<<< HEAD
       <div className="border-t border-fourth mx-[4vw] pt-3 pb-10 ">
         <p className="text-fourth text-[15px] text-center">All rights reserved Copyright &copy;2025 Designed By Hemmaz,Mansouri</p>
-=======
-      <div className="border-t border-gray-300 py-4 text-center">
-        <p className="text-gray-300 text-[15px]">All rights reserved Copyright &copy;2025 Designed By Hemmaz,Mansouri</p>
->>>>>>> 10d7919c73129aad2ffbed9b81319a4c14f9a143
       </div>
     </footer>
   );
