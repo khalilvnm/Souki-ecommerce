@@ -15,6 +15,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [discount, setDiscount] = useState("");
   const [type, setType] = useState("Select Type");
+  const [quantity, setQuantity] = useState("");
   const { token, backend_url, getAllProductsDashboard } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +36,12 @@ const AddProduct = () => {
       return;
     }
 
+    if (!quantity || quantity < 1) {
+      toast.info("Please enter a valid quantity.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("title", title);
@@ -46,6 +53,7 @@ const AddProduct = () => {
       formData.append("price", price);
       formData.append("discount", discount);
       formData.append("type", type);
+      formData.append("quantity", quantity);
 
       const response = await axios.post(backend_url + "/api/product/add", formData, {
         headers: { authorization: "Bearer " + token }
@@ -65,6 +73,7 @@ const AddProduct = () => {
         setPrice("");
         setDiscount("");
         setType("Select Type");
+        setQuantity("");
       }
     } catch (error) {
       console.log(error);
@@ -127,6 +136,14 @@ const AddProduct = () => {
               onChange={(event) => { setDiscount(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
           </div>
+        </div>
+        
+        {/* Quantity */}
+        <div>
+          <label htmlFor='quantity' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Quantity</label>
+          <input required type='number' min="1" placeholder='Enter available quantity' id='quantity' value={quantity}
+            onChange={(event) => { setQuantity(event.target.value); }}
+            className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
         </div>
         
         {/* Type And Category */}

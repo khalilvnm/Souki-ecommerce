@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import BackButton from '../components/BackButton';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const { allProducts, cartItems, calculateProductDiscount,
@@ -108,8 +109,19 @@ const Cart = () => {
                 {product.quantity}
               </p>
               <button 
-                className='flex-1 p-1 bg-gray-200 hover:bg-gray-300 transition'
-                onClick={() => addToCartItems(product._id)}
+                className={`flex-1 p-1 bg-gray-200 transition ${
+                  cartItems[product._id] >= product.quantity 
+                    ? 'opacity-50 cursor-not-allowed' 
+                    : 'hover:bg-gray-300'
+                }`}
+                onClick={() => {
+                  if (cartItems[product._id] >= product.quantity) {
+                    toast.error(`Only ${product.quantity} items available`);
+                    return;
+                  }
+                  addToCartItems(product._id);
+                }}
+                disabled={cartItems[product._id] >= product.quantity}
               >
                 +
               </button>

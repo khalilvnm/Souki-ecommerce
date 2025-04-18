@@ -90,6 +90,13 @@ const SingleProduct = () => {
                 )}
               </div>
 
+              {/* Quantity Available */}
+              <div className="mt-4">
+                <p className="text-gray-700 font-semibold">
+                  Available Quantity: <span className="text-primary">{singleProduct.quantity}</span>
+                </p>
+              </div>
+
               <hr className='border-none h-[1px] w-full bg-gray-200 my-4' />
               
               {/* Product Details */}
