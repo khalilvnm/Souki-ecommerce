@@ -25,8 +25,7 @@ const Decoration = () => {
   }, [allProducts, getAllProducts]);
 
   return (
-    <div className='my-10 flex-col sm:flex-row mx-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] flex gap-5 items-start'>
-      <div className='w-full'>
+    <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
         <p className='text-xl font-semibold mb-5 ml-1'>Decorations Products</p>
         
         {decorationProducts.length === 0 ? (
@@ -50,7 +49,6 @@ const Decoration = () => {
           </div>
         )}
       </div>
-    </div>
   );
 };
 

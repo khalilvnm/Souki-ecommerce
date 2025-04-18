@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Decoration from './pages/Decoration';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer';
 import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';

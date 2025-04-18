@@ -12,9 +12,15 @@ const ProductsList = () => {
   const removeProduct = async (productId) => {
     console.log(productId);
     try {
-      const response = await axios.post(backend_url + "/api/product/delete", { productId: productId }, {
-        headers: { authorization: "Bearer " + token }
-      });
+      const response = await axios.post(backend_url + "/api/product/delete", 
+        { 
+          productId: productId,
+          userDetails: { id: localStorage.getItem('userId') }
+        }, 
+        {
+          headers: { authorization: "Bearer " + token }
+        }
+      );
       if (response.data.success) {
         toast.success(response.data.message);
         getAllProducts();

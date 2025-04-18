@@ -126,17 +126,32 @@ const getProductsListFrontend = async (req, res) => {
 
 // -------------- Delete Product Based On User Or Admin -------------- //
 const deleteProduct = async (req, res) => {
-  const { userDetails, productId } = await req.body;
-  const user = await UserModel.findById(userDetails.id);
-  const product = await ProductModel.findById(productId);
-  const comparePassword = await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
   try {
-    if (user._id.toString() === product.userId || user.email === process.env.ADMIN_EMAIL && comparePassword) {
-      await ProductModel.findByIdAndDelete(productId);
-      return res.status(200).json({ success: true, message: "Product Deleted Successfully." });
-    } else {
-      return res.status({ success: false, message: "Your Don't Have Permission To Access This Resources." });
+    const { userDetails, productId } = req.body;
+    
+    if (!userDetails || !productId) {
+      return res.status(400).json({ success: false, message: "Missing required fields" });
     }
+
+    const user = await UserModel.findById(userDetails.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const product = await ProductModel.findById(productId);
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    const isAdmin = user.email === process.env.ADMIN_EMAIL;
+    const isOwner = user._id.toString() === product.userId.toString();
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ success: false, message: "You don't have permission to delete this product" });
+    }
+
+    await ProductModel.findByIdAndDelete(productId);
+    return res.status(200).json({ success: true, message: "Product deleted successfully" });
 
   } catch (error) {
     console.log(error);

@@ -61,7 +61,7 @@ const AppContextProvider = (props) => {
 
       const currentQuantity = cartItems[productId] || 0;
       if (currentQuantity + 1 > product.quantity) {
-        toast.error(`Only ${product.quantity} items available. You already have ${currentQuantity} in your cart.`);
+        toast.error(`Only ${product.quantity} items available. You have ${currentQuantity} in your cart.`);
         return;
       }
 
@@ -118,11 +118,25 @@ const AppContextProvider = (props) => {
   };
 
   // Delete Product From Cart
-
-  const deleteProductFromCart = (productId) => {
-    let productData = structuredClone(cartItems);
-    delete productData[productId];
-    setCartItems(productData);
+  const deleteProductFromCart = async (productId) => {
+    try {
+      let productData = structuredClone(cartItems);
+      delete productData[productId];
+      
+      if (token) {
+        await axios.post(
+          `${backend_url}/api/cart/remove`,
+          { productId },
+          { headers: { authorization: "Bearer " + token } }
+        );
+      }
+      
+      setCartItems(productData);
+      toast.success("Product removed from cart");
+    } catch (error) {
+      console.error("Delete failed:", error);
+      toast.error("Failed to remove product from cart");
+    }
   };
 
   // Calculte Cart Items count
