@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import SearchSection from "./SearchSection";
-import { FaRegStar } from "react-icons/fa";
-import { FiShoppingBag } from "react-icons/fi";
+import { FaShoppingBag } from "react-icons/fa";
+import { IoPersonSharp } from "react-icons/io5";
 import { AppContext } from "../context/AppContext";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -57,7 +57,7 @@ const TopNavbar = () => {
           </p>
         </Link>
         {/* Search Bar */}
-        <div className="hidden bg-[#dda25e58] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-2 pl-5 pr-10">
+        <div className="hidden font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
           <input
             type="text"
             placeholder="Recherche... "
@@ -72,15 +72,6 @@ const TopNavbar = () => {
         </div>
         {/* SignUp And Cart*/}
         <div className="w-fit flex items-center gap-4">
-          {/* Cart */}
-          <div className="flex items-center gap-2 ">
-            <Link to={"/cart"} className="relative cursor-pointer">
-              <FiShoppingBag className="text-2xl text-primary" />
-              <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
-                {calculateCartItemsCount()}
-              </p>
-            </Link>
-          </div>
           {/* Switch Between Signup and User Profile */}
           {token ? (
             <div className="relative group w-[40px] h-[40px]">
@@ -89,44 +80,54 @@ const TopNavbar = () => {
               alt="user-profile"
               className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
             />
-              <div className="hidden group-hover:block absolute top-[100%] right-[-5px] bg-transition  z-[3000] p-5 w-[230px]">
+              <div className="hidden  font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition  z-[3000] p-5 w-[230px]">
                 <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md  gap-2 ">
                   <NavLink
                     to={"/my-profile"}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
-                    My Profile
+                    Mon Profile
                   </NavLink>
                   <NavLink
                     to={"/my-orders"}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
-                    Orders
+                    Commandes
                   </NavLink>
                   <NavLink
                     to={"/dashboard"}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
-                    Dashboard
+                    Espace Vendeur
                   </NavLink>
                   <button
                     onClick={logoutHandler}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
-                    Logout
+                    Se deconnecter
                   </button>
                   
                 </div>
               </div>
             </div>
           ) : (
-            <Link
-              to={"/signin"}
-              className="bg-primary text-white py-2 px-5 w-[100px] rounded-full transition-all duration-300 hover:bg-slate-500"
-            >
-              Sign In
+            <Link to={"/signin"}>
+
+            <div className="font-inter font-medium bg-[#dda25e93] text-third pl-2.5 py-1.5 text-center items-center flex gap-2 w-[150px] border-2 border-third rounded-full transition-all duration-300 hover:bg-slate-500">            
+              <IoPersonSharp />  
+              <p>Se Connecter</p>
+            </div>
             </Link>
           )}
+                    {/* Cart */}
+                    <div className="flex items-center gap-2">
+            <Link to={"/cart"} className="relative cursor-pointer ">
+              <FaShoppingBag className="text-2xl text-[#e1ad72] drop-shadow-lg" />
+              <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
+                {calculateCartItemsCount()}
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
       {searchValue && <SearchSection searchValue={searchValue} />}

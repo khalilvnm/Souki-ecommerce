@@ -25,7 +25,7 @@ const SearchSection = ({ searchValue }) => {
 
   console.log(productsSearch);
   return (
-    <div className='search-section absolute py-10 overflow-y-scroll px-10 bg-black top-[100%] left-0 z-[2000] w-full h-[600px]'>
+    <div className='search-section absolute py-10 overflow-y-scroll px-10 bg-white top-[100%] left-0 z-[2000] w-full h-[600px]'>
       <div className='grid grid-cols-auto gap-x-5 gap-y-10 '>
         {
           productsSearch.map((product, index) => (

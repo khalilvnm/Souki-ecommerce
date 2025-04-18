@@ -4,26 +4,36 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
+import logo from '../assets/LOGO.png';
+
 
 const Footer = () => {
   return (
-    <footer className="bg-second px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <footer className="bg-second ">
+      <div className="px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <div className="flex flex-col sm:flex-row items-start gap-5 pt-10 pb-16">
+        {/* Logo Side */}
+        <div  className="w-[30%] pr-[5vw]">
+          <img src={logo}/>
+        </div>
         {/* Left Side */}
         <div className="w-full sm:w-[40%] ">
           <p className="text-3xl flex items-center font-playfair font-bold text-white mb-5 drop-shadow-lg">SOU<span className="text-primary">K</span>I</p>
-          <p className="text-gray-300 text-sm w-[80%]">Le premier site web en Algerie completement dedier aux vendeurs artisans et a la vente de produits artisanaux. 
+          <p className="text-fourth text-sm w-[80%]">Le premier site web en Algerie completement dedier aux vendeurs artisans et a la vente de produits artisanaux. 
           Souki propose un large choix dans le domaine de l'artisanat et ouvre de nouvelle possibilite aux artisans de vendre leurs produits en ligne.</p>
         </div>
         {/* Right Side */}
         <div className="w-full sm:w-[30%] flex sm:justify-center">
           <div>
-            <p className="text-xl font-semibold text-gray-200 mb-5">Categories</p>
-            <ul className="flex flex-col gap-2">
-              <NavLink to={"/vetement"} className="text-gray-300 transition-all duration-300 hover:underline">Vetement</NavLink>
-              <NavLink to={"/decoration"} className="text-gray-300 transition-all duration-300 hover:underline">Decoration</NavLink>
-              <NavLink to={"/cuisine"} className="text-gray-300 transition-all duration-300 hover:underline">Cuisine</NavLink>
-              <NavLink to={"/accessoire"} className="text-gray-300 transition-all duration-300 hover:underline">Accessoire</NavLink>
+            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Categories</p>
+            <ul className="flex flex-col pl-3 gap-2">
+              <NavLink to={"/vetement"} className="text-fourth transition-all duration-300 hover:underline">Vetement</NavLink>
+              <NavLink to={"/decoration"} className="text-fourth transition-all duration-300 hover:underline">Decoration</NavLink>
+              <NavLink to={"/cuisine"} className="text-fourth transition-all duration-300 hover:underline">Cuisine</NavLink>
+              <NavLink to={"/accessoire"} className="text-fourth transition-all duration-300 hover:underline">Accessoire</NavLink>
             </ul>
           </div>
         </div>
@@ -31,36 +41,50 @@ const Footer = () => {
         {/* Right Side */}
         <div className="w-full sm:w-[30%] flex sm:justify-center">
           <div>
-            <p className="text-xl font-semibold text-gray-200 mb-5">Contactez-nous</p>
-            <div className="text-gray-300 text-sm mb-5">
+            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Contactez-nous</p>
+
+            <div className="text-fourth text-sm pl-3 gap-2 mb-5">
+            <div className="flex items-center gap-2">
+              <FaPhoneAlt />
               <p>+213-511-223-344</p>
-              <p>Souki@artisanal.com</p>
             </div>
 
-            <div className="flex items-center justify-left text-gray-300 gap-3 text-4xl">
+            <div className="flex items-center gap-2">
+              <FaEnvelope/>
+              <p>Souki@artisanal.com</p>
+            </div>
+ 
+            <div className="flex items-center gap-2">
+              <FaHouse/>
+              <p>123, rue de la liberté, Alger</p>
+            </div>
+            </div>
+
+            <div className="flex items-center justify-left text-fourth gap-3 text-4xl">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <FaFacebook className="border border-gray-300 text-gray-300   rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+                <FaFacebook className="border border-fourth text-fourth   rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
               
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <FaInstagram className="border border-gray-300 text-gray-300 rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+                <FaInstagram className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
 
               <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-              <FaXTwitter className="border border-gray-300 text-gray-300  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+              <FaXTwitter className="border border-fourth text-fourth  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
 
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-              <FaLinkedinIn className="border border-gray-300 text-gray-300  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+              <FaLinkedinIn className="border border-fourth text-fourth  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
             </div>
           </div>
         </div>
       </div>
+      </div>
 
       {/* Copy Right */}
-      <div className="border-t border-gray-300 pt-3 pb-10 text-center">
-        <p className="text-gray-300 text-[15px]">All rights reserved Copyright &copy;2025 Designed By Hemmaz,Mansouri</p>
+      <div className="border-t border-fourth mx-[4vw] pt-3 pb-10 ">
+        <p className="text-fourth text-[15px] text-center">All rights reserved Copyright &copy;2025 Designed By Hemmaz,Mansouri</p>
       </div>
     </footer>
   );

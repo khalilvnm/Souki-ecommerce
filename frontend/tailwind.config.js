@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         playfair: ['"Playfair Display"', 'serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       dropShadow: {
         'custom': '0 4px 4px rgba(0, 0, 0, 0.25)',
@@ -15,7 +16,9 @@ export default {
       colors: {
         "primary": "#dda15e",
         "second": "#b56c28",
-        "third":"#6E3919"
+        "third":"#6E3919",
+        "fourth":"#fefee2",
+        "fifth":"#fdf1b8"
       },
       gridTemplateColumns: {
         "auto": "repeat(auto-fill, minmax(230px, 1fr))"
