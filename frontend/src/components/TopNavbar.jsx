@@ -48,31 +48,32 @@ const TopNavbar = () => {
   }, [token]);
 
   return (
-    <div className="relative bg-second py-5 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <div className="relative bg-second py-5 px-[50px]">
       <div className="flex items-center justify-between gap-10">
         {/* Logo */}
-
         <Link to={"/"} className="flex items-center text-3xl w-fit">
-          <p className="text-white font-semibold">
+          <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg">
             SOU<span className="text-primary">K</span>I
           </p>
         </Link>
         {/* Search Bar */}
-        <div className="hidden bg-white sm:block w-full relative h-[40px] rounded-full border border-black py-2 pl-5 pr-10">
+        <div className="hidden bg-[#dda25e58] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-2 pl-5 pr-10">
           <input
             type="text"
-            placeholder="Search By Title "
-            className="w-full block outline-none"
+            placeholder="Recherche... "
+            className="w-full block outline-none bg-transparent text-[#683718] placeholder-[#683718]"
             onChange={(event) => {
               setSearchValue(event.target.value);
             }}
           />
+          <button>
           <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
+          </button>
         </div>
         {/* SignUp And Cart*/}
         <div className="w-fit flex items-center gap-4">
           {/* Cart */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ">
             <Link to={"/cart"} className="relative cursor-pointer">
               <FiShoppingBag className="text-2xl text-primary" />
               <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
