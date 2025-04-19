@@ -22,7 +22,7 @@ const Footer = () => {
       <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">  
         <FaInstagram className="border border-white  text-white  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
       </a>
-      <a href="https://www.x.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
         <FaXTwitter className="border border-white text-white  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
       </a>
       <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">  

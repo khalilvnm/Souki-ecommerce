@@ -5,7 +5,7 @@ import VetementSection from '../components/VetementSection';
 import AccessoireSection from '../components/AccessoireSection';
 import DecorationSection from '../components/DecorationSection';
 import BijouxSection from '../components/BijouxSection';
-import BainDoucheSection from '../components/BainDoucheSection';
+import BainBeauteSection from '../components/BainBeauteSection';
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
       <VetementSection />
       <AccessoireSection />
       <BijouxSection />
-      <BainDoucheSection />
+      <BainBeauteSection />
       </div>
     </div>
   );

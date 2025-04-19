@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import ProductItem from '../components/ProductItem';
 
-const BainDouche = () => {
+const BainBeaute = () => {
   const { allProducts, getAllProducts } = useContext(AppContext);
-  const [baindoucheProducts, setBainDoucheProducts] = useState([]);
+  const [bainbeauteProducts, setBainBeauteProducts] = useState([]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -13,12 +13,12 @@ const BainDouche = () => {
         await getAllProducts();
       }
       
-      // Filter products where type exactly matches "baindouche"
+      // Filter products where type exactly matches "bainbeaute"
       const filtered = allProducts.filter(
-        product => product.type?.toLowerCase() === "baindouche"
+        product => product.type?.toLowerCase() === "bainbeaute"
       );
       
-      setBainDoucheProducts(filtered);
+      setBainBeauteProducts(filtered);
     };
 
     loadProducts();
@@ -26,15 +26,15 @@ const BainDouche = () => {
 
   return (
     <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-        <p className='text-xl font-semibold mb-5 ml-1'>Bain et Douche Products</p>
+        <p className='text-xl font-semibold mb-5 ml-1'>Bain et Beaute Products</p>
         
-        {baindoucheProducts.length === 0 ? (
+        {bainbeauteProducts.length === 0 ? (
           <div className='text-center py-10 text-gray-500'>
-            No Bain et Douche products found. 
+            No Bain et Beaute products found. 
           </div>
         ) : (
           <div className='grid grid-cols-auto gap-x-5 gap-y-10'>
-            {baindoucheProducts.map((product) => (
+            {bainbeauteProducts.map((product) => (
               <ProductItem 
                 key={product._id}
                 id={product._id} 
@@ -52,4 +52,4 @@ const BainDouche = () => {
   );
 };
 
-export default BainDouche;
+export default BainBeaute;
