@@ -19,14 +19,14 @@ import MyOrders from './pages/MyOrders';
 import SignUp from './pages/Auth/SignUp';
 import SignIn from './pages/Auth/SignIn';
 import MyProfile from './pages/MyProfile';
+import Shop from './pages/Shop';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Details from './pages/Dashboard/Details';
 import AddProduct from './pages/Dashboard/AddProduct';
 import ProductsList from './pages/Dashboard/ProductsList';
-import Users from './pages/Dashboard/Users';
 import Orders from './pages/Dashboard/Orders';
+import Users from './pages/Dashboard/Users';
 import Messages from './pages/Dashboard/Messages';
-import Shop from './pages/Shop';
 
 const App = () => {
   const isDashboard = useMatch("/dashboard/*");
@@ -35,13 +35,23 @@ const App = () => {
     <div className='min-h-[100vh]'>
       <ToastContainer position='top-right' theme='colored' />
       {
-        isDashboard ? null :
+        isDashboard ? (
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<Details />} />
+              <Route path="add-product" element={<AddProduct />} />
+              <Route path="products-list" element={<ProductsList />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="users" element={<Users />} />
+              <Route path="messages" element={<Messages />} />
+            </Route>
+          </Routes>
+        ) : (
           <div>
             <TopNavbar />
             <BotNavbar />
             <div className="pt-[136px]">
               <Routes>
-                <Route path='/' element={<Home />} />
                 <Route path='/' element={<Home />} />
                 <Route path='/vetement' element={<Vetement />} />
                 <Route path='/decoration' element={<Decoration />} />
@@ -58,20 +68,13 @@ const App = () => {
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/signin' element={<SignIn />} />
               </Routes>
-              {!isDashboard && <Footer />}
             </div>
           </div>
+        )
       }
-      {isDashboard && (
-        <Route path='/dashboard' element={<Dashboard />}>
-          <Route path='/dashboard' element={<Details />} />
-          <Route path='add-product' element={<AddProduct />} />
-          <Route path='products-list' element={<ProductsList />} />
-          <Route path='users' element={<Users />} />
-          <Route path='orders' element={<Orders />} />
-          <Route path='messages' element={<Messages />} />
-        </Route>
-      )}
+      {
+        isDashboard ? null : <Footer />
+      }
     </div>
   );
 };
