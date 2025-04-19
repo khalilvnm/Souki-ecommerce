@@ -13,8 +13,10 @@ const BotNavbar = () => {
         <NavLink to={"/decoration"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Decoration</NavLink>
         <NavLink to={"/cuisine"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Cuisine</NavLink>
         <NavLink to={"/accessoire"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Accessoire</NavLink>
+        <NavLink to={"/bijoux"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Bijoux</NavLink>
         <NavLink to={"/about-us"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">About Us</NavLink>
         <NavLink to={"/contact-us"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Contact Us</NavLink>
+        <NavLink to={"/bain-douche"} className="py-1 px-2 transition-all duration-300 max-lg:text-sm">Bain et Douche</NavLink>
       </div>
       {/* Add Responsive Screen */}
       <div className='flex md:hidden justify-end overflow-hidden'>
@@ -27,8 +29,10 @@ const BotNavbar = () => {
           <NavLink to={"/decoration"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Decoration</NavLink>
           <NavLink to={"/cuisine"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Cuisine</NavLink>
           <NavLink to={"/accessoire"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Accessoire</NavLink>
+          <NavLink to={"/bijoux"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Bijoux</NavLink>
           <NavLink to={"/about-us"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>About Us</NavLink>
           <NavLink to={"/contact-us"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Contact Us</NavLink>
+          <NavLink to={"/bain-douche"} className="py-3 px-2 transition-all duration-300" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Bain et Douche</NavLink>
         </div>
       </div>
     </div>

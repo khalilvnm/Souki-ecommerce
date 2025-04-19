@@ -4,8 +4,8 @@ import CuisineSection from '../components/CuisineSection';
 import VetementSection from '../components/VetementSection';
 import AccessoireSection from '../components/AccessoireSection';
 import DecorationSection from '../components/DecorationSection';
-
-
+import BijouxSection from '../components/BijouxSection';
+import BainDoucheSection from '../components/BainDoucheSection';
 
 const Home = () => {
   return (
@@ -16,6 +16,8 @@ const Home = () => {
       <CuisineSection />
       <VetementSection />
       <AccessoireSection />
+      <BijouxSection />
+      <BainDoucheSection />
       </div>
     </div>
   );

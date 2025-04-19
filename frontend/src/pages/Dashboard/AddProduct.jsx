@@ -157,6 +157,8 @@ const AddProduct = () => {
               <option value={"decoration"}>Decoration</option>
               <option value={"Cuisine"}>Cuisine</option>
               <option value={"accessoire"}>Accessoire</option>
+              <option value={"bijoux"}>Bijoux</option>
+              <option value={"baindouche"}>Bain et Douche</option>
             </select>
           </div>
         </div>

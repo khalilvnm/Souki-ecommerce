@@ -27,7 +27,8 @@ import ProductsList from './pages/Dashboard/ProductsList';
 import Orders from './pages/Dashboard/Orders';
 import Users from './pages/Dashboard/Users';
 import Messages from './pages/Dashboard/Messages';
-
+import Bijoux from './pages/Bijoux';
+import BainDouche from './pages/BainDouche';
 const App = () => {
   const isDashboard = useMatch("/dashboard/*");
 
@@ -55,8 +56,10 @@ const App = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/vetement' element={<Vetement />} />
                 <Route path='/decoration' element={<Decoration />} />
+                <Route path='/bain-douche' element={<BainDouche />} />
                 <Route path='/Cuisine' element={<Cuisine />} />
                 <Route path='/accessoire' element={<Accessoire />} />
+                <Route path='/bijoux' element={<Bijoux />} />
                 <Route path='/about-us' element={<AboutUs />} />
                 <Route path='/contact-us' element={<ContactUs />} />
                 <Route path='/shop' element={<Shop />} />

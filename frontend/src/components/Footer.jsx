@@ -33,6 +33,8 @@ const Footer = () => {
               <NavLink to={"/decoration"} className="text-fourth transition-all duration-300 hover:underline">Decoration</NavLink>
               <NavLink to={"/cuisine"} className="text-fourth transition-all duration-300 hover:underline">Cuisine</NavLink>
               <NavLink to={"/accessoire"} className="text-fourth transition-all duration-300 hover:underline">Accessoire</NavLink>
+              <NavLink to={"/bijoux"} className="text-fourth transition-all duration-300 hover:underline">Bijoux</NavLink>
+              <NavLink to={"/bain-douche"} className="text-fourth transition-all duration-300 hover:underline">Bain et Douche</NavLink>
             </ul>
           </div>
         </div>

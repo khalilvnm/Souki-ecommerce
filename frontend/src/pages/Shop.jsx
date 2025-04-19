@@ -67,6 +67,16 @@ const Shop = () => {
                 onChange={(event) => { addType(event.target.value); }} />
               <label htmlFor="accessoire" className="cursor-pointer">Accessoire</label>
             </div>
+            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
+              <input type="checkbox" value={"bijoux"} id="bijoux" className="cursor-pointer"
+                onChange={(event) => { addType(event.target.value); }} />
+              <label htmlFor="bijoux" className="cursor-pointer">Bijoux</label>
+            </div>
+            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
+              <input type="checkbox" value={"baindouche"} id="baindouche" className="cursor-pointer"
+                onChange={(event) => { addType(event.target.value); }} />
+              <label htmlFor="baindouche" className="cursor-pointer">Bain et Douche</label>
+            </div>
           </div>
         </div>
       </div>
