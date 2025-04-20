@@ -17,6 +17,7 @@ const TopNavbar = () => {
   } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState("");
   const [userImage, setUserImage] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -32,6 +33,17 @@ const TopNavbar = () => {
     );
     if (response.data.success) {
       setUserImage(response.data.user.image);
+      // Vérifier si l'utilisateur est admin
+      const adminResponse = await axios.post(
+        backend_url + "/api/order/list-dashboard",
+        { userDetails: { id: localStorage.getItem('userId') } },
+        {
+          headers: { authorization: "Bearer " + token }
+        }
+      );
+      if (adminResponse.data.success && adminResponse.data.message === "Admin") {
+        setIsAdmin(true);
+      }
     }
   };
 
@@ -105,7 +117,7 @@ const TopNavbar = () => {
                     to={"/dashboard"}
                     className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
                   >
-                    Espace Vendeur
+                    {isAdmin ? "Espace Admin" : "Espace Vendeur"}
                   </NavLink>
                   <button
                     onClick={logoutHandler}
