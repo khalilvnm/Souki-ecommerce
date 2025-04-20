@@ -13,7 +13,6 @@ import Loading from './../../components/Loading/Loading';
 const SignUp = () => {
   const { setToken, backend_url } = useContext(AppContext);
   const [showPassword, setShowPassword] = useState("password");
-  const [image, setImage] = useState("");
   const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +31,11 @@ const SignUp = () => {
   const schema = z.object({
     username: z.string({ required_error: "Username Is Requried." }).min(2).max(100),
     email: z.string({ required_error: "Email Is Requried." }).email({ message: "Please Write a Valid Email." }),
-    password: z.string({ required_error: "Password Is Required." }).min(6, { message: "Password Must Be AT least 6 Characters." }).max(200)
+    password: z.string({ required_error: "Password Is Required." }).min(6, { message: "Password Must Be AT least 6 Characters." }).max(200),
+    confirmPassword: z.string({ required_error: "Confirm Password Is Required." })
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
   });
 
   // Form Register
@@ -51,7 +54,6 @@ const SignUp = () => {
       formData.append("username", data.username);
       formData.append("email", data.email);
       formData.append("password", data.password);
-      formData.append("image", image);
       const response = await axios.post(backend_url + "/api/users/signup", formData);
       if (response.data.success) {
         window.localStorage.setItem("token", response.data.user.token);
@@ -88,27 +90,24 @@ const SignUp = () => {
           <div>
             <label htmlFor='password' className='text-gray-600 font-semibold ml-1 mb-1'>Password</label>
             <div className='relative'>
-              <input type={showPassword} id='emapasswordil' placeholder='Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("password")} />
+              <input type={showPassword} id='password' placeholder='Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("password")} />
               {showPassword === "password" ?
                 <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} /> :
                 <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
             </div>
             {errors.password && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.password.message}</p>}
           </div>
-          {/* User Image */}
-          <label htmlFor='image' className='w-full cursor-pointer  mt-5 p-5 text-center rounded-md flex flex-col items-center justify-center border border-gray-300'>
-            {
-              image
-                ?
-                <img src={URL.createObjectURL(image)} alt='user-image' className='w-20 p-1 bg-gray-700 rounded-full' />
-                :
-                <div className='flex flex-col justify-center items-center'>
-                  <FaCloudUploadAlt className='text-primary text-5xl' />
-                  <p className='text-gray-700'>l'image de profile</p>
-                </div>
-            }
-            <input type='file' id='image' hidden onChange={(event) => { setImage(event.target.files[0]); }} />
-          </label>
+          {/* Confirm Password */}
+          <div>
+            <label htmlFor='confirmPassword' className='text-gray-600 font-semibold ml-1 mb-1'>Confirm Password</label>
+            <div className='relative'>
+              <input type={showPassword} id='confirmPassword' placeholder='Confirm Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("confirmPassword")} />
+              {showPassword === "password" ?
+                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} /> :
+                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
+            </div>
+            {errors.confirmPassword && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.confirmPassword.message}</p>}
+          </div>
           {/* Button */}
           <button type='submit' className='mt-5 bg-black text-white py-2 px-3 rounded-md text-[15px] font-semibold text-center block w-full transition-all duration-300 hover:bg-gray-700'>Sign Up</button>
         </div>

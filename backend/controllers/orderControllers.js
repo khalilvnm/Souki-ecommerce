@@ -16,6 +16,12 @@ const placeOrder = async (req, res) => {
       if (!product) {
         throw new Error(`Product ${item.productId} not found`);
       }
+      
+      // Check if user is trying to order their own product
+      if (product.userId.toString() === userDetails.id) {
+        throw new Error(`You cannot order your own product: ${product.title}`);
+      }
+      
       if (product.quantity < item.quantity) {
         throw new Error(`Not enough quantity available for product ${product.title}. Available: ${product.quantity}, Requested: ${item.quantity}`);
       }

@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUserDashboard, getUser, getUsersDashboard, userSignIn, userSignUp } from "../controllers/userController.js";
+import { deleteUserDashboard, getUser, getUsersDashboard, userSignIn, userSignUp, updateUsername, removeProfilePicture, updateProfilePicture, deleteAccount } from "../controllers/userController.js";
 import upload from "../middlewares/multer.js";
 import userAuth from "../middlewares/UserAuth.js";
 
@@ -13,7 +13,14 @@ userRouter.post("/user", userAuth, getUser);
 
 userRouter.post("/users-dashboard", userAuth, getUsersDashboard);
 
-userRouter.post("/delete", userAuth, deleteUserDashboard);
+userRouter.post("/delete-user-dashboard", userAuth, deleteUserDashboard);
 
+userRouter.post("/delete-account", userAuth, deleteAccount);
+
+userRouter.post("/update-username", userAuth, updateUsername);
+
+userRouter.post("/update-profile-picture", userAuth, upload.single("image"), updateProfilePicture);
+
+userRouter.post("/remove-profile-picture", userAuth, removeProfilePicture);
 
 export default userRouter;

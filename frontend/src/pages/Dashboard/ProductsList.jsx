@@ -47,6 +47,7 @@ const ProductsList = () => {
         <p>Price</p>
         <p>Type</p>
         <p>Quantity</p>
+        <p>Added by</p>
         <p className="text-center">Remove</p>
       </div>
 
@@ -61,6 +62,7 @@ const ProductsList = () => {
               <p>{product.price}{currency}</p>
               <p>{product.type}</p>
               <p>{product.quantity}</p>
+              <p>{product.userId?.username || 'Unknown'}</p>
               <p onClick={() => { removeProduct(product._id); }} className="w-8 mx-auto h-8 bg-white cursor-pointer transition-all duration-300 hover:bg-red-700 hover:text-white border border-gray-300 rounded-full flex items-center justify-center">X</p>
             </div>
           ))

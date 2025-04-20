@@ -117,7 +117,7 @@ const AddProduct = () => {
         {/* Description */}
         <div>
           <label htmlFor='description' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Description</label>
-          <input required type='text' placeholder='Type Here.' id='description' value={description}
+          <input type='text' placeholder='Type Here.' id='description' value={description}
             onChange={(event) => { setDescription(event.target.value); }}
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
         </div>
@@ -132,7 +132,7 @@ const AddProduct = () => {
           </div>
           <div className='w-1/2'>
             <label htmlFor='discount' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Discount</label>
-            <input required type='number' placeholder='Type Here.' id='discount' value={discount}
+            <input type='number' placeholder='Type Here.' id='discount' value={discount}
               onChange={(event) => { setDiscount(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
           </div>

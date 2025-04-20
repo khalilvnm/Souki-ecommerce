@@ -23,25 +23,24 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
   return (
     <div className="bg-white block border p-3 border-gray-200 rounded-xl shadow-lg cursor-pointer transition-all duration-300">
       <div className="relative">
-    <button
-      onClick={toggleCart}
-      className="absolute top-[-8px] right-[-8px] p-1 rounded-full transition-all"
-      title={inCart ? "Remove from cart" : "Add to cart"}
-    >
-      <FaShoppingCart
-        size={18}
-        className={`transition-colors duration-300 ${
-          inCart ? "text-red-600" : "text-primary hover:text-green-500"
-        }`}
-      />
-    </button>
-
+        <button
+          onClick={toggleCart}
+          className="absolute top-[-8px] right-[-8px] p-1 rounded-full transition-all"
+          title={inCart ? "Remove from cart" : "Add to cart"}
+        >
+          <FaShoppingCart
+            size={18}
+            className={`transition-colors duration-300 ${
+              inCart ? "text-red-600" : "text-primary hover:text-green-500"
+            }`}
+          />
+        </button>
 
         <img src={images[0]} alt="product-image" className="h-[180px] mx-auto" />
         <hr className="border-none h-[1px] w-full bg-gray-300 my-3" />
         <div>
           <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{title}</p>
-          <p className="text-xs text-gray-500 mb-1">Added by: {userName}</p>
+          {userName && <p className="text-xs text-gray-500 mb-1">Seller: {userName}</p>}
           <div>
             {discount > 0 ? (
               <>
@@ -57,14 +56,14 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
               <span className="font-semibold">{price}{currency}</span>
             )}
           </div>
+          <Link 
+            to={`/single-product/${id}`} 
+            onClick={() => { scrollTo(0, 0); }} 
+            className="bg-black text-center text-white rounded-full block w-full text-[15px] border border-gray-300 mt-3 py-1 px-3"
+          >
+            Quick Look
+          </Link>
         </div>
-        <Link 
-          to={`/single-product/${id}`} 
-          onClick={() => { scrollTo(0, 0); }} 
-          className="bg-black text-center text-white rounded-full block w-full text-[15px] border border-gray-300 mt-3 py-1 px-3"
-        >
-          Quick Look
-        </Link>
       </div>
     </div>
   );

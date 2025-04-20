@@ -6,10 +6,14 @@ import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import "./config/db.js";
+import connectCloudainry from "./config/cloudinary.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Initialize Cloudinary
+connectCloudainry();
 
 // Routes
 app.use("/api/user", userRoutes);

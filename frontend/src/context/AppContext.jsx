@@ -61,7 +61,7 @@ const AppContextProvider = (props) => {
 
       const currentQuantity = cartItems[productId] || 0;
       if (currentQuantity + 1 > product.quantity) {
-        toast.error(`Only ${product.quantity} items available. You have ${currentQuantity} in your cart.`);
+        toast.error(`Only ${product.quantity} items available. You already have ${currentQuantity} in your cart.`);
         return;
       }
 

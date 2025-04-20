@@ -12,6 +12,14 @@ const addToCartItems = async (req, res) => {
       return res.status(404).json({ success: false, message: "Product not found" });
     }
 
+    // Check if user is trying to add their own product
+    if (product.userId.toString() === userDetails.id) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "You cannot add your own product to cart" 
+      });
+    }
+
     // Get User
     const user = await UserModel.findById(userDetails.id);
     let cartItemsData = await user.cartData; // {a:1, b:1}

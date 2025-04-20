@@ -18,9 +18,9 @@ const addProductHandler = async (req, res) => {
 
   const schema = z.object({
     title: z.string({ required_error: "Title Is Requied." }).min(2, { message: "Title Must Be At Least 2 Characters." }),
-    description: z.string({ required_error: "Descriptio Is Required." }).min(2, { message: "Descripton Must Be At Least 2 Characters." }),
+    description: z.string().optional(),
     price: z.string({ required_error: "Price Is Required." }).min(0),
-    discount: z.string({ required_error: "Discount Is Required." }).min(0),
+    discount: z.string().optional().transform(val => val === '' ? '0' : val),
     type: z.string({ required_error: "Type Is Required." }).min(2, { message: "Type Must Be At Least 2 Characters." }),
     quantity: z.string({ required_error: "Quantity Is Required." }).min(1, { message: "Quantity Must Be At Least 1." }),
   });
@@ -100,8 +100,8 @@ const getProductsListDashboard = async (req, res) => {
     const isAdmin = user.email === "admin@gmail.com"; 
 
     const products = isAdmin
-      ? await ProductModel.find({})
-      : await ProductModel.find({ userId: user._id }); 
+      ? await ProductModel.find({}).populate('userId', 'username')
+      : await ProductModel.find({ userId: user._id }).populate('userId', 'username'); 
 
     return res.status(200).json({ success: true, products });
 

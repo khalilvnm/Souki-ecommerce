@@ -3,9 +3,11 @@ import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const Navbar = () => {
   const { token, backend_url } = useContext(AppContext);
   const [userImage, setUserImage] = useState(null);
+  const [user, setUser] = useState(null);
 
   // Get User
   const getUser = async () => {
@@ -14,6 +16,7 @@ const Navbar = () => {
     });
     if (response.data.success) {
       setUserImage(response.data.user.image);
+      setUser(response.data.user);
     }
   };
 
@@ -31,7 +34,7 @@ const Navbar = () => {
       {/* UserProfile */}
       <div className='relative group w-[40px] h-[40px]'>
         <img
-              src={userImage}
+              src={user?.image}
               alt="user-profile"
               className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
         />

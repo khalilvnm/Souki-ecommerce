@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import ProductItem from "../components/ProductItem";
+import ShopProductItem from "../components/ShopProductItem";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Shop = () => {
@@ -82,18 +82,26 @@ const Shop = () => {
       </div>
 
       {/* Right Side */}
-      <div>
+      <div className="flex-1">
         <p className="text-2xl font-semibold text-gray-800 mb-4">All Products</p>
-        <div className="w-full grid grid-cols-auto gap-4">
+        <div className="flex flex-col gap-4">
           {
             productsFiltering.map((product, index) => (
-              <ProductItem key={index} id={product._id} title={product.title} description={product.description} images={product.images} price={product.price} discount={product.discount} />
+              <ShopProductItem 
+                key={index} 
+                id={product._id} 
+                title={product.title} 
+                description={product.description} 
+                images={product.images} 
+                price={product.price} 
+                discount={product.discount}
+                userName={product.userId?.username} 
+              />
             ))
           }
         </div>
-
       </div>
-    </div >
+    </div>
   );
 };
 

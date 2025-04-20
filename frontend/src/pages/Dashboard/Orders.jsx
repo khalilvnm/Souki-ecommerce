@@ -6,25 +6,10 @@ import { FaTrash } from 'react-icons/fa';
 
 const Orders = () => {
   const { backend_url, token } = useContext(AppContext);
-  const [orders, setOrders] = useState([]);
   const [sellerOrders, setSellerOrders] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   const fetchOrders = async () => {
     try {
-      // Fetch regular orders
-      const response = await axios.post(
-        backend_url + "/api/order/orders-list",
-        { userDetails: { id: localStorage.getItem('userId') } },
-        {
-          headers: { authorization: "Bearer " + token }
-        }
-      );
-      
-      if (response.data.success) {
-        setOrders(response.data.orders);
-      }
-
       // Fetch seller orders
       const sellerResponse = await axios.post(
         backend_url + "/api/order/product-owner-orders",
@@ -36,22 +21,6 @@ const Orders = () => {
       
       if (sellerResponse.data.success) {
         setSellerOrders(sellerResponse.data.orders);
-      }
-
-      // Fetch admin orders
-      const adminResponse = await axios.post(
-        backend_url + "/api/order/list-dashboard",
-        { userDetails: { id: localStorage.getItem('userId') } },
-        {
-          headers: { authorization: "Bearer " + token }
-        }
-      );
-
-      if (adminResponse.data.success) {
-        if (adminResponse.data.message === "Admin") {
-          setIsAdmin(true);
-          setOrders(adminResponse.data.orders);
-        }
       }
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -85,7 +54,7 @@ const Orders = () => {
     }
   };
 
-  const OrderCard = ({ order, showCustomerInfo = true }) => (
+  const OrderCard = ({ order }) => (
     <div key={order._id} className="border p-4 rounded-lg shadow relative">
       <button
         onClick={() => handleDeleteOrder(order._id)}
@@ -102,11 +71,11 @@ const Orders = () => {
           <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg mb-2">{showCustomerInfo ? 'Customer Info' : 'Your Info'}</h3>
+          <h3 className="font-semibold text-lg mb-2">Customer Info</h3>
           <p>Name: {order.infos?.nomprenom || 'N/A'}</p>
           <p>Phone: {order.infos?.phone || 'N/A'}</p>
           <p>Address: {order.infos?.adresse || 'N/A'}</p>
-          {showCustomerInfo && order.userId?.email && (
+          {order.userId?.email && (
             <p>Email: {order.userId.email}</p>
           )}
         </div>
@@ -126,49 +95,15 @@ const Orders = () => {
 
   return (
     <div className="p-4">
-      {isAdmin ? (
-        // Admin View - All Orders
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-center">All Orders</h2>
-          {orders.length === 0 ? (
-            <p className="text-gray-500 text-center">No orders yet</p>
-          ) : (
-            <div className="space-y-4">
-              {orders.map((order) => (
-                <OrderCard key={order._id} order={order} showCustomerInfo={true} />
-              ))}
-            </div>
-          )}
-        </div>
+      <h2 className="text-2xl font-bold mb-4 text-center">Orders for Your Products</h2>
+      {sellerOrders.length === 0 ? (
+        <p className="text-gray-500 text-center">No orders for your products yet</p>
       ) : (
-        // Regular User View
-        <>
-          {/* Regular Orders */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4 text-center">Your Orders</h2>
-            {orders.length === 0 ? (
-              <p className="text-gray-500 text-center">No orders yet</p>
-            ) : (
-              <div className="space-y-4">
-                {orders.map((order) => (
-                  <OrderCard key={order._id} order={order} showCustomerInfo={false} />
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Seller Orders */}
-          {sellerOrders.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4 text-center">Orders for Your Products</h2>
-              <div className="space-y-4">
-                {sellerOrders.map((order) => (
-                  <OrderCard key={order._id} order={order} showCustomerInfo={true} />
-                ))}
-              </div>
-            </div>
-          )}
-        </>
+        <div className="space-y-4">
+          {sellerOrders.map((order) => (
+            <OrderCard key={order._id} order={order} />
+          ))}
+        </div>
       )}
     </div>
   );

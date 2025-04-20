@@ -27,7 +27,7 @@ const SignIn = () => {
   };
   // Schema 
   const schema = z.object({
-    email: z.string({ required_error: "Email Is Requried." }).email({ message: "Please Write a Valid Email." }),
+    email: z.string({ required_error: "Email Is Requried." }).email({ message: "Please Write A Valid Email." }),
     password: z.string({ required_error: "Password Is Required." }).min(6, { message: "Password Must Be AT least 6 Characters." }).max(200)
   });
   // Form Register
@@ -78,8 +78,8 @@ const SignIn = () => {
                 <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
             </div>
             {errors.password && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.password.message}</p>}
-            {/* Button */}
           </div>
+          {/* Button */}
           <button type='submit' className='mt-5 bg-black text-white py-2 px-3 rounded-md text-[15px] font-semibold text-center block w-full transition-all duration-300 hover:bg-gray-700'>Sign In</button>
         </div>
         {/* Submit Error */}

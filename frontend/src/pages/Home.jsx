@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../components/Hero';
+import ProductCarousel from '../components/ProductCarousel';
 import CuisineSection from '../components/CuisineSection';
 import VetementSection from '../components/VetementSection';
 import AccessoireSection from '../components/AccessoireSection';
@@ -10,14 +11,15 @@ import BainBeauteSection from '../components/BainBeauteSection';
 const Home = () => {
   return (
     <div className='w-full'>
-    <Hero />
+      <Hero />
       <div className='py-[18px] px-[48px]'>
-      <DecorationSection />
-      <CuisineSection />
-      <VetementSection />
-      <AccessoireSection />
-      <BijouxSection />
-      <BainBeauteSection />
+        <ProductCarousel />
+        <DecorationSection />
+        <CuisineSection />
+        <VetementSection />
+        <AccessoireSection />
+        <BijouxSection />
+        <BainBeauteSection />
       </div>
     </div>
   );
