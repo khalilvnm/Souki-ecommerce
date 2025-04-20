@@ -35,21 +35,14 @@ const getDetails = async (req, res) => {
       // Get Products Count
       const productsCount = await ProductModel.countDocuments({ userId: userDetails.id });
       
-      // Get user's orders (where they are the buyer)
-      const userOrders = await OrderModel.find({ userId: userDetails.id });
-      
       // Get orders where user is the seller of any product
       const sellerOrders = await OrderModel.find({ 'items.productOwnerId': userDetails.id });
       
-      // Combine both types of orders and get unique order IDs
-      const allOrders = [...userOrders, ...sellerOrders];
-      const uniqueOrderIds = new Set(allOrders.map(order => order._id.toString()));
-
       return res.status(200).json({
         success: true,
         details: {
           productsCount,
-          ordersCount: uniqueOrderIds.size
+          ordersCount: sellerOrders.length
         }
       });
     }

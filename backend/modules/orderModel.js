@@ -13,8 +13,7 @@ const orderSchema = new mongoose.Schema({
     }], 
     required: true 
   },
-  amount: { type: Number, required: true },
-  status: { type: String, default: "Order Processing" },
+  amount: { type: Number, required: true }
 }, { minimize: false, timestamps: true });
 
 // Order Model 
