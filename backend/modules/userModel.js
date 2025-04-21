@@ -7,7 +7,18 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   image: { type: String, required: true },
-  cartData: { type: Object, default: {} }
+  cartData: { type: Object, default: {} },
+  isSeller: { type: Boolean, default: false },
+  sellerStatus: { 
+    type: String, 
+    enum: ['pending', 'approved', 'rejected'],
+    default: null 
+  },
+  sellerInfo: {
+    shopName: { type: String },
+    phoneNumber: { type: String },
+    address: { type: String }
+  }
 }, { minimize: false, timestamps: true });
 
 // User Model

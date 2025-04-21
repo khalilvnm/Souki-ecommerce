@@ -29,6 +29,9 @@ import Users from './pages/Dashboard/Users';
 import Messages from './pages/Dashboard/Messages';
 import Bijoux from './pages/Bijoux';
 import BainBeaute from './pages/BainBeaute';
+import BecomeSeller from './pages/BecomeSeller';
+import SellerApplications from './pages/Dashboard/SellerApplications';
+
 const App = () => {
   const isDashboard = useMatch("/dashboard/*");
 
@@ -45,6 +48,7 @@ const App = () => {
               <Route path="orders" element={<Orders />} />
               <Route path="users" element={<Users />} />
               <Route path="messages" element={<Messages />} />
+              <Route path="seller-applications" element={<SellerApplications />} />
             </Route>
           </Routes>
         ) : (
@@ -70,6 +74,7 @@ const App = () => {
                 <Route path='/my-profile' element={<MyProfile />} />
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/signin' element={<SignIn />} />
+                <Route path='/become-seller' element={<BecomeSeller />} />
               </Routes>
             </div>
           </div>
