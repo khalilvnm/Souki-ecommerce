@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 
 const Navbar = () => {
@@ -26,13 +27,24 @@ const Navbar = () => {
     }
   }, [token]);
   return (
-    <div className="py-5 w-full h-[70px] px-[3vw] flex items-center bg-second border-b border-gray-200 justify-between">
-      {/* Logo */}
-      <Link to={"/"} className="flex text-3xl font-semibold items-start gap-1 text-gray-700">
-        <p className='text-white font-semibold'>Sou<span className='text-primary'>k</span>i</p>
-      </Link>
+    <div className="py-5 w-full h-[70px] px-[40px] flex items-center bg-second border-b border-fourth justify-between">
+      <div className="flex items-center gap-8">
+        {/* Back Button */}
+        <Link to={"/"}
+          className="text-primary text-5xl hover:text-third transition-all items-center"
+          title="Retour à l'accueil"
+        >
+          <IoArrowBackCircle />
+        </Link>
+        {/* Logo */}
+        <Link to={"/"} className="flex items-center text-3xl w-fit pb-1">
+          <p className="text-third text-center font-playfair font-bold text-[40px] leading-none drop-shadow-lg">
+            SOU<span className="text-primary">K</span>I
+          </p>
+        </Link>
+      </div>
       {/* UserProfile */}
-      <div className='relative group w-[40px] h-[40px]'>
+      <div className='relative group w-[40px] h-[40px] '>
         <img
               src={user?.image}
               alt="user-profile"

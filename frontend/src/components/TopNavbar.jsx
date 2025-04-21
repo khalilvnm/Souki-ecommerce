@@ -70,8 +70,8 @@ const TopNavbar = () => {
       <div className="flex items-center justify-between gap-10">
         {/* Logo */}
         <Link to={"/"} className="flex items-center text-3xl w-fit">
-          <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg">
-            SOU<span className="text-primary">K</span>I
+          <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg transition-all duration-300 hover:text-primary">
+            SOU<span className="text-primary transition-all duration-300 hover:text-third">K</span>I
           </p>
         </Link>
         {/* Search Bar */}
