@@ -25,7 +25,7 @@ const Users = () => {
   // Delete User
   const deleteUserHandler = async (userId) => {
     try {
-      const response = await axios.post(backend_url + "/api/users/delete", { userId: userId }, {
+      const response = await axios.post(backend_url + "/api/users/delete-user-dashboard", { userId: userId }, {
         headers: { authorization: "Bearer " + token }
       });
       if (response.data.success) {
@@ -33,6 +33,7 @@ const Users = () => {
           toast.info(response.data.message);
         } else {
           toast.info(response.data.message);
+          getUsersDashboard(); // Refresh the users list after successful deletion
         }
       }
     } catch (error) {

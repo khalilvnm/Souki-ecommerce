@@ -36,7 +36,7 @@ const App = () => {
   const isDashboard = useMatch("/dashboard/*");
 
   return (
-    <div className='min-h-[100vh]'>
+    <div className='min-h-screen flex flex-col'>
       <ToastContainer position='top-right' theme='colored' />
       {
         isDashboard ? (
@@ -52,10 +52,10 @@ const App = () => {
             </Route>
           </Routes>
         ) : (
-          <div>
+          <div className="flex flex-col flex-grow">
             <TopNavbar />
             <BotNavbar />
-            <div className="pt-[136px]">
+            <div className="pt-[136px] flex-grow">
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/vetement' element={<Vetement />} />
@@ -77,11 +77,9 @@ const App = () => {
                 <Route path='/become-seller' element={<BecomeSeller />} />
               </Routes>
             </div>
+            {!isDashboard && <Footer />}
           </div>
         )
-      }
-      {
-        isDashboard ? null : <Footer />
       }
     </div>
   );
