@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import SearchSection from "./SearchSection";
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag, FaStore } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
 import { AppContext } from "../context/AppContext";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
@@ -18,6 +18,8 @@ const TopNavbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [userImage, setUserImage] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
+  const [sellerStatus, setSellerStatus] = useState(null);
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -28,12 +30,15 @@ const TopNavbar = () => {
       backend_url + "/api/users/user",
       {},
       {
-        headers: { authorization: "Beaer " + token },
+        headers: { authorization: "Bearer " + token },
       }
     );
     if (response.data.success) {
       setUserImage(response.data.user.image);
-      // Vérifier si l'utilisateur est admin
+      setIsSeller(response.data.user.isSeller);
+      setSellerStatus(response.data.user.sellerStatus);
+      
+      // Check if user is admin
       const adminResponse = await axios.post(
         backend_url + "/api/order/list-dashboard",
         { userDetails: { id: localStorage.getItem('userId') } },
@@ -86,61 +91,74 @@ const TopNavbar = () => {
             }}
           />
           <button>
-          <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
+            <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
           </button>
         </div>
         {/* SignUp And Cart*/}
         <div className="w-fit flex items-center gap-4">
           {/* Switch Between Signup and User Profile */}
           {token ? (
-            <div className="relative group w-[40px] h-[40px]">
-            <img
-              src={userImage}
-              alt="user-profile"
-              className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
-            />
-              <div className="hidden  font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition  z-[3000] p-5 w-[230px]">
-                <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md  gap-2 ">
-                  <NavLink
-                    to={"/my-profile"}
-                    className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
-                  >
-                    Mon Profile
-                  </NavLink>
-                  <NavLink
-                    to={"/my-orders"}
-                    className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
-                  >
-                    Commandes
-                  </NavLink>
-                  <NavLink
-                    to={"/dashboard"}
-                    className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
-                  >
-                    {isAdmin ? "Espace Admin" : "Espace Vendeur"}
-                  </NavLink>
-                  <button
-                    onClick={logoutHandler}
-                    className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
-                  >
-                    Se deconnecter
-                  </button>
-                  
+            <div className="flex items-center gap-4">
+              {!isAdmin && !isSeller && sellerStatus !== 'pending' && (
+                <Link to="/become-seller" className="font-inter font-medium bg-[#dda25e93] text-third w-[150px] h-[40px] text-center flex items-center justify-center gap-2 border-2 border-third rounded-full transition-all duration-300 hover:bg-[#c48f4d93]">
+                  <FaStore className="text-lg" />
+                  <span>Be a Seller</span>
+                </Link>
+              )}
+              {sellerStatus === 'pending' && (
+                <div className="font-inter font-medium bg-[#e9c49c93] text-third w-[150px] h-[40px] text-center flex items-center justify-center gap-2 border-2 border-third rounded-full">
+                  <span className="animate-pulse">Pending...</span>
+                </div>
+              )}
+              <div className="relative group w-[40px] h-[40px]">
+                <img
+                  src={userImage}
+                  alt="user-profile"
+                  className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
+                />
+                <div className="hidden font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition z-[3000] p-5 w-[230px]">
+                  <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md gap-2">
+                    <NavLink
+                      to={"/my-profile"}
+                      className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                    >
+                      Mon Profile
+                    </NavLink>
+                    <NavLink
+                      to={"/my-orders"}
+                      className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                    >
+                      Commandes
+                    </NavLink>
+                    {(isAdmin || isSeller) && (
+                      <NavLink
+                        to={"/dashboard"}
+                        className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                      >
+                        {isAdmin ? "Espace Admin" : "Espace Vendeur"}
+                      </NavLink>
+                    )}
+                    <button
+                      onClick={logoutHandler}
+                      className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                    >
+                      Se deconnecter
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
             <Link to={"/signin"}>
-
-            <div className="font-inter font-medium bg-[#dda25e93] text-third pl-2.5 py-1.5 text-center items-center flex gap-2 w-[150px] border-2 border-third rounded-full transition-all duration-300 hover:bg-slate-500">            
-              <IoPersonSharp />  
-              <p>Se Connecter</p>
-            </div>
+              <div className="font-inter font-medium bg-[#dda25e93] text-third pl-2.5 py-1.5 text-center items-center flex gap-2 w-[150px] border-2 border-third rounded-full transition-all duration-300 hover:bg-slate-500">            
+                <IoPersonSharp />  
+                <p>Se Connecter</p>
+              </div>
             </Link>
           )}
-                    {/* Cart */}
-                    <div className="flex items-center gap-2">
-            <Link to={"/cart"} className="relative cursor-pointer ">
+          {/* Cart */}
+          <div className="flex items-center gap-2">
+            <Link to={"/cart"} className="relative cursor-pointer">
               <FaShoppingBag className="text-2xl text-[#e1ad72] drop-shadow-lg" />
               <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
                 {calculateCartItemsCount()}

@@ -21,6 +21,8 @@ const getDetails = async (req, res) => {
       const ordersCount = await OrderModel.countDocuments();
       // Get Messages Count
       const messagesCount = await MessageModel.countDocuments();
+      // Get Seller Applications Count
+      const sellerApplicationsCount = await UserModel.countDocuments({ sellerStatus: 'pending' });
 
       return res.status(200).json({
         success: true,
@@ -28,7 +30,8 @@ const getDetails = async (req, res) => {
           usersCount,
           productsCount,
           ordersCount,
-          messagesCount
+          messagesCount,
+          sellerApplicationsCount
         }
       });
     } else {

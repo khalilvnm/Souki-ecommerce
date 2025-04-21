@@ -31,7 +31,7 @@ const ProductCarousel = () => {
   }
 
   return (
-    <div className="py-10">
+    <div className="py-10 ">
       <h2 className="text-2xl font-bold mb-6 text-center">All Products</h2>
       <Carousel
         responsive={responsive}
@@ -46,6 +46,7 @@ const ProductCarousel = () => {
         deviceType="desktop"
         dotListClass="custom-dot-list-style"
         itemClass="px-2"
+        className="relative z-0"
       >
         {allProducts.map((product) => (
           <div key={product._id}>

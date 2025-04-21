@@ -5,7 +5,7 @@ import { AppContext } from './../../context/AppContext';
 import { AiOutlineProduct } from "react-icons/ai"; // product
 import { FiBox } from "react-icons/fi"; //order
 import { LiaUsersSolid } from "react-icons/lia"; // users
-import { FaEnvelope } from "react-icons/fa"; // messages
+import { FaEnvelope, FaStore } from "react-icons/fa"; // messages
 import LoadingPage from './../LoadingPage/LoadingPage';
 
 const Details = () => {
@@ -65,6 +65,14 @@ const Details = () => {
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <FaEnvelope className='text-4xl text-primary' />
             <p className="text-gray-700">Messages: <span className="text-primary font-semibold text-[17px]">{details.messagesCount || "0"}</span> </p>
+          </div>
+        }
+        {/* Seller Applications Count */}
+        {
+          details.sellerApplicationsCount !== undefined &&
+          <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
+            <FaStore className='text-4xl text-primary' />
+            <p className="text-gray-700">Seller Applications: <span className="text-primary font-semibold text-[17px]">{details.sellerApplicationsCount || "0"}</span> </p>
           </div>
         }
       </div>

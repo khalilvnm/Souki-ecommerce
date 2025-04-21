@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import "dotenv/config";
 
+const defaultImage = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
+
 // ------------------- User Sign Up ------------------ //
 const userSignUp = async (req, res) => {
   try {
@@ -52,7 +54,7 @@ const userSignUp = async (req, res) => {
         username: data.username,
         email: data.email,
         password: hashedPassword,
-        image: "data:image/png;base64,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"
+        image: defaultImage
       });
       const user = await newUser.save();
       // Generate jwt
@@ -275,8 +277,6 @@ const removeProfilePicture = async (req, res) => {
       return res.status(400).json({ success: false, message: "User details are required" });
     }
 
-    const defaultImage = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
-
     const updatedUser = await UserModel.findByIdAndUpdate(
       userDetails.id,
       { image: defaultImage },
@@ -295,4 +295,114 @@ const removeProfilePicture = async (req, res) => {
   }
 };
 
-export { userSignUp, userSignIn, getUser, getUsersDashboard, deleteUserDashboard, updateProfilePicture, updateUsername, deleteAccount, removeProfilePicture };
+// Become Seller
+const becomeSeller = async (req, res) => {
+  try {
+    const { userDetails, phoneNumber, shopName, address } = req.body;
+
+    // Validate required fields
+    if (!phoneNumber || !shopName || !address) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    // Update user with seller information
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userDetails.id,
+      {
+        sellerStatus: 'pending',
+        sellerInfo: {
+          phoneNumber,
+          shopName,
+          address
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { password, ...other } = updatedUser._doc;
+    return res.status(200).json({ success: true, user: other });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
+
+// Approve/Reject Seller
+const updateSellerStatus = async (req, res) => {
+  try {
+    const { userDetails, userId, status } = req.body;
+
+    // Check if user is admin
+    const admin = await UserModel.findById(userDetails.id);
+    const isAdmin = admin && 
+      admin.email === process.env.ADMIN_EMAIL && 
+      await bcrypt.compare(process.env.ADMIN_PASSWORD, admin.password);
+
+    if (!isAdmin) {
+      return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Update seller status
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      {
+        sellerStatus: status,
+        isSeller: status === 'approved'
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { password, ...other } = updatedUser._doc;
+    return res.status(200).json({ success: true, user: other });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
+
+// Get Pending Sellers
+const getPendingSellers = async (req, res) => {
+  try {
+    const { userDetails } = req.body;
+
+    // Check if user is admin
+    const admin = await UserModel.findById(userDetails.id);
+    const isAdmin = admin && 
+      admin.email === process.env.ADMIN_EMAIL && 
+      await bcrypt.compare(process.env.ADMIN_PASSWORD, admin.password);
+
+    if (!isAdmin) {
+      return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Get all pending sellers
+    const pendingSellers = await UserModel.find({ sellerStatus: 'pending' });
+    return res.status(200).json({ success: true, sellers: pendingSellers });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
+
+export {
+  userSignUp,
+  userSignIn,
+  getUser,
+  getUsersDashboard,
+  deleteUserDashboard,
+  updateProfilePicture,
+  updateUsername,
+  deleteAccount,
+  removeProfilePicture,
+  becomeSeller,
+  updateSellerStatus,
+  getPendingSellers
+};
