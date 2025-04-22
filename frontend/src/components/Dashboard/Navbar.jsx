@@ -31,16 +31,16 @@ const Navbar = () => {
       <div className="flex items-center gap-8">
         {/* Back Button */}
         <Link to={"/"}
-          className="text-primary text-5xl hover:text-third transition-all items-center"
+          className="text-primary text-5xl hover:text-third transition-all items-center drop-shadow-lg"
           title="Retour à l'accueil"
         >
           <IoArrowBackCircle />
         </Link>
         {/* Logo */}
         <Link to={"/"} className="flex items-center text-3xl w-fit pb-1">
-          <p className="text-third text-center font-playfair font-bold text-[40px] leading-none drop-shadow-lg">
-            SOU<span className="text-primary">K</span>I
-          </p>
+        <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg hover:text-primary group">
+            SOU<span className="text-primary group-hover:text-third">K</span>I
+          </p> 
         </Link>
       </div>
       {/* UserProfile */}

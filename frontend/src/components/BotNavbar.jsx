@@ -5,16 +5,16 @@ import { RiMenu3Fill } from "react-icons/ri";
 const BotNavbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   return (
-    <div className='fixed top-[80px] left-0 right-0 z-[999] botnavbar py-3 px-[3vw] sm:px-[3vw] md:px-[7vw] lg:px-[9vw] bg-primary'>
+    <div className='fixed top-[80px] left-0 right-0 z-[999] botnavbar py-3 px-[3vw] sm:px-[3vw] md:px-[7vw] lg:px-[9vw] bg-primary shadow-xl'>
       <div className='hidden text-xl font-inter font-semibold md:flex max-lg:gap-x-1 text-third items-center gap-6 justify-center'>
-      <NavLink to={"/"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Accueil</NavLink>
-        <NavLink to={"/shop"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Magasin</NavLink>
-        <NavLink to={"/vetement"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Vêtements</NavLink>
-        <NavLink to={"/decoration"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Décoration</NavLink>
-        <NavLink to={"/cuisine"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Cuisine</NavLink>
-        <NavLink to={"/accessoire"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Accessoires</NavLink>
-        <NavLink to={"/bijoux"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Bijoux</NavLink>
-        <NavLink to={"/bain-beaute"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Bain et Beauté</NavLink>
+        <NavLink to={"/"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Accueil</NavLink>
+        <NavLink to={"/shop"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Magasin</NavLink>
+        <NavLink to={"/vetement"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Vêtements</NavLink>
+        <NavLink to={"/decoration"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Décoration</NavLink>
+        <NavLink to={"/cuisine"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Cuisine</NavLink>
+        <NavLink to={"/accessoire"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Accessoires</NavLink>
+        <NavLink to={"/bijoux"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Bijoux</NavLink>
+        <NavLink to={"/bain-beaute"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Bain et Beauté</NavLink>
         
         {/*<NavLink to={"/about-us"} className="py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">About Us</NavLink>
         <NavLink to={"/contact-us"} className="py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Contact Us</NavLink>

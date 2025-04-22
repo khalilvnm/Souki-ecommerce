@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
+import { FaSearch } from "react-icons/fa";
 import SearchSection from "./SearchSection";
 import { FaShoppingBag, FaStore } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
@@ -71,27 +71,28 @@ const TopNavbar = () => {
   }, [location.pathname]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[1000] bg-second py-5 px-[50px]">
+    <div className="fixed top-0 left-0 right-0 z-[1000] bg-second py-5 px-[50px] shadow-xl">
       <div className="flex items-center justify-between gap-10">
         {/* Logo */}
-        <Link to={"/"} className="flex items-center text-3xl w-fit">
-          <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg transition-all duration-300 hover:text-primary">
-            SOU<span className="text-primary transition-all duration-300 hover:text-third">K</span>I
+        <Link to={"/"} className="flex items-center text-3xl w-fit transition-all duration-300">
+          <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg hover:text-primary group">
+            SOU<span className="text-primary group-hover:text-third">K</span>I
           </p>
         </Link>
         {/* Search Bar */}
-        <div className="hidden font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
+        <div className="group hidden font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
           <input
             type="text"
             placeholder="Recherche... "
-            className="w-full block outline-none bg-transparent text-[#683718] placeholder-[#683718]"
+            className="w-full block outline-none bg-transparent text-[#683718] placeholder-[#683718] focus:placeholder-[#f2c897] transition placeholder:transition-colors duration-300"
             value={searchValue}
             onChange={(event) => {
               setSearchValue(event.target.value);
             }}
           />
-          <button>
-            <CiSearch className="absolute text-2xl right-[10px] top-[50%] -translate-y-[50%]" />
+          <button type="button" 
+          className="hover:text-[#f2c897] text-third transition-transform duration-200">
+            <FaSearch className="absolute text-xl right-[10px] top-[50%] -translate-y-1/2 " />
           </button>
         </div>
         {/* SignUp And Cart*/}
@@ -110,11 +111,11 @@ const TopNavbar = () => {
                   <span className="animate-pulse">Pending...</span>
                 </div>
               )}
-              <div className="relative group w-[40px] h-[40px]">
+              <div className="relative group w-[40px] h-[40px] ">
                 <img
                   src={userImage}
                   alt="user-profile"
-                  className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
+                  className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer "
                 />
                 <div className="hidden font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition z-[3000] p-5 w-[230px]">
                   <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md gap-2">
@@ -159,7 +160,7 @@ const TopNavbar = () => {
           {/* Cart */}
           <div className="flex items-center gap-2">
             <Link to={"/cart"} className="relative cursor-pointer">
-              <FaShoppingBag className="text-2xl text-[#e1ad72] drop-shadow-lg" />
+              <FaShoppingBag className="text-2xl text-[#e1ad72] drop-shadow-lg transition-all duration-300 hover:text-third" />
               <p className="absolute w-[16px] h-[16px] rounded-full bg-red-800 text-white text-sm font-medium flex items-center justify-center top-[-5px] right-[-5px]">
                 {calculateCartItemsCount()}
               </p>
