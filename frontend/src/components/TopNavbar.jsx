@@ -80,7 +80,7 @@ const TopNavbar = () => {
           </p>
         </Link>
         {/* Search Bar */}
-        <div className="group hidden font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
+        <div className="group hidden drop-shadow-lg font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
           <input
             type="text"
             placeholder="Recherche... "
@@ -151,7 +151,7 @@ const TopNavbar = () => {
             </div>
           ) : (
             <Link to={"/signin"}>
-              <div className="font-inter font-medium bg-[#dda25e93] text-third pl-2.5 py-1.5 text-center items-center flex gap-2 w-[150px] border-2 border-third rounded-full transition-all duration-300 hover:bg-slate-500">            
+              <div className="font-inter font-medium bg-[#dda25e93] text-third pl-2.5 py-1.5 text-center items-center flex gap-2 w-[150px] border-2 border-third rounded-full transition-all duration-300 drop-shadow-lg hover:bg-third hover:text-primary">            
                 <IoPersonSharp />  
                 <p>Se Connecter</p>
               </div>

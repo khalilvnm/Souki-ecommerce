@@ -16,10 +16,6 @@ const BotNavbar = () => {
         <NavLink to={"/bijoux"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Bijoux</NavLink>
         <NavLink to={"/bain-beaute"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Bain et Beauté</NavLink>
         
-        {/*<NavLink to={"/about-us"} className="py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">About Us</NavLink>
-        <NavLink to={"/contact-us"} className="py-1 px-2 transition-all duration-300 hover:text-second hover:underline max-lg:text-sm">Contact Us</NavLink>
-        */}
-
         </div>
       {/* Responsive Screen */}
       <div className='flex md:hidden justify-end overflow-hidden'>
@@ -33,10 +29,6 @@ const BotNavbar = () => {
           <NavLink to={"/accessoire"} className="py-3 px-2 transition-all duration-300 hover:underline" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Accessoires</NavLink>
           <NavLink to={"/bijoux"} className="py-3 px-2 transition-all duration-300 hover:underline" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Bijoux</NavLink>
           <NavLink to={"/bain-beaute"} className="py-3 px-2 transition-all duration-300 hover:underline" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Bain et Beauté</NavLink>
-          
-          {/*<NavLink to={"/about-us"} className="py-3 px-2 transition-all duration-300 hover:underline" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>About Us</NavLink>
-          <NavLink to={"/contact-us"} className="py-3 px-2 transition-all duration-300 hover:underline" onClick={() => { setShowNavbar(false); scrollTo(0, 0); }}>Contact Us</NavLink>
-          */}
 
           </div>
       </div>
