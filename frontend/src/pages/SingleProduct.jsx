@@ -109,6 +109,9 @@ const SingleProduct = () => {
                     <span className='text-gray-900 capitalize'>SubCategory:</span> {singleProduct.subCategory}
                   </p>
                 )}
+                <p className='capitalize'>
+                  <span className='text-gray-900 capitalize'>Vendu par:</span> {singleProduct.userId?.username || 'Unknown'}
+                </p>
               </div>
               
               {/* Action Buttons */}

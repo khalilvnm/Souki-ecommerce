@@ -163,7 +163,7 @@ const deleteProduct = async (req, res) => {
 const getSingleProduct = async (req, res) => {
   try {
     const { productId } = await req.body;
-    const product = await ProductModel.findById(productId);
+    const product = await ProductModel.findById(productId).populate('userId', 'username');
     return res.status(200).json({ success: true, product: product });
   } catch (error) {
     console.log(error);
