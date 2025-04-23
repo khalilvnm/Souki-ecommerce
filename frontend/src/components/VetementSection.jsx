@@ -22,7 +22,7 @@ const VetementSection = () => {
       {/* Shop vetement Products */}
       <div>
         <p className='mb-3 text-xl font-semibold text-gray-800'>Vetement Products</p>
-        <Carousel responsive={productResponsive}>
+        <Carousel responsive={productResponsive} className="z-0">
           {vetementProducts.map((product, index) => (
             <div className='mr-3' key={index}>
               <ProductItem 

@@ -23,7 +23,7 @@ const AccessoireSection = () => {
       {/* Shop accessoire Products */}
       <div>
         <p className='mb-3 text-xl font-semibold text-gray-800'>Accessoire Products</p>
-        <Carousel responsive={productResponsive}>
+        <Carousel responsive={productResponsive} className="z-0">
           {accessoireProducts.map((product, index) => (
             <div className='mr-3' key={index}>
               <ProductItem 

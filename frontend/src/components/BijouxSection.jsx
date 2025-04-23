@@ -10,7 +10,6 @@ const BijouxSection = () => {
   const [bijouxProducts, setbijouxProducts] = useState([]);
 
   useEffect(() => {
-    // جلب جميع المنتجات التي تنتمي إلى الإلكترونيات فقط بدون تصنيفات فرعية
     setbijouxProducts(allProducts.filter((item) => item.type === "bijoux"));
   }, [allProducts]);
 
@@ -22,7 +21,7 @@ const BijouxSection = () => {
       {/* Shop bijoux Products */}
       <div>
         <p className='mb-3 text-xl font-semibold text-gray-800'>Bijoux Products</p>
-        <Carousel responsive={productResponsive}>
+        <Carousel responsive={productResponsive} className="z-0">
           {bijouxProducts.map((product, index) => (
             <div className='mr-3' key={index}>
               <ProductItem 
