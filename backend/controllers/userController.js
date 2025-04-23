@@ -298,10 +298,10 @@ const removeProfilePicture = async (req, res) => {
 // Become Seller
 const becomeSeller = async (req, res) => {
   try {
-    const { userDetails, phoneNumber, shopName, address } = req.body;
+    const { userDetails, phoneNumber, description, address } = req.body;
 
     // Validate required fields
-    if (!phoneNumber || !shopName || !address) {
+    if (!phoneNumber || !description || !address) {
       return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
@@ -312,7 +312,7 @@ const becomeSeller = async (req, res) => {
         sellerStatus: 'pending',
         sellerInfo: {
           phoneNumber,
-          shopName,
+          description,
           address
         }
       },

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import SearchSection from "./SearchSection";
 import { FaShoppingBag, FaStore } from "react-icons/fa";
@@ -21,6 +21,7 @@ const TopNavbar = () => {
   const [isSeller, setIsSeller] = useState(false);
   const [sellerStatus, setSellerStatus] = useState(null);
   const location = useLocation();
+  const searchInputRef = useRef(null);
 
   const navigate = useNavigate();
   
@@ -82,6 +83,7 @@ const TopNavbar = () => {
         {/* Search Bar */}
         <div className="group hidden drop-shadow-lg font-inter font-medium bg-[#dda25e93] sm:block w-full relative h-[40px] rounded-full border-2 border-third py-1.5 pl-5 pr-10">
           <input
+            ref={searchInputRef}
             type="text"
             placeholder="Recherche... "
             className="w-full block outline-none bg-transparent text-[#683718] placeholder-[#683718] focus:placeholder-[#f2c897] transition placeholder:transition-colors duration-300"
@@ -89,8 +91,20 @@ const TopNavbar = () => {
             onChange={(event) => {
               setSearchValue(event.target.value);
             }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && searchValue.trim()) {
+                navigate(`/shop?search=${searchValue}`);
+              }
+            }}
           />
           <button type="button" 
+          onClick={() => {
+            if (searchValue.trim()) {
+              navigate(`/shop?search=${searchValue}`);
+            } else {
+              searchInputRef.current?.focus();
+            }
+          }}
           className="hover:text-[#f2c897] text-third transition-transform duration-200">
             <FaSearch className="absolute text-xl right-[10px] top-[50%] -translate-y-1/2 " />
           </button>

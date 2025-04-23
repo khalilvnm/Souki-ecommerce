@@ -76,7 +76,7 @@ const SearchSection = ({ searchValue }) => {
             ))}
             {productsSearch.length > 0 && (
               <Link 
-                to="/shop" 
+                to={`/shop?search=${searchValue}`}
                 className="text-center text-sm text-primary hover:underline py-2 mt-2 border-t"
               >
                 View all results

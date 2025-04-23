@@ -88,9 +88,9 @@ const SellerApplications = () => {
               
               <div className="mb-4">
                 <h4 className="font-semibold mb-2">Shop Information</h4>
-                <p><span className="font-medium">Shop Name:</span> {seller.sellerInfo.shopName}</p>
                 <p><span className="font-medium">Phone:</span> {seller.sellerInfo.phoneNumber}</p>
                 <p><span className="font-medium">Address:</span> {seller.sellerInfo.address}</p>
+                <p><span className="font-medium">Description:</span> {seller.sellerInfo.description}</p>
               </div>
 
               <div className="flex gap-2">

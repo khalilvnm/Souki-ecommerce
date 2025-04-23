@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
     default: null 
   },
   sellerInfo: {
-    shopName: { type: String },
     phoneNumber: { type: String },
-    address: { type: String }
+    address: { type: String },
+    description: { type: String }
   }
 }, { minimize: false, timestamps: true });
 

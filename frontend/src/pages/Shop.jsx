@@ -2,13 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import ShopProductItem from "../components/ShopProductItem";
 import { IoIosArrowForward } from "react-icons/io";
+import { useSearchParams } from "react-router-dom";
 
 const Shop = () => {
   const { allProducts } = useContext(AppContext);
   const [types, setTypes] = useState([]);
   const [productsFiltering, setProductsFiltering] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
-
+  const [searchParams] = useSearchParams();
+  const searchValue = searchParams.get('search');
 
   // Add Type
   const addType = (productType) => {
@@ -23,15 +25,24 @@ const Shop = () => {
   const applyProductFilter = () => {
     let productData = allProducts.slice();
 
+    // Apply search filter if search value exists
+    if (searchValue) {
+      productData = productData.filter((product) =>
+        product.title.toLowerCase().startsWith(searchValue.toLowerCase())
+      );
+    }
+
+    // Apply type filter if types are selected
     if (types.length > 0) {
       productData = productData.filter((product) => types.includes(product.type));
     }
+
     setProductsFiltering(productData);
   };
 
   useEffect(() => {
     applyProductFilter();
-  }, [allProducts, types]);
+  }, [allProducts, types, searchValue]);
 
 
   return (
@@ -83,7 +94,9 @@ const Shop = () => {
 
       {/* Right Side */}
       <div className="flex-1">
-        <p className="text-2xl font-semibold text-gray-800 mb-4">All Products</p>
+        <p className="text-2xl font-semibold text-gray-800 mb-4">
+          {searchValue ? `Search Results for "${searchValue}"` : "All Products"}
+        </p>
         <div className="flex flex-col gap-4">
           {
             productsFiltering.map((product, index) => (

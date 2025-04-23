@@ -21,7 +21,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
   };
 
   return (
-    <div className="bg-white block border p-3 border-gray-200 rounded-xl shadow-lg cursor-pointer transition-all duration-300">
+    <div className="bg-white block border p-3 border-gray-200 rounded-xl shadow-lg cursor-pointer transition-all duration-300 h-full">
       <div className="relative">
         <button
           onClick={toggleCart}
@@ -36,12 +36,14 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
           />
         </button>
 
-        <img src={images[0]} alt="product-image" className="h-[180px] mx-auto" />
+        <div className="h-[180px] flex items-center justify-center">
+          <img src={images[0]} alt="product-image" className="max-h-[180px] w-auto" />
+        </div>
         <hr className="border-none h-[1px] w-full bg-gray-300 my-3" />
         <div>
-          <p className="text-nowrap text-ellipsis overflow-hidden text-sm">{title}</p>
+          <p className="text-nowrap text-ellipsis overflow-hidden text-sm h-5">{title}</p>
           {userName && <p className="text-xs text-gray-500 mb-1">Seller: {userName}</p>}
-          <div>
+          <div className="min-h-[60px] flex flex-col justify-end">
             {discount > 0 ? (
               <>
                 <span className="text-red-700 font-semibold mr-3">{discount}% Off</span>
@@ -53,7 +55,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
                 </p>
               </>
             ) : (
-              <span className="font-semibold">{price}{currency}</span>
+              <span className="font-semibold mb-[42px]">{price}{currency}</span>
             )}
           </div>
           <Link 

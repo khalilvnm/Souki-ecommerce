@@ -9,7 +9,7 @@ const BecomeSeller = () => {
   
   const [formData, setFormData] = useState({
     phoneNumber: '',
-    shopName: '',
+    description: '',
     address: ''
   });
   
@@ -71,21 +71,6 @@ const BecomeSeller = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="shopName" className="block text-sm font-medium text-gray-700">
-              Shop Name
-            </label>
-            <input
-              type="text"
-              id="shopName"
-              name="shopName"
-              required
-              value={formData.shopName}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
-            />
-          </div>
-
-          <div>
             <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
               Phone Number
             </label>
@@ -104,17 +89,34 @@ const BecomeSeller = () => {
             <label htmlFor="address" className="block text-sm font-medium text-gray-700">
               Address
             </label>
-            <textarea
+            <input
+              type="text"
               id="address"
               name="address"
               required
               value={formData.address}
               onChange={handleChange}
-              rows={4}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base resize-y min-h-[120px]"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
+              placeholder="Enter your address"
             />
           </div>
 
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              required
+              value={formData.description}
+              onChange={handleChange}
+              rows={4}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
+              placeholder="Tell us about your shop and what you plan to sell..."
+            />
+          </div>
+          
           <button
             type="submit"
             disabled={loading}
