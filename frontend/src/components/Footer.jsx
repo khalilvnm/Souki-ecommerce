@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
         {/* Left Side */}
         <div className="w-full sm:w-[40%] ">
-          <p className="text-3xl flex items-center font-playfair font-bold text-white mb-5 drop-shadow-lg">SOU<span className="text-primary">K</span>I</p>
+          <p className="text-3xl flex items-center font-playfair font-bold text-white mb-5 drop-shadow-lg">SOU<span className="text-primary ">K</span>I</p>
           <p className="text-fourth text-sm w-[80%]">Le premier site web en Algerie completement dedier aux vendeurs artisans et a la vente de produits artisanaux. 
           Souki propose un large choix dans le domaine de l'artisanat et ouvre de nouvelle possibilite aux artisans de vendre leurs produits en ligne.</p>
         </div>
@@ -28,13 +28,13 @@ const Footer = () => {
         <div className="w-full sm:w-[30%] flex sm:justify-center">
           <div>
             <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Categories</p>
-            <ul className="flex flex-col pl-3 gap-2">
-              <NavLink to={"/vetement"} className="text-fourth transition-all duration-300 hover:underline">Vetement</NavLink>
-              <NavLink to={"/decoration"} className="text-fourth transition-all duration-300 hover:underline">Decoration</NavLink>
-              <NavLink to={"/cuisine"} className="text-fourth transition-all duration-300 hover:underline">Cuisine</NavLink>
-              <NavLink to={"/accessoire"} className="text-fourth transition-all duration-300 hover:underline">Accessoire</NavLink>
-              <NavLink to={"/bijoux"} className="text-fourth transition-all duration-300 hover:underline">Bijoux</NavLink>
-              <NavLink to={"/bain-beaute"} className="text-fourth transition-all duration-300 hover:underline">Bain et Beaute</NavLink>
+            <ul className="flex flex-col pl-1.5 gap-2">
+              <NavLink to={"/vetement"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Vetement</NavLink>
+              <NavLink to={"/decoration"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Decoration</NavLink>
+              <NavLink to={"/cuisine"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Cuisine</NavLink>
+              <NavLink to={"/accessoire"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Accessoire</NavLink>
+              <NavLink to={"/bijoux"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Bijoux</NavLink>
+              <NavLink to={"/bain-beaute"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Bain et Beaute</NavLink>
             </ul>
           </div>
         </div>
@@ -42,9 +42,9 @@ const Footer = () => {
         {/* Right Side */}
         <div className="w-full sm:w-[30%] flex sm:justify-center">
           <div>
-            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Contactez-nous</p>
+            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Contacts</p>
 
-            <div className="text-fourth text-sm pl-3 gap-2 mb-5">
+            <div className="text-fourth pl-1.5 gap-2 mb-5">
             <div className="flex items-center gap-2">
               <FaPhoneAlt />
               <p>+213-511-223-344</p>
@@ -55,31 +55,43 @@ const Footer = () => {
               <p>Souki@artisanal.com</p>
             </div>
  
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 whitespace-nowrap">
               <FaHouse/>
               <p>123, rue de la liberté, Alger</p>
             </div>
             </div>
 
-            <div className="flex items-center justify-left text-fourth gap-3 text-4xl">
+            <div className="flex items-center justify-left pl-1.5 text-fourth gap-3 text-4xl">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                <FaFacebook className="border border-fourth text-fourth   rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+                <FaFacebook className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
               
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <FaInstagram className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+                <FaInstagram className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
 
               <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-              <FaXTwitter className="border border-fourth text-fourth  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+              <FaXTwitter className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
 
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-              <FaLinkedinIn className="border border-fourth text-fourth  rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+              <FaLinkedinIn className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
               </a>
             </div>
           </div>
         </div>
+        
+        {/* About Us */}
+        <div className="w-full sm:w-[30%] flex sm:justify-center">
+          <div>
+            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">À propos</p>
+            <ul className="flex flex-col pl-1.5 gap-2">
+              <NavLink to={"/about-us"} className="text-fourth transition-all duration-300 hover:text-third hover:underline max-lg:text-sm">En savoir plus</NavLink>
+              <NavLink to={"/contact-us"} className="text-fourth transition-all duration-300 hover:text-third hover:underline max-lg:text-sm">Contactez-nous</NavLink>
+            </ul>
+          </div>
+        </div>
+
       </div>
       </div>
 
