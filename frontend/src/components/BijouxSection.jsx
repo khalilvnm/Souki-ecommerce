@@ -15,7 +15,7 @@ const BijouxSection = () => {
 
   return (
     <div className='py-10'>
-      <p className='mb-3 text-3xl font-semibold text-gray-800'>bijoux</p>
+      <p className='mb-3 text-3xl font-semibold text-gray-800'>Bijoux</p>
       <hr className='border-none h-[1px] w-full bg-gray-300 mb-10' />
 
       {/* Shop bijoux Products */}

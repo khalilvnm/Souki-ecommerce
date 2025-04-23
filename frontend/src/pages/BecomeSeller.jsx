@@ -122,7 +122,7 @@ const BecomeSeller = () => {
             disabled={loading}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-third hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           >
-            {loading ? 'Submitting...' : 'Submit Application'}
+            {loading ? 'Soumission...' : 'Soumettre une demande'}
           </button>
         </form>
       </div>

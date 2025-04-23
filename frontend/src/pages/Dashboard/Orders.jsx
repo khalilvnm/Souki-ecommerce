@@ -6,11 +6,27 @@ import { FaTrash } from 'react-icons/fa';
 
 const Orders = () => {
   const { backend_url, token } = useContext(AppContext);
-  const [sellerOrders, setSellerOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const fetchOrders = async () => {
     try {
-      // Fetch seller orders
+      // First try to fetch all orders (admin view)
+      const adminResponse = await axios.post(
+        backend_url + "/api/order/list-dashboard",
+        { userDetails: { id: localStorage.getItem('userId') } },
+        {
+          headers: { authorization: "Bearer " + token }
+        }
+      );
+      
+      if (adminResponse.data.success) {
+        setOrders(adminResponse.data.orders);
+        setIsAdmin(adminResponse.data.message === "Admin");
+        return;
+      }
+
+      // If not admin, fetch seller-specific orders
       const sellerResponse = await axios.post(
         backend_url + "/api/order/product-owner-orders",
         { userDetails: { id: localStorage.getItem('userId') } },
@@ -20,7 +36,7 @@ const Orders = () => {
       );
       
       if (sellerResponse.data.success) {
-        setSellerOrders(sellerResponse.data.orders);
+        setOrders(sellerResponse.data.orders);
       }
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -30,6 +46,14 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
+    
+    // Set up auto refresh every 30 seconds
+    const refreshInterval = setInterval(() => {
+      fetchOrders();
+    }, 30000);
+
+    // Cleanup on unmount
+    return () => clearInterval(refreshInterval);
   }, [backend_url, token]);
 
   const handleDeleteOrder = async (orderId) => {
@@ -59,22 +83,22 @@ const Orders = () => {
       <button
         onClick={() => handleDeleteOrder(order._id)}
         className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors duration-300"
-        title="Delete Order"
+        title="Supprimer la commande"
       >
         <FaTrash size={18} />
       </button>
       <div className="grid grid-cols-3 gap-4 text-center">
         <div>
-          <h3 className="font-semibold text-lg mb-2">Order Details</h3>
-          <p>Order ID: {order._id}</p>
-          <p>Total Amount: {order.amount} DZ</p>
+          <h3 className="font-semibold text-lg mb-2">Détails de la commande</h3>
+          <p>Commande ID: {order._id}</p>
+          <p>Montant total: {order.amount} DZ</p>
           <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg mb-2">Customer Info</h3>
-          <p>Name: {order.infos?.nomprenom || 'N/A'}</p>
-          <p>Phone: {order.infos?.phone || 'N/A'}</p>
-          <p>Address: {order.infos?.adresse || 'N/A'}</p>
+          <h3 className="font-semibold text-lg mb-2">Informations client</h3>
+          <p>Nom: {order.infos?.nomprenom || 'N/A'}</p>
+          <p>Numero: {order.infos?.phone || 'N/A'}</p>
+          <p>Addresse: {order.infos?.adresse || 'N/A'}</p>
           {order.userId?.email && (
             <p>Email: {order.userId.email}</p>
           )}
@@ -83,9 +107,12 @@ const Orders = () => {
           <h3 className="font-semibold text-lg mb-2">Ordered Products</h3>
           {order.items.map((item, index) => (
             <div key={index} className="bg-gray-50 p-2 rounded mb-2">
-              <p className="font-medium">{item.productId?.title || 'Unknown Product'}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Price: {item.price} DZ</p>
+              <p className="font-medium">{item.productId?.title || 'Produit inconnu'}</p>
+              <p>Quantité: {item.quantity}</p>
+              <p>Prix: {item.price} DZ</p>
+              {isAdmin && item.productOwnerId && (
+                <p className="text-sm text-gray-500">Vendeur ID: {item.productOwnerId}</p>
+              )}
             </div>
           ))}
         </div>
@@ -95,12 +122,16 @@ const Orders = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Orders for Your Products</h2>
-      {sellerOrders.length === 0 ? (
-        <p className="text-gray-500 text-center">No orders for your products yet</p>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        {isAdmin ? "Tous les Commandes" : "Commandes pour vos produits"}
+      </h2>
+      {orders.length === 0 ? (
+        <p className="text-gray-500 text-center">
+          {isAdmin ? "No orders in the system yet" : "Aucune commande pour le moment"}
+        </p>
       ) : (
         <div className="space-y-4">
-          {sellerOrders.map((order) => (
+          {orders.map((order) => (
             <OrderCard key={order._id} order={order} />
           ))}
         </div>

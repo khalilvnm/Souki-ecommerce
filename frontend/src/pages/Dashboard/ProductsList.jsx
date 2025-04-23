@@ -43,12 +43,12 @@ const ProductsList = () => {
       <div className="hidden sm:grid grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr_0.5fr] border border-gray-200 rounded-md py-2 px-2 bg-gray-50 text-sm font-semibold mb-2">
         <p>#</p>
         <p>Image</p>
-        <p>Title</p>
-        <p>Price</p>
-        <p>Type</p>
-        <p>Quantity</p>
-        <p>Added by</p>
-        <p className="text-center">Remove</p>
+        <p>Titre</p>
+        <p>Prix</p>
+        <p>Categorie</p>
+        <p>Quantité</p>
+        <p>Vendu par</p>
+        <p className="text-center">Retirer</p>
       </div>
 
       {/* Body */}

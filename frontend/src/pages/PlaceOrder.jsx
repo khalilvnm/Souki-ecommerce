@@ -112,7 +112,7 @@ const PlaceOrder = () => {
       <div className="relative -left-16">
         <BackButton />
       </div>
-        <p className="text-xl font-semibold text-gray-800 mt-4">Infos</p>
+        <p className="text-xl font-semibold text-gray-800 mt-4">Informations</p>
       
         <div className="flex flex-col mt-7 gap-3 w-full">
           <div className="flex items-center justify-between gap-2">
@@ -129,14 +129,14 @@ const PlaceOrder = () => {
 
       {/* Cart Summary */}
       <div className="w-full mt-16 md:w-[40%] ">
-        <p className="text-xl font-semibold text-gray-800 mb-5">Cart Total</p>
+        <p className="text-xl font-semibold text-gray-800 mb-5">Total du panier</p>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
             <p>{collectProductsAmount()}{currency}</p>
           </div>
           <hr className='border-none h-[1px] w-full bg-gray-200' />
-          <button type="submit" className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md'>Proceed To Checkout</button>
+          <button type="submit" className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md'>Passer la Commande</button>
         </div>
       </div>
     </form>

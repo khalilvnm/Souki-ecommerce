@@ -61,7 +61,7 @@ const Users = () => {
               <div className="mt-2 w-full">
                 <p className="text-gray-700">Username: <span className="text-gray-900 font-medium">{user.username}</span></p>
                 <p className="text-gray-700">Email: <span className="text-gray-900 font-medium">{user.email}</span></p>
-                <button onClick={() => { deleteUserHandler(user._id); }} className="mt-2 text-[15px] bg-black text-white py-1 px-4 rounded-full">Remove</button>
+                <button onClick={() => { deleteUserHandler(user._id); }} className="mt-2 text-[15px] bg-black text-white py-1 px-4 rounded-full">Rejeter</button>
               </div>
             </div>
           ))

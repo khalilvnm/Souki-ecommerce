@@ -132,7 +132,7 @@ const AppContextProvider = (props) => {
       }
       
       setCartItems(productData);
-      toast.success("Product removed from cart");
+      toast.success("Produit retiré du panier");
     } catch (error) {
       console.error("Delete failed:", error);
       toast.error("Failed to remove product from cart");

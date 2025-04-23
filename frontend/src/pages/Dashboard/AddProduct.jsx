@@ -108,8 +108,8 @@ const AddProduct = () => {
         
         {/* Title */}
         <div>
-          <label htmlFor='title' className='block text-gray-800 font-Semibold text-base mb-1 ml-1'>Title</label>
-          <input required type='text' placeholder='Type Here.' id='title' value={title}
+          <label htmlFor='title' className='block text-gray-800 font-Semibold text-base mb-1 ml-1'>Titre</label>
+          <input required type='text' placeholder='Tapez ici.' id='title' value={title}
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'
             onChange={(event) => { setTitle(event.target.value); }} />
         </div>
@@ -117,7 +117,7 @@ const AddProduct = () => {
         {/* Description */}
         <div>
           <label htmlFor='description' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Description</label>
-          <input type='text' placeholder='Type Here.' id='description' value={description}
+          <input type='text' placeholder='Tapez ici.' id='description' value={description}
             onChange={(event) => { setDescription(event.target.value); }}
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
         </div>
@@ -125,14 +125,14 @@ const AddProduct = () => {
         {/* Price And Discount */}
         <div className='flex gap-2 items-center'>
           <div className='w-1/2'>
-            <label htmlFor='price' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Price</label>
-            <input required type='number' placeholder='Type Here.' id='price'
+            <label htmlFor='price' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Prix</label>
+            <input required type='number' placeholder='Tapez ici.' id='price'
               onChange={(event) => { setPrice(event.target.value); }} value={price}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
           </div>
           <div className='w-1/2'>
-            <label htmlFor='discount' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Discount</label>
-            <input type='number' placeholder='Type Here.' id='discount' value={discount}
+            <label htmlFor='discount' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Remise</label>
+            <input type='number' placeholder='Tapez ici.' id='discount' value={discount}
               onChange={(event) => { setDiscount(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
           </div>
@@ -140,7 +140,7 @@ const AddProduct = () => {
         
         {/* Quantity */}
         <div>
-          <label htmlFor='quantity' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Quantity</label>
+          <label htmlFor='quantity' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Quantité</label>
           <input required type='number' min="1" placeholder='Enter available quantity' id='quantity' value={quantity}
             onChange={(event) => { setQuantity(event.target.value); }}
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
@@ -149,10 +149,10 @@ const AddProduct = () => {
         {/* Type And Category */}
         <div className='flex items-center gap-2'>
           <div className='w-1/2'>
-            <label className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Type</label>
+            <label className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Categorie</label>
             <select value={type} onChange={(event) => { setType(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'>
-              <option value={"Select Type"} className='text-gray-600 text-sm'>Select Type</option>
+              <option value={"Select Type"} className='text-gray-600 text-sm'>Sélectionnez le Categorie</option>
               <option value={"vetement"}>Vetement</option>
               <option value={"decoration"}>Decoration</option>
               <option value={"Cuisine"}>Cuisine</option>
@@ -169,7 +169,7 @@ const AddProduct = () => {
             ?
             <button disabled className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>Processing .....</button>
             :
-            <button type='submit' className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center'>Add Product</button>
+            <button type='submit' className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center'>Ajouter Produit</button>
         }
 
       </form>

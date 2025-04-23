@@ -31,7 +31,7 @@ const ContactUs = () => {
       console.log('Server response:', response.data);
 
       if (response.data.success) {
-        toast.success("Message sent successfully!");
+        toast.success("Message envoyé avec succès!");
         setFormData({ name: "", email: "", message: "" }); // Clear form
       } else {
         toast.error(response.data.message || "Failed to send message");
@@ -50,11 +50,11 @@ const ContactUs = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-      <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Contact Us</h2>
+      <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Contactez-nous</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700 font-medium">Name</label>
+          <label className="block text-gray-700 font-medium">Nom</label>
           <input
             type="text"
             name="name"
@@ -99,7 +99,7 @@ const ContactUs = () => {
             loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-800'
           }`}
         >
-          {loading ? 'Sending...' : 'Send Message'}
+          {loading ? 'Envoi...' : 'Envoyer un message'}
         </button>
       </form>
     </div>
