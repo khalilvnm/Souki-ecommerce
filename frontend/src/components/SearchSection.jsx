@@ -33,7 +33,7 @@ const SearchSection = ({ searchValue }) => {
   if (isLoading) {
     return (
       <div className='search-section absolute py-5 px-10 bg-white top-[100%] left-0 z-[2000] w-full shadow-lg'>
-        <p className="text-gray-500">Loading suggestions...</p>
+        <p className="text-gray-500">Chargement...</p>
       </div>
     );
   }

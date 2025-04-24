@@ -33,7 +33,7 @@ const ShopProductItem = ({ id, title, images, price, discount, userName }) => {
           <div className="flex justify-between items-start">
             <div>
               <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-              <p className="text-sm text-gray-500 mt-1">Added by: {userName}</p>
+              <p className="text-sm text-gray-500 mt-1">Vendu par : {userName}</p>
             </div>
             <button
               onClick={toggleCart}
@@ -71,7 +71,7 @@ const ShopProductItem = ({ id, title, images, price, discount, userName }) => {
           onClick={() => { scrollTo(0, 0); }} 
           className="bg-black text-center text-white rounded-full w-[150px] text-[15px] border border-gray-300 mt-4 py-2 px-4 hover:bg-gray-800 transition-colors"
         >
-          Quick Look
+          Voir le produit
         </Link>
       </div>
     </div>

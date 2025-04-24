@@ -41,14 +41,14 @@ const Details = () => {
           details.usersCount &&
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <LiaUsersSolid className='text-4xl text-primary' />
-            <p className="text-gray-700">Users: <span className="text-primary font-semibold text-[17px]">{details.usersCount > 0 ? details.usersCount : "0"}</span> </p>
+            <p className="text-gray-700">Utilisateurs: <span className="text-primary font-semibold text-[17px]">{details.usersCount > 0 ? details.usersCount : "0"}</span> </p>
           </div>
         }
         {/* Products Count */}
         {
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <AiOutlineProduct className='text-4xl text-primary' />
-            <p className="text-gray-700">Products: <span className="text-primary font-semibold text-[17px]">{details.productsCount > 0 ? details.productsCount : "0"}</span> </p>
+            <p className="text-gray-700">Produits: <span className="text-primary font-semibold text-[17px]">{details.productsCount > 0 ? details.productsCount : "0"}</span> </p>
           </div>
         }
         {/* Orders Count */}
@@ -56,7 +56,7 @@ const Details = () => {
           details.ordersCount !== undefined &&
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <FiBox className='text-4xl text-primary' />
-            <p className="text-gray-700">Orders: <span className="text-primary font-semibold text-[17px]">{details.ordersCount || "0"}</span> </p>
+            <p className="text-gray-700">Commandes: <span className="text-primary font-semibold text-[17px]">{details.ordersCount || "0"}</span> </p>
           </div>
         }
         {/* Messages Count */}
@@ -72,7 +72,7 @@ const Details = () => {
           details.sellerApplicationsCount !== undefined &&
           <div className="border border-gray-300 p-5 rounded-md shadow-md flex items-center gap-5 transition-all duration-300 hover:scale-[1.05] hover:bg-blue-50 cursor-pointer">
             <FaStore className='text-4xl text-primary' />
-            <p className="text-gray-700">Seller Applications: <span className="text-primary font-semibold text-[17px]">{details.sellerApplicationsCount || "0"}</span> </p>
+            <p className="text-gray-700">Demandes de vendeur: <span className="text-primary font-semibold text-[16px]">{details.sellerApplicationsCount || "0" }</span> </p>
           </div>
         }
       </div>

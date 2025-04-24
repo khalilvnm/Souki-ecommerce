@@ -115,9 +115,9 @@ const TopNavbar = () => {
           {token ? (
             <div className="flex items-center gap-4">
               {!isAdmin && !isSeller && sellerStatus !== 'pending' && (
-                <Link to="/become-seller" className="font-inter font-medium bg-[#dda25e93] text-third w-[150px] h-[40px] text-center flex items-center justify-center gap-2 border-2 border-third rounded-full transition-all duration-300 hover:bg-[#c48f4d93]">
-                  <FaStore className="text-lg" />
-                  <span>Be a Seller</span>
+                <Link to="/become-seller" className="font-inter font-medium bg-primary text-third w-[180px] h-[40px] text-center flex items-center justify-center gap-2 border-2 border-third rounded-full transition-all duration-300 hover:bg-[#c48f4d93]">
+                  {/* <FaStore className="text-lg" /> */}
+                  <span>Vendre avec Souki</span>
                 </Link>
               )}
               {sellerStatus === 'pending' && (

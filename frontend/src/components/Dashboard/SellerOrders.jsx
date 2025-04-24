@@ -32,34 +32,34 @@ const SellerOrders = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Orders for Your Products</h2>
+      <h2 className="text-2xl font-bold mb-4">Commandes pour vos produits</h2>
       {orders.length === 0 ? (
-        <p className="text-gray-500">No orders yet</p>
+        <p className="text-gray-500">Aucune commande pour le moment</p>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
             <div key={order._id} className="border p-4 rounded-lg shadow">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="font-semibold">Order ID: {order._id}</p>
-                  <p>Status: {order.status}</p>
-                  <p>Total Amount: {order.amount} DZ</p>
+                  <p className="font-semibold">Commande ID: {order._id}</p>
+                  <p>Statu: {order.status}</p>
+                  <p>Montant total: {order.amount} DZ</p>
                 </div>
                 <div>
-                  <p className="font-semibold">Customer Info:</p>
-                  <p>Name: {order.infos.nomprenom}</p>
-                  <p>Phone: {order.infos.phone}</p>
-                  <p>Address: {order.infos.adresse}</p>
+                  <p className="font-semibold">Informations client:</p>
+                  <p>Nom: {order.infos.nomprenom}</p>
+                  <p>Numero: {order.infos.phone}</p>
+                  <p>Addresse: {order.infos.adresse}</p>
                 </div>
               </div>
               <div className="mt-4">
-                <h3 className="font-semibold mb-2">Ordered Products:</h3>
+                <h3 className="font-semibold mb-2">Produits commandés:</h3>
                 {order.items.map((item, index) => (
                   <div key={index} className="flex items-center gap-4 p-2 bg-gray-50 rounded">
                     <div>
                       <p className="font-medium">{item.productId.title}</p>
-                      <p>Quantity: {item.quantity}</p>
-                      <p>Price: {item.price} DZ</p>
+                      <p>Quantité: {item.quantity}</p>
+                      <p>Prix: {item.price} DZ</p>
                     </div>
                   </div>
                 ))}

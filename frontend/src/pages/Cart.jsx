@@ -61,7 +61,7 @@ const Cart = () => {
       <div className="absolute top-auto left-5 z-10">
         <BackButton />
       </div>
-      <p className='mb-10 text-2xl font-semibold text-gray-800'>Your Cart</p>
+      <p className='mb-10 text-2xl font-semibold text-gray-800'>Votre panier</p>
       <div className='flex flex-col gap-4'>
         {productsCart.map((product) => (
           <div key={product._id} className='p-5 border border-gray-200 items-center rounded-md shadow-md grid grid-cols-[1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] gap-3'>
@@ -124,7 +124,7 @@ const Cart = () => {
                 }`}
                 onClick={() => {
                   if (product.cartQuantity >= product.quantity) {
-                    toast.error(`Maximum quantity reached. Only ${product.quantity} items available in stock.`);
+                    toast.error(`Quantité maximale atteinte. Seul ${product.quantity} les articles disponibles en stock.`);
                     return;
                   }
                   addToCartItems(product._id);
@@ -138,9 +138,9 @@ const Cart = () => {
             {/* Stock Status */}
             <div className="text-sm text-gray-600">
               {product.quantity > 0 ? (
-                <span>In Stock: {product.quantity}</span>
+                <span>en Stock: {product.quantity}</span>
               ) : (
-                <span className="text-red-500">Out of Stock</span>
+                <span className="text-red-500">En rupture de stock</span>
               )}
             </div>
 
@@ -160,7 +160,7 @@ const Cart = () => {
       
       {/* Cart Total Section */}
       <div className='w-full sm:w-[450px] p-5 rounded-md bg-gray-100 mt-10'>
-        <p className='text-xl font-semibold text-gray-800 mb-5'>Cart Total</p>
+        <p className='text-xl font-semibold text-gray-800 mb-5'>Total du panier</p>
         <div className='flex flex-col gap-2'>
           <div className='flex items-center justify-between'>
             <p className='text-gray-700 text-[15px]'>Total</p>
@@ -171,19 +171,19 @@ const Cart = () => {
             to={"/placeorder"} 
             className='w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md hover:bg-gray-800 transition'
           >
-            Proceed To Checkout
+            Passer la Commande
           </Link>
         </div>
       </div>
     </div>
       ) : (
         <div className='py-20 min-h-[70vh] text-center'>
-          <p className='text-3xl text-gray-800 font-semibold mb-5'>Your Cart Is Empty!</p>
+          <p className='text-3xl text-gray-800 font-semibold mb-5'>Votre panier est vide!</p>
           <Link 
             to={"/"} 
             className='w-fit bg-black text-white py-2 px-5 rounded-md hover:bg-gray-800 transition'
           >
-            Go To Shopping
+            Aller au Magasin
           </Link>
         </div>
       )}

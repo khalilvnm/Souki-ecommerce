@@ -182,7 +182,7 @@ const MyProfile = () => {
                           onClick={updateUsername}
                           className="bg-primary text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
                         >
-                          Save
+                          Sauvegarder
                         </button>
                         <button
                           onClick={() => {
@@ -216,7 +216,7 @@ const MyProfile = () => {
                     <span>{user.email}</span>
                   </div>
                   <div className="text-gray-500">
-                    Member since {new Date(user.createdAt).toLocaleDateString()}
+                    Membre depuis {new Date(user.createdAt).toLocaleDateString()}
                   </div>
                 </div>
 
@@ -227,14 +227,14 @@ const MyProfile = () => {
                     className="flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
                   >
                     <FaSignOutAlt />
-                    <span>Logout</span>
+                    <span>Déconnexion</span>
                   </button>
                   <button 
                     onClick={deleteAccount} 
                     className="flex items-center justify-center gap-2 bg-red-100 text-red-600 px-6 py-2 rounded-md hover:bg-red-200 transition-colors"
                   >
                     <FaTrash />
-                    <span>Delete Account</span>
+                    <span>Supprimer le compte</span>
                   </button>
                 </div>
               </div>

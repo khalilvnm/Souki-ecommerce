@@ -15,8 +15,13 @@ const BijouxSection = () => {
 
   return (
     <div className='py-10'>
+<<<<<<< HEAD
       <p className='text-[25px] font-semibold font-inter drop-shadow-lg text-third'>Bijoux</p>
       <hr className='border-none h-[2px] w-full bg-third mb-6' />
+=======
+      <p className='mb-3 text-3xl font-semibold text-gray-800'>Bijoux</p>
+      <hr className='border-none h-[1px] w-full bg-gray-300 mb-10' />
+>>>>>>> 1309dfee0b751a32891860c2ff0879316cf7977b
 
       {/* Shop bijoux Products */}
       <div>

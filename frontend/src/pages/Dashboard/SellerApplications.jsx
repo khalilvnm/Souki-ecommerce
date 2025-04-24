@@ -57,7 +57,7 @@ const SellerApplications = () => {
   };
 
   if (loading) {
-    return <div className="p-4">Loading...</div>;
+    return <div className="p-4">Chargement...</div>;
   }
 
   if (error) {
@@ -66,10 +66,10 @@ const SellerApplications = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Seller Applications</h2>
+      <h2 className="text-2xl font-bold mb-4">Demandes de vendeur</h2>
       
       {sellers.length === 0 ? (
-        <p>No pending seller applications</p>
+        <p>Aucune demande de vendeur en attente</p>
       ) : (
         <div className="grid gap-4">
           {sellers.map((seller) => (
@@ -88,8 +88,8 @@ const SellerApplications = () => {
               
               <div className="mb-4">
                 <h4 className="font-semibold mb-2">Shop Information</h4>
-                <p><span className="font-medium">Phone:</span> {seller.sellerInfo.phoneNumber}</p>
-                <p><span className="font-medium">Address:</span> {seller.sellerInfo.address}</p>
+                <p><span className="font-medium">Numero:</span> {seller.sellerInfo.phoneNumber}</p>
+                <p><span className="font-medium">Addresse:</span> {seller.sellerInfo.address}</p>
                 <p><span className="font-medium">Description:</span> {seller.sellerInfo.description}</p>
               </div>
 
@@ -98,13 +98,13 @@ const SellerApplications = () => {
                   onClick={() => handleStatusUpdate(seller._id, 'approved')}
                   className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
                 >
-                  Approve
+                  Accepter
                 </button>
                 <button
                   onClick={() => handleStatusUpdate(seller._id, 'rejected')}
                   className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 >
-                  Reject
+                  Rejeter
                 </button>
               </div>
             </div>

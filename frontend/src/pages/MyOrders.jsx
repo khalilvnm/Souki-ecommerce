@@ -80,10 +80,10 @@ const MyOrders = () => {
           <BackButton />
         </div>
       </div>
-      <p className="text-gray-800 text-2xl mb-10 font-semibold">My Orders</p>
+      <p className="text-gray-800 text-2xl mb-10 font-semibold">Mes commandes</p>
       
       {orders.length === 0 ? (
-        <p className="text-gray-500">No orders yet</p>
+        <p className="text-gray-500">Aucune commande pour le moment</p>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
@@ -91,29 +91,29 @@ const MyOrders = () => {
               <button
                 onClick={() => handleDeleteOrder(order._id)}
                 className="absolute top-4 right-4 text-red-500 hover:text-red-700"
-                title="Delete Order"
+                title="Supprimer la commande"
               >
                 <FaTrash />
               </button>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Order ID</h3>
+                  <h3 className="font-semibold text-lg mb-2">Commande ID</h3>
                   <p>{order._id}</p>
                   <p>Total Amount: {order.amount} DZ</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Your Info</h3>
-                  <p>Name: {order.infos?.nomprenom || 'N/A'}</p>
-                  <p>Phone: {order.infos?.phone || 'N/A'}</p>
-                  <p>Address: {order.infos?.adresse || 'N/A'}</p>
+                  <h3 className="font-semibold text-lg mb-2">Votre Information</h3>
+                  <p>Nom: {order.infos?.nomprenom || 'N/A'}</p>
+                  <p>Numero: {order.infos?.phone || 'N/A'}</p>
+                  <p>Addresse: {order.infos?.adresse || 'N/A'}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Ordered Products</h3>
+                  <h3 className="font-semibold text-lg mb-2">Produits commandés</h3>
                   {(order.items || []).map((item, index) => (
                     <div key={index} className="bg-gray-50 p-2 rounded mb-2">
                       <p className="font-medium">{item.productId?.title || 'Unknown Product'}</p>
-                      <p>Quantity: {item.quantity || 0}</p>
-                      <p>Price: {item.price || 0} DZ</p>
+                      <p>Quantité: {item.quantity || 0}</p>
+                      <p>Prix: {item.price || 0} DZ</p>
                     </div>
                   ))}
                 </div>

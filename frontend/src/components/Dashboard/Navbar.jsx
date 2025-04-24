@@ -40,7 +40,7 @@ const Navbar = () => {
         <Link to={"/"} className="flex items-center text-3xl w-fit pb-1">
         <p className="text-third font-playfair font-bold text-[40px] leading-none drop-shadow-lg hover:text-primary group">
             SOU<span className="text-primary group-hover:text-third">K</span>I
-          </p> 
+        </p> 
         </Link>
       </div>
       {/* UserProfile */}
