@@ -27,17 +27,17 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col justify-between min-h-[400px]">
+    <div className="bg-primary rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col justify-between min-h-[400px]">
       <div className="relative">
         <button
           onClick={toggleCart}
-          className="absolute top-2 right-2 bg-white border border-gray-300 p-2 rounded-full shadow-sm hover:shadow transition"
+          className="absolute top-2 right-2 bg-fifth p-2 rounded-full shadow-sm hover:shadow transition"
           title={inCart ? "Retirer du panier" : "Ajouter au panier"}
         >
           <FaShoppingCart
             size={18}
             className={`transition-colors duration-300 ${
-              inCart ? "text-red-600" : "text-gray-700 hover:text-third"
+              inCart ? "text-red-600" : "text-primary hover:text-third"
             }`}
           />
         </button>
@@ -49,11 +49,11 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
         />
       </div>
 
-      <div className="p-4 flex flex-col justify-between flex-grow">
+      <div className="p-3 flex flex-col justify-between flex-grow">
         <div>
-          <p className="text-sm font-medium truncate mb-1">{title}</p>
+          <p className="text-lg text-[#101415] drop-shadow-lg font-semibold font-inter truncate mb-1">{title}</p>
           {userName && (
-            <p className="text-xs text-gray-500 mb-2">Vendu par : {userName}</p>
+            <p className="text-md font-inter text-fifth mb-2 ">Vendu par : <span className="font-semibold text-third drop-shadow-lg">{userName}</span></p>
           )}
           <div className="mb-2">
             <div className="min-h-[60px]">

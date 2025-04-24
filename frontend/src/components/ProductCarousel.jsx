@@ -27,12 +27,13 @@ const ProductCarousel = () => {
   };
 
   if (!allProducts || allProducts.length === 0) {
-    return <div className="flex justify-center items-center h-64">Loading...</div>;
+    return <div className="flex justify-center items-center h-64">Chargement...</div>;
   }
 
   return (
-    <div className="py-10 ">
-      <h2 className="text-2xl font-bold mb-6 text-center">All Products</h2>
+    <div className="py-8 ">
+      <h2 className="text-[36px] font-semibold drop-shadow-lg text-center text-third font-inter">Tous les Produits</h2>
+      <div className="w-full h-[2px] bg-third mx-auto mb-8 rounded-full" />
       <Carousel
         responsive={responsive}
         infinite={true}

@@ -18,7 +18,8 @@ export default {
         "second": "#b56c28",
         "third":"#6E3919",
         "fourth":"#fefee2",
-        "fifth":"#fdf1b8"
+        "fifth":"#fdf1b8",
+        "six":"#FEFAE0"
       },
       gridTemplateColumns: {
         "auto": "repeat(auto-fill, minmax(230px, 1fr))"

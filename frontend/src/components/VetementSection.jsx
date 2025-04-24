@@ -16,12 +16,11 @@ const VetementSection = () => {
 
   return (
     <div className='py-10'>
-      <p className='mb-3 text-3xl font-semibold text-gray-800'>Vetement</p>
-      <hr className='border-none h-[1px] w-full bg-gray-300 mb-10' />
+      <p className='text-[25px] font-semibold font-inter drop-shadow-lg text-third'>Vêtement</p>
+      <hr className='border-none h-[2px] w-full bg-third mb-6' />
 
       {/* Shop vetement Products */}
       <div>
-        <p className='mb-3 text-xl font-semibold text-gray-800'>Vetement Products</p>
         <Carousel responsive={productResponsive} className="z-0">
           {vetementProducts.map((product, index) => (
             <div className='mr-3' key={index}>

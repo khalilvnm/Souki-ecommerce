@@ -10,7 +10,7 @@ import BainBeauteSection from '../components/BainBeauteSection';
 
 const Home = () => {
   return (
-    <div className='w-full'>
+    <div className='w-full bg-six'>
       <Hero />
       <div className='py-[18px] px-[48px]'>
         <ProductCarousel />
