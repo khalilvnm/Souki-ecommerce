@@ -66,25 +66,27 @@ const SingleProduct = () => {
             
             {/* Right Side */}
             <div className='w-full sm:w-[50%]'>
-              <p className='text-xl text-gray-800 mb-2 font-semibold'>{singleProduct.title}</p>
-              <p className='text-gray-600 w-[70%] font-medium'>{singleProduct.description}</p>
+              <p className='text-3xl mb-2 font-inter font-bold text-third'>{singleProduct.title}</p>
+              <p className=' w-[70%] font-medium font-inter text-second'>{singleProduct.description}</p>
               
               {/* Price Section */}
-              <div>
+              <div> 
+              <div className='mt-4 font-inter font-bold text-third'>Prix:</div>
                 {singleProduct.discount > 0 ? (
                   <>
                     <div className='flex items-center gap-2 font-semibold'>
-                      <p className='text-red-700'>-{singleProduct.discount}% Off</p>
-                      <p className='text-2xl text-gray-700'>
+                      <p className='text-red-700 text-[25px]'>-{singleProduct.discount}%</p>
+                      <p className='text-xl text-primary line-through'>
+                      {singleProduct.price}{currency}
+                      </p>
+                      
+                    </div>
+                    <p className='text-[28px] font-inter font-bold text-second'>
                         {calculateProductDiscount(singleProduct.price, singleProduct.discount)}{currency}
                       </p>
-                    </div>
-                    <p className='text-xl text-gray-600 line-through'>
-                      {singleProduct.price}{currency}
-                    </p>
                   </>
                 ) : (
-                  <p className='text-2xl text-gray-700 font-semibold'>
+                  <p className='text-[28px] font-inter font-bold text-second'>
                     {singleProduct.price}{currency}
                   </p>
                 )}
@@ -92,25 +94,25 @@ const SingleProduct = () => {
 
               {/* Quantity Available */}
               <div className="mt-4">
-                <p className="text-gray-700 font-semibold">
-                  Available Quantity: <span className="text-primary">{singleProduct.quantity}</span>
+                <p className="font-inter font-bold text-third">
+                Quantité: <span className="text-second">{singleProduct.quantity}</span>
                 </p>
               </div>
 
               <hr className='border-none h-[1px] w-full bg-gray-200 my-4' />
               
               {/* Product Details */}
-              <div className='flex flex-col gap-1 text-gray-600 font-medium'>
+              <div className='flex flex-col gap-1 text-primary font-semibold'>
                 <p className='capitalize'>
-                  <span className='text-gray-900 capitalize'>Type:</span> {singleProduct.type}
+                  <span className='font-inter font-bold text-third'>Type:</span> {singleProduct.type}
                 </p>
                 {singleProduct.subCategory && (
                   <p className='capitalize'>
-                    <span className='text-gray-900 capitalize'>SubCategory:</span> {singleProduct.subCategory}
+                    <span className='font-inter font-bold text-third'>SubCategory:</span> {singleProduct.subCategory}
                   </p>
                 )}
                 <p className='capitalize'>
-                  <span className='text-gray-900 capitalize'>Vendu par:</span> {singleProduct.userId?.username || 'Unknown'}
+                  <span className='font-inter font-bold text-third'>Vendu par:</span> {singleProduct.userId?.username || 'Unknown'}
                 </p>
               </div>
               
@@ -118,9 +120,9 @@ const SingleProduct = () => {
               <div className='flex flex-col gap-3 mt-5'>
                 <button 
                   onClick={() => addToCartItems(singleProduct._id)}
-                  className='h-[42px] py-1.5 px-7 border border-gray-100 text-[15px] font-medium bg-black rounded-md text-white w-[180px] transition-all duration-300 hover:bg-[#454545]'
+                  className='h-[42px] py-1.5 px-7 text-[15px] rounded-full  w-[180px] transition-all duration-300 mt-2 text-center bg-third text-fifth text-sm font-medium  hover:bg-second  drop-shadow-lg'
                 >
-                  Add To Cart
+                  Ajouter au Panier
                 </button>
               </div>
             </div>

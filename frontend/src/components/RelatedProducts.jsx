@@ -6,7 +6,7 @@ const RelatedProducts = ({ type, singleProduct }) => {
   const { allProducts } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   console.log(type);
-  // Get Related Products BasedOn Category
+  /* Get Related Products BasedOn Category */
   const getRelatedProducts = () => {
     let productsData = [];
     allProducts.map((product) => {
@@ -23,7 +23,9 @@ const RelatedProducts = ({ type, singleProduct }) => {
 
   return (
     <div className='py-10'>
-      <p className='text-2xl text-gray-800 font-semibold mb-5'>Related Products</p>
+      <p className=' text-[25px] font-semibold font-inter drop-shadow-lg text-third'>Produits Similaires </p>
+      <hr className='border-none h-[2px] w-full bg-third mb-6' />
+
       {/* Show Products */}
       <div className='grid grid-cols-auto gap-8'>
         {

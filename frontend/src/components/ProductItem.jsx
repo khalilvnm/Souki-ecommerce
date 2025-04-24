@@ -63,7 +63,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
     <span className="text-red-600 font-semibold">
       {discount}% Off
     </span>
-    <span className="line-through text-sm text-gray-400">
+    <span className="line-through text-sm text-second">
       {price}{currency}
     </span>
   </div>
@@ -91,7 +91,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="mt-2 text-center bg-black text-white text-sm font-medium py-2 px-4 rounded-full hover:bg-gray-800 transition"
+          className="mt-2 text-center bg-third text-primary text-sm font-medium py-2 px-4 rounded-full hover:bg-second transition drop-shadow-lg"
         >
           Voir le produit
         </Link>
