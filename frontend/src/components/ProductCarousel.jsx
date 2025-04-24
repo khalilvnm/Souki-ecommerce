@@ -31,14 +31,11 @@ const ProductCarousel = () => {
   }
 
   return (
-<<<<<<< HEAD
+
     <div className="py-8 ">
       <h2 className="text-[36px] font-semibold drop-shadow-lg text-center text-third font-inter">Tous les Produits</h2>
       <div className="w-full h-[2px] bg-third mx-auto mb-8 rounded-full" />
-=======
-    <div className="py-10 ">
-      <h2 className="text-2xl font-bold mb-6 text-center">Tous les produits</h2>
->>>>>>> 1309dfee0b751a32891860c2ff0879316cf7977b
+
       <Carousel
         responsive={responsive}
         infinite={true}
