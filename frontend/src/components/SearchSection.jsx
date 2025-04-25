@@ -44,7 +44,7 @@ const SearchSection = ({ searchValue }) => {
   }
 
   return (
-    <div className='search-section absolute py-3 px-5 bg-white top-[100%] left-0 z-[2000] w-full shadow-lg border border-gray-200'>
+    <div className='search-section absolute py-5 px-5 bg-white sm:top-[100%] top-[180%] left-0 z-[2000] w-full shadow-lg border border-gray-200'>
       <div className='flex flex-col'>
         {productsSearch.length === 0 ? (
           <div className="text-sm text-gray-500 py-2">

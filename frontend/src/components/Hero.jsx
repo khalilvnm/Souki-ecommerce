@@ -21,7 +21,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative z-0">
+    <div className="relative z-0 sm:mt-[4px] -mt-[3px]">
       <Carousel 
         responsive={responsive}
         showDots={true}
@@ -31,7 +31,7 @@ const Hero = () => {
       >
         {
           hero_images.map((image, index) => (
-            <img src={image} key={index} alt="hero" className="w-full" />
+            <img src={image} key={index} alt="hero" className="w-full sm:h-[400px] h-[200px]" />
           ))
         }
       </Carousel>
