@@ -153,12 +153,12 @@ const AddProduct = () => {
             <select value={type} onChange={(event) => { setType(event.target.value); }}
               className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'>
               <option value={"Select Type"} className='text-gray-600 text-sm'>Sélectionnez le Categorie</option>
-              <option value={"Vêtements"}>Vetement</option>
+              <option value={"Vêtements"}>Vêtements</option>
               <option value={"decoration"}>Decoration</option>
               <option value={"Cuisine"}>Cuisine</option>
               <option value={"accessoire"}>Accessoire</option>
               <option value={"bijoux"}>Bijoux</option>
-              <option value={"bainbeaute"}>Bain et Beauté</option>
+              <option value={"Bain et Beauté"}>Bain et Beauté</option>
             </select>
           </div>
         </div>

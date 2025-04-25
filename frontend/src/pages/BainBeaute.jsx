@@ -13,9 +13,9 @@ const BainBeaute = () => {
         await getAllProducts();
       }
       
-      // Filter products where type exactly matches "bainbeaute"
+      // Filter products where type exactly matches "Bain et Beauté"
       const filtered = allProducts.filter(
-        product => product.type?.toLowerCase() === "bainbeaute"
+        product => product.type === "Bain et Beauté"
       );
       
       setBainBeauteProducts(filtered);

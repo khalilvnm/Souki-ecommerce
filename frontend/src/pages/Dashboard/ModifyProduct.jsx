@@ -255,12 +255,12 @@ const ModifyProduct = ({ productId, onClose }) => {
             className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'
           >
             <option value={"Select Type"} className='text-gray-600 text-sm'>Sélectionnez le Categorie</option>
-            <option value={"vetement"}>Vetement</option>
+            <option value={"Vêtements"}>Vêtements</option>
             <option value={"decoration"}>Decoration</option>
             <option value={"Cuisine"}>Cuisine</option>
             <option value={"accessoire"}>Accessoire</option>
             <option value={"bijoux"}>Bijoux</option>
-            <option value={"bainbeaute"}>Bain et Beaute</option>
+            <option value={"Bain et Beauté"}>Bain et Beauté</option>
           </select>
         </div>
         
@@ -268,19 +268,19 @@ const ModifyProduct = ({ productId, onClose }) => {
         <div className="flex gap-4">
           {loading ? (
             <button disabled className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>
-              Processing .....
+              Traitement .....
             </button>
           ) : (
             <>
               <button type='submit' className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center'>
-                Update Product
+                Modifier le produit
               </button>
               <button 
                 type='button' 
                 onClick={onClose}
                 className='w-fit block text-black bg-gray-200 py-1.5 px-5 rounded-md text-center'
               >
-                Cancel
+                Annuler
               </button>
             </>
           )}

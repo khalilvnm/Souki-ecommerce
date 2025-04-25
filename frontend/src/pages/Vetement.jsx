@@ -13,9 +13,9 @@ const Vetement = () => {
         await getAllProducts();
       }
 
-      // Filter products where type exactly matches "vetement"
+      // Filter products where type exactly matches "Vêtements"
       const filtered = allProducts.filter(
-        product => product.type?.toLowerCase() === "vetement"
+        product => product.type === "Vêtements"
       );
       
       setVetementProducts(filtered);

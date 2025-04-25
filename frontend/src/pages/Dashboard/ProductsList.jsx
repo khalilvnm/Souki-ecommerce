@@ -78,7 +78,7 @@ const ProductsList = () => {
                   onClick={() => setSelectedProductId(product._id)}
                   className="w-fit block text-white bg-blue-600 py-1 px-3 rounded-md text-center hover:bg-blue-700"
                 >
-                  Modify
+                  Modifier
                 </button>
               </p>
               <p onClick={() => { removeProduct(product._id); }} className="w-8 mx-auto h-8 bg-white cursor-pointer transition-all duration-300 hover:bg-red-700 hover:text-white border border-gray-300 rounded-full flex items-center justify-center">X</p>

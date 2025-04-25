@@ -10,7 +10,7 @@ const BainBeauteSection = () => {
   const [bainbeauteProducts, setbainbeauteProducts] = useState([]);
 
   useEffect(() => {
-    setbainbeauteProducts(allProducts.filter((item) => item.type === "bainbeaute"));
+    setbainbeauteProducts(allProducts.filter((item) => item.type === "Bain et Beauté"));
   }, [allProducts]);
 
   return (

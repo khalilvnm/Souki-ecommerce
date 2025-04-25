@@ -11,7 +11,7 @@ const VetementSection = () => {
 
   useEffect(() => {
     //njibo les produits ta3 type vetemnt brk
-    setvetementProducts(allProducts.filter((item) => item.type === "vetement"));
+    setvetementProducts(allProducts.filter((item) => item.type === "Vêtements"));
   }, [allProducts]);
 
   return (

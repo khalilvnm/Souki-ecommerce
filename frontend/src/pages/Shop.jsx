@@ -103,7 +103,7 @@ const Shop = () => {
             <div className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" value={"Vêtements"} id="Vêtements" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="Vêtements" className="cursor-pointer">Vêtement</label>
+              <label htmlFor="Vêtements" className="cursor-pointer">Vêtements</label>
             </div>
             <div className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" value={"decoration"} id="decoration" className="cursor-pointer accent-third"

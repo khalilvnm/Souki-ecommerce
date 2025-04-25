@@ -29,12 +29,12 @@ const Footer = () => {
           <div>
             <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">Categories</p>
             <ul className="flex flex-col pl-1.5 gap-2">
-              <NavLink to={"/vetement"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Vetement</NavLink>
+              <NavLink to={"/vetement"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Vêtements</NavLink>
               <NavLink to={"/decoration"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Decoration</NavLink>
               <NavLink to={"/cuisine"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Cuisine</NavLink>
               <NavLink to={"/accessoire"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Accessoire</NavLink>
               <NavLink to={"/bijoux"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Bijoux</NavLink>
-              <NavLink to={"/bain-beaute"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Bain et Beaute</NavLink>
+              <NavLink to={"/bain-beaute"} className="text-fourth transition-all duration-300 hover:text-third hover:underline">Bain et Beauté</NavLink>
             </ul>
           </div>
         </div>
