@@ -84,9 +84,9 @@ const Footer = () => {
         {/* About Us */}
         <div className="w-full sm:w-[30%] flex sm:justify-center">
           <div>
-            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">À propos</p>
+            <p className="text-2xl font-playfair items-center font-bold text-white mb-5 drop-shadow-lg">En savoir plus</p>
             <ul className="flex flex-col pl-1.5 gap-2">
-              <NavLink to={"/about-us"} className="text-fourth transition-all duration-300 hover:text-third hover:underline max-lg:text-sm">En savoir plus</NavLink>
+              <NavLink to={"/about-us"} className="text-fourth transition-all duration-300 hover:text-third hover:underline max-lg:text-sm">À propos</NavLink>
               <NavLink to={"/contact-us"} className="text-fourth transition-all duration-300 hover:text-third hover:underline max-lg:text-sm">Contactez-nous</NavLink>
             </ul>
           </div>

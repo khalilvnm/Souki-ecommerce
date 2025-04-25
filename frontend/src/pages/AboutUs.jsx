@@ -7,27 +7,29 @@ const AboutUs = () => {
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold text-brown-800 mb-4">About Us</h1>
-        <p className="text-gray-600 text-lg">
-          Discover the art of handcrafted excellence, where tradition meets modern craftsmanship.
+        <h1 className="text-5xl font-extrabold font-inter text-third mb-4">À propos de nous</h1>
+
+        <p className="text-second font-inter text-lg">
+        Découvrez l'artisanat d'exception, où tradition et savoir-faire moderne se rencontrent.
         </p>
       </div>
 
-      {/* Our Story Section */}
-      <div className="bg-primary p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
-        <img
-          src={logo}
-          alt="Handcraft"
-          className="rounded-lg bg-second shadow-md w-full md:w-1/2"
-        />
-        <div>
-          <h2 className="text-3xl font-semibold text-brown-700 mb-4">Our Story</h2>
-          <p className="text-gray-700 leading-relaxed">
-            We started with a passion for handcrafted beauty, blending traditional techniques with contemporary designs.
-            Every piece tells a unique story, carefully crafted by skilled artisans who put their heart into their work.
-          </p>
-        </div>
-      </div>
+    {/* Our Story Section */}
+<div className="bg-primary  p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
+  <img
+    src={logo}
+    alt="Artisanat"
+    className="rounded-lg pl-3 pr-4 bg-second drop-shadow-lg w-40 md:w-1/3 "
+  />
+ <div>
+    <h2 className="text-4xl font-extrabold text-third font-inter mb-4 text-center">Notre histoire</h2>
+    <p className="text-xl text-fifth font-inter font-bold leading-relaxed">
+      Nous sommes nés d'une passion pour la beauté de l'artisanat, en mêlant techniques traditionnelles et créations contemporaines.
+      Chaque pièce raconte une histoire unique, façonnée avec soin par des artisans qui mettent tout leur cœur dans leur travail.
+    </p>
+ </div>
+</div>
+
 
       {/* Vision & Mission Section */}
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
