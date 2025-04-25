@@ -140,7 +140,7 @@ const Shop = () => {
           {searchValue ? `Search Results for "${searchValue}"` : "Tous les produits"}
         </p>
         <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
-        <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {
             productsFiltering.map((product, index) => (
               <ShopProductItem 

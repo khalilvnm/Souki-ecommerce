@@ -5,8 +5,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className='px-[3vw] h-[60px] bg-second border-t border-fourth flex items-center justify-between'>
-
+    <div className='px-[3vw] flex-col sm:flex-row h-auto sm:h-[60px] bg-second border-t border-fourth flex items-center sm:justify-between gap-3 sm:gap-0 py-3 sm:py-0'>
       {/* Logo */}
       <div className="flex items-center text-fourth font-playfair font-bold text-[40px] leading-none drop-shadow-lg">
       SOU<span className="text-primary">K</span>I

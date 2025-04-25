@@ -87,34 +87,42 @@ const Orders = () => {
       >
         <FaTrash size={18} />
       </button>
-      <div className="grid grid-cols-3 gap-4 text-center">
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Détails de la commande</h3>
-          <p>Commande ID: {order._id}</p>
-          <p>Montant total: {order.amount} DZ</p>
-          <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base">
+        <div className="bg-white p-3 rounded-lg">
+          <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Détails de la commande</h3>
+          <div className="space-y-1">
+            <p className="break-all"><span className="font-medium">Commande ID:</span> {order._id}</p>
+            <p><span className="font-medium">Montant total:</span> {order.amount} DZ</p>
+            <p><span className="font-medium">Date:</span> {new Date(order.createdAt).toLocaleDateString()}</p>
+          </div>
         </div>
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Informations client</h3>
-          <p>Nom: {order.infos?.nomprenom || 'N/A'}</p>
-          <p>Numero: {order.infos?.phone || 'N/A'}</p>
-          <p>Addresse: {order.infos?.adresse || 'N/A'}</p>
-          {order.userId?.email && (
-            <p>Email: {order.userId.email}</p>
-          )}
+        <div className="bg-white p-3 rounded-lg">
+          <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Informations client</h3>
+          <div className="space-y-1">
+            <p><span className="font-medium">Nom:</span> {order.infos?.nomprenom || 'N/A'}</p>
+            <p><span className="font-medium">Numero:</span> {order.infos?.phone || 'N/A'}</p>
+            <p><span className="font-medium">Addresse:</span> {order.infos?.adresse || 'N/A'}</p>
+            {order.userId?.email && (
+              <p><span className="font-medium">Email:</span> {order.userId.email}</p>
+            )}
+          </div>
         </div>
-        <div>
-          <h3 className="font-semibold text-lg mb-2">Ordered Products</h3>
-          {order.items.map((item, index) => (
-            <div key={index} className="bg-gray-50 p-2 rounded mb-2">
-              <p className="font-medium">{item.productId?.title || 'Produit inconnu'}</p>
-              <p>Quantité: {item.quantity}</p>
-              <p>Prix: {item.price} DZ</p>
-              {isAdmin && item.productOwnerId && (
-                <p className="text-sm text-gray-500">Vendeur ID: {item.productOwnerId}</p>
-              )}
-            </div>
-          ))}
+        <div className="bg-white p-3 rounded-lg">
+          <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Ordered Products</h3>
+          <div className="space-y-2">
+            {order.items.map((item, index) => (
+              <div key={index} className="bg-gray-50 p-2 rounded">
+                <p className="font-medium text-sm sm:text-base">{item.productId?.title || 'Produit inconnu'}</p>
+                <div className="text-sm grid grid-cols-2 gap-2 mt-1">
+                  <p><span className="font-medium">Quantité:</span> {item.quantity}</p>
+                  <p><span className="font-medium">Prix:</span> {item.price} DZ</p>
+                </div>
+                {isAdmin && item.productOwnerId && (
+                  <p className="text-xs text-gray-500 mt-1">Vendeur ID: {item.productOwnerId}</p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
