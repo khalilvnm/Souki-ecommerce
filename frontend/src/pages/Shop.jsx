@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import ShopProductItem from "../components/ShopProductItem";
-import { IoIosArrowForward } from "react-icons/io";
 import { useSearchParams } from "react-router-dom";
 
 const Shop = () => {
@@ -102,9 +101,9 @@ const Shop = () => {
           <p className='mb-2 font-semibold font-inter text-third text-lg'>Catégories</p>
           <div className="flex flex-col items-start justify-start text-fifth font-inter gap-2">
             <div className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" value={"vetement"} id="vetement" className="cursor-pointer accent-third"
+              <input type="checkbox" value={"Vêtements"} id="Vêtements" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="vetement" className="cursor-pointer">Vêtement</label>
+              <label htmlFor="Vêtements" className="cursor-pointer">Vêtement</label>
             </div>
             <div className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" value={"decoration"} id="decoration" className="cursor-pointer accent-third"

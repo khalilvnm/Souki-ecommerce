@@ -104,13 +104,13 @@ const SingleProduct = () => {
               {/* Product Details */}
               <div className='flex flex-col gap-1 text-primary font-semibold'>
                 <p className='capitalize'>
-                  <span className='font-inter font-bold text-third'>Type:</span> {singleProduct.type}
+                  <span className='font-inter font-bold text-third'>Categorie:</span> {singleProduct.type}
                 </p>
-                {singleProduct.subCategory && (
+                {/* {singleProduct.subCategory && (
                   <p className='capitalize'>
                     <span className='font-inter font-bold text-third'>SubCategory:</span> {singleProduct.subCategory}
                   </p>
-                )}
+                )} */}
                 <p className='capitalize'>
                   <span className='font-inter font-bold text-third'>Vendu par:</span> {singleProduct.userId?.username || 'Unknown'}
                 </p>

@@ -171,7 +171,78 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
+// -------------- Update Product -------------- //
+const updateProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const { title, description, price, discount, type, quantity } = req.body;
+    const images = req.files;
 
+    // Validate input
+    const schema = z.object({
+      title: z.string({ required_error: "Title Is Required." }).min(2, { message: "Title Must Be At Least 2 Characters." }),
+      description: z.string().optional(),
+      price: z.string({ required_error: "Price Is Required." }).min(0),
+      discount: z.string().optional().transform(val => val === '' ? '0' : val),
+      type: z.string({ required_error: "Type Is Required." }).min(2, { message: "Type Must Be At Least 2 Characters." }),
+      quantity: z.string({ required_error: "Quantity Is Required." }).min(1, { message: "Quantity Must Be At Least 1." }),
+    });
+
+    const validation = schema.safeParse({ title, description, price, discount, type, quantity });
+    if (!validation.success) {
+      return res.status(400).json({ success: false, message: validation.error.errors[0].message });
+    }
+
+    // Find existing product
+    const existingProduct = await ProductModel.findById(productId);
+    if (!existingProduct) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    // Handle image updates if any new images are uploaded
+    let updatedImages = [...existingProduct.images];
+    if (images) {
+      const newImages = await Promise.all(
+        Object.entries(images).map(async ([key, value]) => {
+          try {
+            const result = await cloudinary.uploader.upload(value[0].path, { resource_type: "image" });
+            const index = parseInt(key.replace('image', '')) - 1;
+            updatedImages[index] = result.secure_url;
+            return result.secure_url;
+          } catch (error) {
+            console.log(error);
+            return null;
+          }
+        })
+      );
+    }
+
+    // Update product
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
+      productId,
+      {
+        title,
+        description,
+        price: Number(price),
+        discount: Number(discount),
+        type,
+        quantity: Number(quantity),
+        images: updatedImages,
+      },
+      { new: true }
+    );
+
+    return res.status(200).json({ 
+      success: true, 
+      product: updatedProduct,
+      message: "Product updated successfully" 
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
 
 export {
   addProductHandler,
@@ -179,4 +250,5 @@ export {
   deleteProduct,
   getProductsListFrontend,
   getSingleProduct,
+  updateProduct,
 };
