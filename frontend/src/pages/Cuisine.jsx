@@ -29,11 +29,11 @@ const Cuisine = () => {
 
   return (
     <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-      <p className='text-xl font-semibold mb-5 ml-1'>Cuisine Products</p>
-      
+      <p className='text-2xl font-bold font-inter text-third pb-1'>Produits Cuisine</p>
+      <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
       {cuisineProducts.length === 0 ? (
         <div className="text-center py-10 text-gray-500">
-          No Cuisine products found
+          Aucun produits Cuisine trouvé.
         </div>
       ) : (
         <div className="grid grid-cols-auto gap-5">

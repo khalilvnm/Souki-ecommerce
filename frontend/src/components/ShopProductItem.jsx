@@ -1,81 +1,74 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { FaShoppingCart } from "react-icons/fa";
-import { useState, useEffect } from "react";
 
 const ShopProductItem = ({ id, title, images, price, discount, userName }) => {
   const { calculateProductDiscount, currency, addToCartItems, cartItems, removeToCartItems } = useContext(AppContext);
   const [inCart, setInCart] = useState(false);
-  
+
   useEffect(() => {
-    setInCart(!!cartItems[id]); // true if exists
+    setInCart(!!cartItems[id]);
   }, [cartItems, id]);
 
   const toggleCart = () => {
-    if (inCart) {
-      removeToCartItems(id);
-    } else {
-      addToCartItems(id);
-    }
+    inCart ? removeToCartItems(id) : addToCartItems(id);
   };
 
   return (
-    <div className="bg-white flex border p-4 border-gray-200 rounded-xl shadow-lg transition-all duration-300">
-      {/* Left side - Image */}
-      <div className="w-[200px] flex-shrink-0 relative">
-        <img src={images[0]} alt="product-image" className="h-[180px] w-[180px] object-contain" />
+    <div className="bg-primary rounded-2xl mb-2 hover:shadow-lg transition-all duration-300 flex flex-col h-full drop-shadow-lg justify-between min-h-[350px]">
+      
+      {/* Image */}
+      <div className="ralative">
+        <img src={images[0]} alt="product" className="w-full h-[200px] object-cover rounded-t-2xl" />
       </div>
 
-      {/* Right side - Product Details */}
-      <div className="flex-1 flex flex-col justify-between ml-6">
-        <div>
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-              <p className="text-sm text-gray-500 mt-1">Vendu par : {userName}</p>
-            </div>
-            <button
-              onClick={toggleCart}
-              className="p-2 rounded-full transition-all"
-              title={inCart ? "Remove from cart" : "Add to cart"}
-            >
-              <FaShoppingCart
-                size={20}
-                className={`transition-colors duration-300 ${
-                  inCart ? "text-red-600" : "text-primary hover:text-green-500"
-                }`}
-              />
-            </button>
-          </div>
+      {/* Product Info */}
+      <div className="p-3 flex flex-col justify-between flex-grow">
+        <h3 className="text-lg text-[#101415] drop-shadow-lg font-bold font-inter truncate mb-1 ">{title}</h3>
+        <p className="text-sm font-inter text-fifth mb-2">
+          Vendu par : <span className="font-semibold text-third drop-shadow-lg">{userName}</span>
+        </p>
 
-          <div className="mt-4">
-            {discount > 0 ? (
-              <div className="flex items-center gap-3">
-                <span className="text-red-700 font-semibold">{discount}% Off</span>
-                <span className="text-xl font-semibold">
-                  {calculateProductDiscount(price, discount)}{currency}
-                </span>
-                <span className="line-through text-gray-500">
-                  {price}{currency}
-                </span>
-              </div>
-            ) : (
-              <span className="text-xl font-semibold">{price}{currency}</span>
-            )}
+        {discount > 0 ? (
+          <>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-red-600 font-semibold font-inter">-{discount}%</span>
+            <span className="line-through text-second">{price}{currency}</span>
           </div>
+            <span className="font-bold text-third font-inter block">{calculateProductDiscount(price, discount)}{currency}</span>
+          </>
+        ) : (
+          <>
+          <div className="flex items-center gap-2 mb-2 h-[20px]">
+          </div>
+          <span className="font-bold text-third font-inter block">
+            {price}{currency}
+          </span>
+        </>
+        )}
+
+        {/* See Product buttons */}
+        <div className="flex justify-between items-center mt-auto pt-3">
+          <Link
+            to={`/single-product/${id}`}
+            onClick={() => scrollTo(0, 0)}
+            className=" text-center bg-third text-primary text-sm font-medium py-2 px-4 rounded-full hover:bg-second transition drop-shadow-lg "
+          >
+            Voir le produit
+          </Link>
+
+          <button className="absolute right-3 bg-fifth p-2 rounded-full shadow-sm hover:shadow transition"
+          onClick={toggleCart} title={inCart ? "Retirer du panier" : "Ajouter au panier"}>
+            <FaShoppingCart
+              size={20}
+              className={`transition-colors duration-300 ${inCart ? "text-red-600" : "text-second hover:text-third"}`}
+            />
+          </button>
         </div>
-
-        <Link 
-          to={`/single-product/${id}`} 
-          onClick={() => { scrollTo(0, 0); }} 
-          className="bg-black text-center text-white rounded-full w-[150px] text-[15px] border border-gray-300 mt-4 py-2 px-4 hover:bg-gray-800 transition-colors"
-        >
-          Voir le produit
-        </Link>
       </div>
     </div>
   );
 };
 
-export default ShopProductItem; 
+export default ShopProductItem;

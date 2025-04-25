@@ -27,7 +27,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
   };
 
   return (
-    <div className="bg-primary rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col justify-between min-h-[400px]">
+    <div className="bg-primary rounded-2xl mb-2 hover:shadow-lg drop-shadow-lg transition-all duration-300 h-full flex flex-col justify-between min-h-[400px]">
       <div className="relative">
         <button
           onClick={toggleCart}
@@ -57,26 +57,26 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
           )}
           <div className="mb-2">
             <div className="min-h-[60px]">
-            {discount > 0 ? (
+
+{discount > 0 ? (
               <>
   <div className="flex items-center gap-2 mb-1">
-    <span className="text-red-600 font-semibold">
-      {discount}% Off
+    <span className="text-red-600 font-bold font-inter">
+      -{discount}%
     </span>
-    <span className="line-through text-sm text-second">
+    <span className="line-through text-sm font-medium text-second">
       {price}{currency}
     </span>
   </div>
-  <span className="font-semibold text-black block">
+  <span className="font-bold text-third font-inter block">
     {calculateProductDiscount(price, discount)}{currency}
   </span>
 </>
-
 ) : (
   <>
     <div className="flex items-center gap-2 mb-2 h-[20px]">
     </div>
-    <span className="font-semibold text-black block">
+    <span className="font-bold text-third font-inter block">
       {price}{currency}
     </span>
   </>
@@ -85,7 +85,6 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
 </div>
           </div>
         </div>
-
         <Link
           to={`/single-product/${id}`}
           onClick={() => {

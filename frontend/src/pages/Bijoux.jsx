@@ -26,11 +26,11 @@ const Bijoux = () => {
 
   return (
     <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-        <p className='text-xl font-semibold mb-5 ml-1'>Bijoux Products</p>
-        
+        <p className='text-2xl font-bold font-inter text-third pb-1'>Produits Bijoux</p>
+        <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
         {bijouxProducts.length === 0 ? (
           <div className='text-center py-10 text-gray-500'>
-            No bijoux products found. 
+            Aucun produits Bijoux trouvé.
           </div>
         ) : (
           <div className='grid grid-cols-auto gap-x-5 gap-y-10'>

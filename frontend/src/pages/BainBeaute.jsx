@@ -26,11 +26,11 @@ const BainBeaute = () => {
 
   return (
     <div className="py-10 px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-        <p className='text-xl font-semibold mb-5 ml-1'>Bain et Beaute Products</p>
-        
+        <p className='text-2xl font-bold font-inter text-third pb-1'>Produits Bain et Beauté</p>
+        <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
         {bainbeauteProducts.length === 0 ? (
           <div className='text-center py-10 text-gray-500'>
-            No Bain et Beaute products found. 
+            Aucun produits Bain et Beauté trouvé. 
           </div>
         ) : (
           <div className='grid grid-cols-auto gap-x-5 gap-y-10'>

@@ -64,70 +64,72 @@ const Shop = () => {
   }, [allProducts, types, searchValue, priceRange]);
 
   return (
-    <div className='my-20 flex flex-col sm:flex-row gap-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+    <div className=' my-20 flex flex-col sm:flex-row gap-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       {/* Left Side */}
       <div className="w-full sm:w-[250px]">
-        <div className="flex items-center text-xl font-semibold mb-4 cursor-pointer"
+        <div className="flex items-center text-2xl drop-shadow-lg font-bold mb-5 cursor-pointer text-third font-inter"
           onClick={() => { setShowFilters((prev) => !prev); }}>
           <p>Filtres</p>
-          <IoIosArrowForward className={`${showFilters ? "rotate-90" : ""} transition-all duration-300`} />
+
+         {/*<IoIosArrowForward className={`${showFilters ? "rotate-90" : ""} transition-all duration-300`} /> */}
+
         </div>
-        <div className={`sm:block ${showFilters ? "block" : "hidden"} p-5 border border-gray-300 rounded-xl transition-all duration-300`}>
+        <div className={`sm:block ${showFilters ? "block" : "hidden"} p-5 bg-primary rounded-xl transition-all duration-300 drop-shadow-lg`}>
           {/* Price Range Filter */}
           <div className="mb-6">
-            <p className='mb-3 font-semibold'>Prix</p>
+            <p className='mb-1 font-semibold font-inter text-third text-lg'>Prix (DZD)</p>
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-4 drop-shadow-lg">
                 <input
                   type="number"
-                  placeholder={`Min ${currency}`}
+                  placeholder={`Min`}
                   value={priceRange.min}
                   onChange={(e) => handlePriceChange('min', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
+                  className="w-full px-3 py-2 rounded-md font-inter text-third placeholder-primary focus:outline-none bg-fourth"
                 />
                 <input
                   type="number"
-                  placeholder={`Max ${currency}`}
+                  placeholder={`Max`}
                   value={priceRange.max}
                   onChange={(e) => handlePriceChange('max', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
+                  className="w-full px-3 py-2 rounded-md font-inter placeholder-primary focus:outline-none text-third bg-fourth"
                 />
               </div>
             </div>
           </div>
           
           {/* Type */}
-          <p className='mb-3 font-semibold'>Catégories</p>
-          <div className="flex flex-col items-start justify-start gap-2">
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"vetement"} id="vetement" className="cursor-pointer"
+          <p className='mb-2 font-semibold font-inter text-third text-lg'>Catégories</p>
+          <div className="flex flex-col items-start justify-start text-fifth font-inter gap-2">
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"vetement"} id="vetement" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="vetement" className="cursor-pointer">Vetement</label>
+              <label htmlFor="vetement" className="cursor-pointer">Vêtement</label>
             </div>
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"decoration"} id="decoration" className="cursor-pointer"
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"decoration"} id="decoration" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="decoration" className="cursor-pointer">Decoration</label>
+              <label htmlFor="decoration" className="cursor-pointer">Décoration</label>
             </div>
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"Cuisine"} id="Cuisine" className="cursor-pointer"
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"Cuisine"} id="Cuisine" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
               <label htmlFor="Cuisine" className="cursor-pointer">Cuisine</label>
             </div>
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"accessoire"} id="accessoire" className="cursor-pointer"
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"accessoire"} id="accessoire" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
               <label htmlFor="accessoire" className="cursor-pointer">Accessoire</label>
             </div>
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"bijoux"} id="bijoux" className="cursor-pointer"
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"bijoux"} id="bijoux" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
               <label htmlFor="bijoux" className="cursor-pointer">Bijoux</label>
             </div>
-            <div className="flex items-center gap-2 text-gray-800 cursor-pointer">
-              <input type="checkbox" value={"bainbeaute"} id="bainbeaute" className="cursor-pointer"
+            <div className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value={"bainbeaute"} id="bainbeaute" className="cursor-pointer accent-third"
                 onChange={(event) => { addType(event.target.value); }} />
-              <label htmlFor="bainbeaute" className="cursor-pointer">Bain et Beaute</label>
+              <label htmlFor="bainbeaute" className="cursor-pointer">Bain et Beauté</label>
             </div>
           </div>
         </div>
@@ -135,10 +137,11 @@ const Shop = () => {
 
       {/* Right Side */}
       <div className="flex-1">
-        <p className="text-2xl font-semibold text-gray-800 mb-4">
+        <p className="text-3xl font-bold font-inter text-third pb-1">
           {searchValue ? `Search Results for "${searchValue}"` : "Tous les produits"}
         </p>
-        <div className="flex flex-col gap-4">
+        <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
+        <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {
             productsFiltering.map((product, index) => (
               <ShopProductItem 
@@ -155,6 +158,7 @@ const Shop = () => {
           }
         </div>
       </div>
+
     </div>
   );
 };
