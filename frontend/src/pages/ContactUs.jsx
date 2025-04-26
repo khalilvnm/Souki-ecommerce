@@ -49,45 +49,45 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-      <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Contactez-nous</h2>
+    <div className="max-w-3xl mx-auto p-8 bg-primary shadow-lg rounded-lg my-10 transform hover:scale-105 transition-all duration-300">
+      <h2 className="text-3xl font-extrabold font-inter text-third mb-6 text-center drop-shadow-lg">Contactez-nous</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700 font-medium">Nom</label>
+          <label className="block text-third font-semibold font-inter mb-1 ml-1">Nom</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+            className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
             placeholder="Your Name"
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 font-medium">Email</label>
+          <label className="block text-third font-semibold font-inter mb-1 ml-1">Email</label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+            className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
             placeholder="Your Email"
           />
         </div>
 
         <div>
-          <label className="block text-gray-700 font-medium">Message</label>
+          <label className="block text-third font-semibold font-inter mb-1 ml-1">Message</label>
           <textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
             rows="5"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+            className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
             placeholder="Your Message"
           />
         </div>
@@ -95,8 +95,8 @@ const ContactUs = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold transition ${
-            loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-800'
+          className={`w-full bg-third text-primary py-3 rounded-lg text-lg font-bold font-inter transition drop-shadow-lg ${
+            loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-second hover:text-fifth'
           }`}
         >
           {loading ? 'Envoi...' : 'Envoyer un message'}

@@ -71,45 +71,45 @@ const SignUp = () => {
 
   return loading ? <Loading /> : (
     <div className='my-10 min-h-[70vh] flex items-center justify-center px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
-      <form onSubmit={handleSubmit(onSubmitHandler)} className='w-full sm:w-[450px] border border-gray-300 p-5 rounded-md'>
-        <p className='text-2xl mb-5 font-gray-700 font-semibold'>Sign Up</p>
+      <form onSubmit={handleSubmit(onSubmitHandler)} className='w-full sm:w-[450px] bg-primary drop-shadow-lg p-5 rounded-md transform hover:scale-105 transition-all duration-300'>
+        <p className='text-2xl mb-5 text-third font-extrabold font-inter drop-shadow-lg'>Inscrivez-vous</p>
         <div className='flex flex-col gap-3'>
           {/* userName */}
           <div>
-            <label htmlFor='username' className='text-gray-600 font-semibold ml-1 mb-1'>Username</label>
-            <input type='text' id='username' placeholder='Username' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("username")} />
+            <label htmlFor='username' className='text-third font-inter font-semibold ml-1 mb-1'>Nom d'utilisateur</label>
+            <input type='text' id='username' placeholder='Username' className="block wifull border border-second text-second font-inter shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("username")} />
             {errors.username && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.username.message}</p>}
           </div>
           {/* Email */}
           <div>
-            <label htmlFor='email' className='text-gray-600 font-semibold ml-1 mb-1'>Email</label>
-            <input type='email' id='email' placeholder='Email' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("email")} />
+            <label htmlFor='email' className='text-third font-inter font-semibold ml-1 mb-1'>Email</label>
+            <input type='email' id='email' placeholder='Email' className="block wifull border border-second text-second font-inter shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("email")} />
             {errors.email && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.email.message}</p>}
           </div>
           {/* Password */}
           <div>
-            <label htmlFor='password' className='text-gray-600 font-semibold ml-1 mb-1'>Password</label>
+            <label htmlFor='password' className='text-third font-inter font-semibold ml-1 mb-1'>Mot de passe</label>
             <div className='relative'>
-              <input type={showPassword} id='password' placeholder='Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("password")} />
+              <input type={showPassword} id='password' placeholder='Password' className="block wifull border border-second text-second font-inter shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("password")} />
               {showPassword === "password" ?
-                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} /> :
-                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
+                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} /> :
+                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} />}
             </div>
             {errors.password && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.password.message}</p>}
           </div>
           {/* Confirm Password */}
           <div>
-            <label htmlFor='confirmPassword' className='text-gray-600 font-semibold ml-1 mb-1'>Confirm Password</label>
+            <label htmlFor='confirmPassword' className='text-third font-inter font-semibold ml-1 mb-1'>Confirmer Mot de passe</label>
             <div className='relative'>
-              <input type={showPassword} id='confirmPassword' placeholder='Confirm Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("confirmPassword")} />
+              <input type={showPassword} id='confirmPassword' placeholder='Confirm Password' className="block wifull border border-second text-second font-inter shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register("confirmPassword")} />
               {showPassword === "password" ?
-                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} /> :
-                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
+                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} /> :
+                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} />}
             </div>
             {errors.confirmPassword && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.confirmPassword.message}</p>}
           </div>
           {/* Button */}
-          <button type='submit' className='mt-5 bg-black text-white py-2 px-3 rounded-md text-[15px] font-semibold text-center block w-full transition-all duration-300 hover:bg-gray-700'>Sign Up</button>
+          <button type='submit' className='mt-5 bg-third text-primary py-2 px-3 rounded-md text-[15px] font-inter font-semibold text-center block w-full transition-all duration-300 hover:text-fifth hover:bg-second'>S'inscrire</button>
         </div>
         {/* Submit Error */}
         {
@@ -118,8 +118,8 @@ const SignUp = () => {
             <p className='text-sm font-medium text-red-700'>{submitError}</p>
           </div>
         }
-        <p className='text-sm mt-6 text-gray-800 font-semibold'>Already Have an Account?
-          <Link to={"/signin"} className='text-base font-semibold text-primary ml-2'>Sign In</Link>
+        <p className='text-sm mt-6 text-second font-semibold font-inter'>Vous avez déjà un compte?
+          <Link to={"/signin"} className='text-base font-extrabold text-third ml-1 transition-all duration-300 hover:text-fifth hover:underline'>Connectez-vous</Link>
         </p>
       </form>
     </div>

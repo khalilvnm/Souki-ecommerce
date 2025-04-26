@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
-import BackButton from '../components/BackButton';
+import { IoArrowBackCircle } from "react-icons/io5";
 import { toast } from 'react-toastify';
+import { GoXCircleFill } from "react-icons/go";
 
 const Cart = () => {
   const { allProducts, cartItems, calculateProductDiscount,
@@ -57,26 +58,28 @@ const Cart = () => {
   return (
     <>
       {!shouldShowEmpty ? (
-        <div className='relative py-10 px-4 sm:px-[3vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
-          <div className="absolute top-auto left-5 z-10 hidden sm:block">
-            <BackButton />
-          </div>
-          <p className='mb-10 text-2xl font-semibold text-gray-800'>Votre panier</p>
-          <div className='flex flex-col gap-4'>
+        <div className='relative px-4 sm:px-[3vw] md:px-[7vw] lg:px-[9vw] min-h-[70vh]'>
+                  <Link to={"/"}
+                    className="absolute top-auto left-5 z-10 hidden sm:block pt-7 text-primary text-5xl hover:text-third transition-all drop-shadow-lg"
+                    title="Retour à l'accueil"
+                  >
+                    <IoArrowBackCircle />
+                  </Link>
+          <p className='mb-6 pt-10 text-2xl font-extrabold text-third font-inter'>Votre panier</p>
+          <div className='flex flex-col gap-4 drop-shadow-lg'>
             {productsCart.map((product) => (
-              <div key={product._id} className='p-4 sm:p-5 border border-gray-200 rounded-md shadow-md flex flex-col sm:grid sm:grid-cols-[1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] gap-3'>
-                {/* Mobile Layout - Top Section */}
+              <div key={product._id} className='bg-primary mr-10 rounded-md drop-shadow-lg transform hover:scale-105 transition-all duration-300 flex flex-col gap-3  sm:grid sm:grid-cols-[1.2fr_1.5fr_1.2fr_1.2fr_2fr_auto]'>
                 <div className="flex gap-4 sm:block">
                   {/* Product Image */}
                   <img 
                     src={product.images[0]} 
                     alt={product.title} 
-                    className='w-24 sm:w-full h-24 sm:h-auto object-cover sm:object-contain'
+                    className=' h-[140px] w-[400px] rounded-l-md object-cover'
                   />
                   
                   {/* Mobile Product Info */}
                   <div className="flex flex-col justify-between sm:hidden">
-                    <p className='text-sm text-gray-700 font-semibold line-clamp-2'>
+                    <p className='text-sm text-third font-bold font-inter line-clamp-2'>
                       {product.title}
                     </p>
                     <div className='text-gray-800 text-[15px] font-semibold'>
@@ -100,55 +103,73 @@ const Cart = () => {
                 </div>
 
                 {/* Desktop Only - Product Title */}
-                <p className='hidden sm:block text-sm text-gray-700 font-semibold line-clamp-2'>
+                <p className='hidden sm:block pt-3 text-xl text-third font-bold font-inter line-clamp-2'>
                   {product.title}
                 </p>
                 
                 {/* Desktop Only - Price */}
-                <p className='hidden sm:block text-gray-800 text-[15px] font-semibold'>
+                <p className='hidden sm:block font-bold font-inter text-[15px] pt-3 text-third text-xl'>
+                  Prix:
+                  <div>
                   {product.discount > 0 ? (
                     <>
-                      <span className="text-red-600">
-                        {currency}{calculateProductDiscount(product.price, product.discount)}
+                      <span className="text-black text-xl">
+                        {calculateProductDiscount(product.price, product.discount)}{currency}
                       </span>
-                      <span className="text-sm text-gray-500 line-through ml-2">
-                        {currency}{product.price}
+                      <div>
+                      <span className="text-sm text-second line-through ">
+                        {product.price}{currency}
                       </span>
-                      <span className="text-xs text-red-600 ml-2">
-                        ({product.discount}% OFF)
+                      <span className="text-xs text-red-600 ">
+                        (-{product.discount}%)
                       </span>
+                      </div>
                     </>
                   ) : (
-                    `${currency}${product.price}`
-                  )}
+                    <span className="text-black text-xl">
+                        {product.price}{currency}
+                      </span>
+                  )}</div>
                 </p>
+
+                {/* Stock Status */}
+                <div className="text-xl text-third pt-3 font-inter font-bold">
+                  {product.quantity > 0 ? (
+                    <p>en Stock: <div className='pl-10 text-black'>{product.quantity}</div></p>
+                  ) : (
+                    <span className="text-red-500">En rupture de stock</span>
+                  )}
+                  </div>
 
                 {/* Mobile Layout - Bottom Section */}
                 <div className="flex justify-between items-center sm:block mt-4 sm:mt-0">
+                  
+                  
                   {/* Total Price */}
-                  <p className='text-[15px] font-semibold text-gray-800'>
-                    Total: {currency}{(
+                  <p className='text-[20px] font-inter font-bold text-third pt-3 pb-6'>
+                    Total: <span className='text-black'>{(
                       product.cartQuantity * 
                       calculateProductDiscount(product.price, product.discount)
-                    ).toFixed(2)}
+                    ).toFixed(2)}{currency}
+                  </span>
                   </p>
                   
                   {/* Quantity Controls */}
-                  <div className='flex items-center text-center overflow-hidden gap-2 border border-gray-300 rounded-md w-[120px] sm:w-auto'>
+                  <div className='flex items-center text-center overflow-hidden gap-2 border border-second mr-10 bg-fifth rounded-md w-[120px] sm:w-auto'>
                     <button 
-                      className='flex-1 p-1 bg-gray-200 hover:bg-gray-300 transition'
+                      className='flex-1 p-1 bg-second text-black font-md hover:bg-third transition'
                       onClick={() => removeToCartItems(product._id)}
                     >
                       -
                     </button>
-                    <p className='flex-1 p-1'>
+                    <p className='flex-1 p-1 text-third font-inter'>
                       {product.cartQuantity}
                     </p>
                     <button 
-                      className={`flex-1 p-1 bg-gray-200 transition ${
+                      className={`flex-1 p-1 bg-second transition text-black font-md ${
                         product.cartQuantity >= product.quantity 
                           ? 'opacity-50 cursor-not-allowed' 
-                          : 'hover:bg-gray-300'
+                          : 'hover:bg-third'
                       }`}
                       onClick={() => {
                         if (product.cartQuantity >= product.quantity) {
@@ -164,41 +185,34 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/* Stock Status */}
-                <div className="text-sm text-gray-600 mt-2 sm:mt-0">
-                  {product.quantity > 0 ? (
-                    <span>en Stock: {product.quantity}</span>
-                  ) : (
-                    <span className="text-red-500">En rupture de stock</span>
-                  )}
-                </div>
+
 
                 {/* Remove Button */}
                 <button 
                   onClick={() => {
                     deleteProductFromCart(product._id);
                   }}
-                  className='absolute top-2 right-2 sm:static sm:mx-auto w-[25px] h-[25px] flex items-center justify-center rounded-full border border-gray-800 hover:bg-red-700 hover:text-white hover:border-red-700 transition-all duration-300 cursor-pointer text-sm'
+                  className='pt-2 pr-2 sm:static sm:mx-auto w-[35px] h-[35px] flex items-center justify-center text-third  hover:text-second transition-all duration-300 cursor-pointer text-4xl'
                   aria-label="Remove item"
                 >
-                  ×
+                  <GoXCircleFill />
                 </button>
               </div>
             ))}
           </div>
           
           {/* Cart Total Section */}
-          <div className='w-full sm:w-[450px] p-5 rounded-md bg-gray-100 mt-10'>
-            <p className='text-xl font-semibold text-gray-800 mb-5'>Total du panier</p>
+          <div className='w-full sm:w-[450px] p-5 rounded-md bg-primary my-10'>
+            <p className='text-2xl font-bold font-inter text-third mb-5'>Total du panier</p>
             <div className='flex flex-col gap-2'>
               <div className='flex items-center justify-between'>
-                <p className='text-gray-700 text-[15px]'>Total</p>
-                <p>{getProductsCartAmount()}{currency}</p>
+                <p className='text-third font-md text-[18px]'>Total</p>
+                <p className='font-bold font-inter'>{getProductsCartAmount()}{currency}</p>
               </div>
-              <hr className='border-none h-[1px] w-full bg-gray-200' />
+              <hr className='border-none h-[1px] w-full bg-third' />
               <Link 
                 to={"/placeorder"} 
-                className='w-full sm:w-fit bg-black text-white py-1.5 text-[15px] mt-5 px-5 rounded-md hover:bg-gray-800 transition text-center'
+                className='w-full sm:w-fit bg-third text-primary py-1.5 text-[15px] mt-5 px-5 rounded-md hover:bg-second hover:text-fifth transition text-center'
               >
                 Passer la Commande
               </Link>
@@ -207,10 +221,10 @@ const Cart = () => {
         </div>
       ) : (
         <div className='py-20 min-h-[70vh] text-center'>
-          <p className='text-3xl text-gray-800 font-semibold mb-5'>Votre panier est vide!</p>
+          <p className='text-3xl text-third drop-shadow-lg font-bold font-inter mb-10'>Votre panier est vide!</p>
           <Link 
             to={"/"} 
-            className='w-fit bg-black text-white py-2 px-5 rounded-md hover:bg-gray-800 transition'
+            className='w-fit bg-third text-primary py-2 px-5 rounded-md hover:bg-primary hover:text-fifth transition'
           >
             Aller au Magasin
           </Link>

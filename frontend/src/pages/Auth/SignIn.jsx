@@ -58,39 +58,39 @@ const SignIn = () => {
     }
   };
   return loading ? <Loading /> : (
-    <div className='my-10 min-h-[70vh] flex items-center justify-center px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
-      <form onSubmit={handleSubmit(onSubmitHandler)} className='w-full sm:w-[450px] border border-gray-300 p-5 rounded-md'>
-        <p className='text-2xl mb-5 font-gray-700 font-semibold'>Sign In</p>
+    <div className='my-10 min-h-[70vh] flex items-center justify-center px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw] '>
+      <form onSubmit={handleSubmit(onSubmitHandler)} className='w-full sm:w-[450px] drop-shadow-lg bg-primary p-5 rounded-md transform hover:scale-105 transition-all duration-300'>
+        <p className='text-2xl mb-5 text-third font-extrabold font-inter drop-shadow-lg'>Connectez-Vous</p>
         <div className='flex flex-col gap-5'>
           {/* Email */}
           <div>
-            <label htmlFor='email' className='text-gray-600 font-semibold ml-1 mb-1'>Email</label>
-            <input type='email' id='email' placeholder='Email' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register('email')} />
+            <label htmlFor='email' className='text-third font-inter font-semibold ml-1 mb-1'>Email</label>
+            <input type='email' id='email' placeholder='Email' className="block wifull border border-second text-second font-inter shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register('email')} />
             {errors.email && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.email.message}</p>}
           </div>
           {/* Password */}
           <div>
-            <label htmlFor='password' className='text-gray-600 font-semibold ml-1 mb-1'>Password</label>
+            <label htmlFor='password' className='text-third font-inter font-semibold ml-1 mb-1'>Mot de passe</label>
             <div className='relative'>
-              <input type={showPassword} id='password' placeholder='Password' className="block wifull border border-gray-400 shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register('password')} />
+              <input type={showPassword} id='password' placeholder='Password' className="block wifull border text-second font-inter border-second shadow-sm rounded-md py-2 px-3 w-full outline-primary" {...register('password')} />
               {showPassword === "password" ?
-                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} /> :
-                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-gray-700' onClick={showPasswordHandler} />}
+                <IoEyeSharp className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} /> :
+                <FaEyeSlash className='absolute top-[50%] right-[20px] -translate-y-[50%] cursor-pointer text-xl text-third' onClick={showPasswordHandler} />}
             </div>
             {errors.password && <p className='text-red-700 text-sm font-medium mt-1 ml-1'>{errors.password.message}</p>}
           </div>
           {/* Button */}
-          <button type='submit' className='mt-5 bg-black text-white py-2 px-3 rounded-md text-[15px] font-semibold text-center block w-full transition-all duration-300 hover:bg-gray-700'>Sign In</button>
+          <button type='submit' className='mt-5 bg-third text-primary py-2 px-3 rounded-md text-[15px] font-inter font-semibold text-center block w-full transition-all duration-300 hover:text-fifth hover:bg-second'>Se Connecter</button>
         </div>
         {/* Submit Error */}
         {
           submitError &&
           <div className='my-4 p-3 flex items-center justify-center text-center bg-[#ddd] border border-gray-300 rounded-md'>
-            <p className='text-sm font-medium text-red-700'>{submitError}</p>
+            <p className='text-sm font-semibold font-inter text-red-700'>{submitError}</p>
           </div>
         }
-        <p className='text-sm mt-6 text-gray-800 font-medium'>Don't Have an Account?
-          <Link to={"/signup"} className='text-base font-semibold text-primary ml-2'>Sign Up</Link>
+        <p className='text-sm mt-6 text-second font-semibold font-inter'>Vous n'avez pas de compte?
+          <Link to={"/signup"} className='text-base font-extrabold text-third ml-1 transition-all duration-300 hover:text-fifth hover:underline'>Inscrivez-vous</Link>
         </p>
       </form>
     </div>
