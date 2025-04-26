@@ -127,7 +127,7 @@ const MyProfile = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 drop-shadow-lg">
       {user ? (
         <div className="max-w-3xl mx-auto">
           <div className="bg-white shadow-xl rounded-lg overflow-hidden">
@@ -143,7 +143,7 @@ const MyProfile = () => {
                     />
                   </div>
                   <div className="absolute bottom-0 right-0 flex gap-2 bg-white p-2 rounded-full shadow-lg">
-                    <label htmlFor="profile-picture" className="cursor-pointer text-primary hover:text-blue-600 transition-colors">
+                    <label htmlFor="profile-picture" className="cursor-pointer text-primary hover:text-third transition-colors">
                       <FaCloudUploadAlt className="text-xl" />
                     </label>
                     <button 
@@ -180,7 +180,7 @@ const MyProfile = () => {
                         />
                         <button
                           onClick={updateUsername}
-                          className="bg-primary text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors"
+                          className="bg-primary text-white px-3 py-1 rounded-md hover:bg-third transition-colors"
                         >
                           Sauvegarder
                         </button>
@@ -196,10 +196,10 @@ const MyProfile = () => {
                       </div>
                     ) : (
                       <>
-                        <h2 className="text-2xl font-bold text-gray-800">{user.username}</h2>
+                        <h2 className="text-2xl font-bold text-third">{user.username}</h2>
                         <button
                           onClick={() => setIsEditingUsername(true)}
-                          className="text-primary hover:text-blue-600 transition-colors"
+                          className="text-primary hover:text-third transition-colors"
                         >
                           <FaEdit className="text-xl" />
                         </button>
@@ -210,12 +210,12 @@ const MyProfile = () => {
 
                 {/* User Info */}
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <FaUserCircle className="text-xl" />
-                    <span className="font-medium">Email:</span>
-                    <span>{user.email}</span>
+                  <div className="flex items-center gap-2 text-third font-semibold">
+                    <FaUserCircle className="text-xl text-third" />
+                    <span className="font-medium">Email: </span>
+                    <span className='text-gray-800'>{user.email}</span>
                   </div>
-                  <div className="text-gray-500">
+                  <div className="text-gray-800">
                     Membre depuis {new Date(user.createdAt).toLocaleDateString()}
                   </div>
                 </div>
@@ -224,14 +224,14 @@ const MyProfile = () => {
                 <div className="flex flex-col sm:flex-row gap-4 pt-6">
                   <button 
                     onClick={logoutHandler} 
-                    className="flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-200 transition-colors"
+                    className="flex items-center justify-center gap-2 bg-second text-fifth px-6 py-2 rounded-md hover:bg-third hover:text-primary transition-colors"
                   >
                     <FaSignOutAlt />
                     <span>Déconnexion</span>
                   </button>
                   <button 
                     onClick={deleteAccount} 
-                    className="flex items-center justify-center gap-2 bg-red-100 text-red-600 px-6 py-2 rounded-md hover:bg-red-200 transition-colors"
+                    className="flex items-center justify-center gap-2 bg-red-200 text-red-600 px-6 py-2 rounded-md hover:bg-red-300 transition-colors"
                   >
                     <FaTrash />
                     <span>Supprimer le compte</span>
