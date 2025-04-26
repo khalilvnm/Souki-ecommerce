@@ -62,7 +62,7 @@ const ContactUs = () => {
             onChange={handleChange}
             required
             className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
-            placeholder="Your Name"
+            placeholder="Votre Nom"
           />
         </div>
 
@@ -75,7 +75,7 @@ const ContactUs = () => {
             onChange={handleChange}
             required
             className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
-            placeholder="Your Email"
+            placeholder="Votre Email"
           />
         </div>
 
@@ -88,7 +88,7 @@ const ContactUs = () => {
             required
             rows="5"
             className="w-full p-3 border font-inter text-second border-second rounded-lg focus:ring focus:ring-second"
-            placeholder="Your Message"
+            placeholder="Votre Message"
           />
         </div>
 
