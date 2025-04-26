@@ -23,6 +23,7 @@
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^7.3.0",
     "react-toastify": "^11.0.5",
+    "swiper": "^11.2.6",
     "zod": "^3.24.2"
   },
   "devDependencies": {
