@@ -55,7 +55,7 @@ const BecomeSeller = () => {
   return (
     <div className="pb-24 pt-20 px-4 bg-white">
       <div className="max-w-md mx-auto bg-primary rounded-lg shadow-lg p-7">
-        <h2 className="text-2xl font-bold text-center mb-8 text-third">Become a Seller</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 text-third drop-shadow-lg">Devenir Vendeur</h2>
         
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -71,8 +71,8 @@ const BecomeSeller = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-              Phone Number
+            <label htmlFor="phoneNumber" className="text-third font-inter font-semibold ml-1 mb-1">
+              Numéro de téléphone
             </label>
             <input
               type="tel"
@@ -81,13 +81,14 @@ const BecomeSeller = () => {
               required
               value={formData.phoneNumber}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
+              className="mt-1 block w-full rounded-md bg-fifth shadow-sm focus:ring-primary px-4 py-3 text-base text-third"
+              placeholder="Enter your phone number"
             />
           </div>
 
           <div>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-              Address
+            <label htmlFor="address" className="text-third font-inter font-semibold ml-1 mb-1">
+              Addresse
             </label>
             <input
               type="text"
@@ -96,13 +97,13 @@ const BecomeSeller = () => {
               required
               value={formData.address}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
+              className="mt-1 block w-full rounded-md bg-fifth shadow-sm  focus:ring-primary px-4 py-3 text-base text-third"
               placeholder="Enter your address"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="text-third font-inter font-semibold ml-1 mb-1">
               Description
             </label>
             <textarea
@@ -112,7 +113,7 @@ const BecomeSeller = () => {
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-4 py-3 text-base"
+              className="mt-1 block w-full rounded-md bg-fifth shadow-sm focus:ring-primary px-4 py-3 text-base text-third"
               placeholder="Tell us about your shop and what you plan to sell..."
             />
           </div>
@@ -120,7 +121,7 @@ const BecomeSeller = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-third hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-fifth bg-third hover:bg-second hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary drop-shadow-lg"
           >
             {loading ? 'Soumission...' : 'Soumettre une demande'}
           </button>

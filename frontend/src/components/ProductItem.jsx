@@ -90,7 +90,7 @@ const ProductItem = ({ id, title, images, price, discount, userName }) => {
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="mt-2 text-center bg-third text-primary text-sm font-medium py-2 px-4 rounded-full hover:bg-second transition drop-shadow-lg"
+          className="mt-2 text-center bg-third text-fifth text-sm font-medium py-2 px-4 rounded-full hover:bg-second hover:text-white transition drop-shadow-lg"
         >
           Voir le produit
         </Link>

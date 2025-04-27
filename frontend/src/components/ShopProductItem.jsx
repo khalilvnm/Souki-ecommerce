@@ -53,7 +53,7 @@ const ShopProductItem = ({ id, title, images, price, discount, userName }) => {
           <Link
             to={`/single-product/${id}`}
             onClick={() => scrollTo(0, 0)}
-            className="text-center bg-third text-primary text-xs sm:text-sm font-medium py-1.5 sm:py-2 px-3 sm:px-4 rounded-full hover:bg-second transition drop-shadow-lg"
+            className="text-center bg-third text-fifth hover:text-white text-xs sm:text-sm font-medium py-1.5 sm:py-2 px-3 sm:px-4 rounded-full hover:bg-second transition drop-shadow-lg"
           >
             Voir le produit
           </Link>
