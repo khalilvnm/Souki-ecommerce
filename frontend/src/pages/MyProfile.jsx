@@ -215,7 +215,7 @@ const MyProfile = () => {
                     <span className="font-medium">Email: </span>
                     <span className='text-gray-800'>{user.email}</span>
                   </div>
-                  <div className="text-gray-800">
+                  <div className="text-third">
                     Membre depuis {new Date(user.createdAt).toLocaleDateString()}
                   </div>
                 </div>

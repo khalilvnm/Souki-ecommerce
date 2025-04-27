@@ -48,7 +48,6 @@ const SellerApplications = () => {
       );
 
       if (response.data.success) {
-        // Refresh the list
         fetchPendingSellers();
       }
     } catch (err) {
@@ -57,23 +56,33 @@ const SellerApplications = () => {
   };
 
   if (loading) {
-    return <div className="p-4">Chargement...</div>;
+    return (
+      <div className="p-4 flex justify-center items-center h-[70vh]">
+        <p className="text-[#6E3919] font-semibold text-xl">Chargement...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="p-4 text-red-500">{error}</div>;
+    return (
+      <div className="p-4 flex justify-center items-center h-[70vh]">
+        <p className="text-red-500 font-semibold text-xl">{error}</p>
+      </div>
+    );
   }
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Demandes de vendeur</h2>
+      <h2 className="text-3xl font-bold text-[#6E3919] text-center mb-10">Demandes de vendeur</h2>
       
       {sellers.length === 0 ? (
-        <p>Aucune demande de vendeur en attente</p>
+        <div className="flex justify-center items-center ">
+          <p className="text-gray-500 text-center">Aucune demande de vendeur en attente</p>
+        </div>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-6">
           {sellers.map((seller) => (
-            <div key={seller._id} className="bg-white p-4 rounded-lg shadow">
+            <div key={seller._id} className="bg-fifth p-6 rounded-lg shadow">
               <div className="flex items-center gap-4 mb-4">
                 <img
                   src={seller.image}
@@ -81,28 +90,28 @@ const SellerApplications = () => {
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="font-bold">{seller.username}</h3>
+                  <h3 className="font-bold text-[#6E3919]">{seller.username}</h3>
                   <p className="text-gray-600">{seller.email}</p>
                 </div>
               </div>
               
               <div className="mb-4">
-                <h4 className="font-semibold mb-2">Shop Information</h4>
-                <p><span className="font-medium">Numero:</span> {seller.sellerInfo.phoneNumber}</p>
-                <p><span className="font-medium">Addresse:</span> {seller.sellerInfo.address}</p>
-                <p><span className="font-medium">Description:</span> {seller.sellerInfo.description}</p>
+                <h4 className="font-semibold text-[#6E3919] mb-2">Informations sur la boutique</h4>
+                <p><span className="font-medium text-[#6E3919]">Numéro:</span> {seller.sellerInfo.phoneNumber}</p>
+                <p><span className="font-medium text-[#6E3919]">Adresse:</span> {seller.sellerInfo.address}</p>
+                <p><span className="font-medium text-[#6E3919]">Description:</span> {seller.sellerInfo.description}</p>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <button
                   onClick={() => handleStatusUpdate(seller._id, 'approved')}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                  className="px-6 py-2 bg-[#6E3919] text-fifth rounded hover:bg-primary hover:text-third hover:opacity-90 transition-all"
                 >
                   Accepter
                 </button>
                 <button
                   onClick={() => handleStatusUpdate(seller._id, 'rejected')}
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  className="px-6 py-2 bg-red-600 text-white hover:bg-red-300 hover:text-red-700 rounded hover:opacity-90 transition-all"
                 >
                   Rejeter
                 </button>
@@ -115,4 +124,4 @@ const SellerApplications = () => {
   );
 };
 
-export default SellerApplications; 
+export default SellerApplications;

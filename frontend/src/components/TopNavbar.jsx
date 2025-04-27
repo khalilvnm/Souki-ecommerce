@@ -144,7 +144,7 @@ const TopNavbar = () => {
                     className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
                   />
                   <div className="hidden font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition z-[3000] p-5 w-[230px]">
-                    <div className="bg-black text-white flex flex-col items-start p-3 border-2 border-primary rounded-md gap-2">
+                    <div className="bg-third text-fifth flex flex-col items-start p-3 rounded-md gap-2">
                       <NavLink
                         to={"/my-profile"}
                         className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"

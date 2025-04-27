@@ -44,47 +44,47 @@ const SideBar = () => {
   }, [backend_url, token, orderMessage]);
 
   return (
-    <div className='sidebar h-full py-3 bg-white border-r border-gray-200'>
+    <div className='sidebar h-full py-3 bg-white border-r border-third rounded-md'>
       <div className='links flex flex-col'>
-        <NavLink to={"/dashboard"} className="flex items-center gap-3 py-3 border-b border-gray-300 px-[3vw] w-full" end={"/dashboard"}>
-          <IoHomeOutline className="text-2xl text-gray-800 md:text-[22px]" />
-          <p className="text-[15px] text-gray-700 font-medium hidden md:block">Tableau de bord</p>
+        <NavLink to={"/dashboard"} className="flex items-center gap-3 py-3 border-b border-third px-[3vw] w-full" end={"/dashboard"}>
+          <IoHomeOutline className="text-2xl text-third md:text-[22px]" />
+          <p className="text-[15px] text-third font-medium hidden md:block">Tableau de bord</p>
         </NavLink>
 
         {(isAdmin || isSeller) && (
           <>
-            <NavLink to={"/dashboard/add-product"} className="flex items-center gap-3 py-3 border-b border-gray-300 px-[3vw] w-full">
-              <IoIosAddCircleOutline className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Ajouter Produit</p>
+            <NavLink to={"/dashboard/add-product"} className="flex items-center gap-3 py-3 border-b border-third px-[3vw] w-full">
+              <IoIosAddCircleOutline className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Ajouter Produit</p>
             </NavLink>
 
-            <NavLink to={"/dashboard/products-list"} className="flex items-center gap-3 py-3 border-b border-gray-300 px-[3vw] w-full">
-              <CiCircleList className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Liste des produits</p>
+            <NavLink to={"/dashboard/products-list"} className="flex items-center gap-3 py-3 border-b border-third px-[3vw] w-full">
+              <CiCircleList className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Liste des produits</p>
             </NavLink>
 
-            <NavLink to={"/dashboard/orders"} className="flex items-center gap-3 py-3 w-full border-b border-gray-300 px-[3vw]">
-              <IoCheckmarkCircleOutline className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Commandes</p>
+            <NavLink to={"/dashboard/orders"} className="flex items-center gap-3 py-3 w-full border-b border-third px-[3vw]">
+              <IoCheckmarkCircleOutline className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Commandes</p>
             </NavLink>
           </>
         )}
 
         {isAdmin && (
           <>
-            <NavLink to={"/dashboard/users"} className="flex items-center gap-3 py-3 w-full border-b border-gray-300 px-[3vw]">
-              <LiaUsersSolid className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Utilisateurs</p>
+            <NavLink to={"/dashboard/users"} className="flex items-center gap-3 py-3 w-full border-b border-third px-[3vw]">
+              <LiaUsersSolid className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Utilisateurs</p>
             </NavLink>
 
-            <NavLink to={"/dashboard/seller-applications"} className="flex items-center gap-3 py-3 w-full border-b border-gray-300 px-[3vw]">
-              <FaStore className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Demandes de vendeur</p>
+            <NavLink to={"/dashboard/seller-applications"} className="flex items-center gap-3 py-3 w-full border-b border-third px-[3vw]">
+              <FaStore className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Demandes de vendeur</p>
             </NavLink>
 
-            <NavLink to={"/dashboard/messages"} className="flex items-center gap-3 py-3 w-full border-b border-gray-300 px-[3vw]">
-              <FaEnvelope className="text-2xl text-gray-800 md:text-[22px]" />
-              <p className="text-[15px] text-gray-700 font-medium hidden md:block">Messages</p>
+            <NavLink to={"/dashboard/messages"} className="flex items-center gap-3 py-3 w-full border-b border-third px-[3vw]">
+              <FaEnvelope className="text-2xl text-third md:text-[22px]" />
+              <p className="text-[15px] text-third font-medium hidden md:block">Messages</p>
             </NavLink>
           </>
         )}

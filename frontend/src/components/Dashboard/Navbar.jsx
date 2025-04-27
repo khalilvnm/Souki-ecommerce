@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
 
 
 const Navbar = () => {
   const { token, backend_url } = useContext(AppContext);
   const [userImage, setUserImage] = useState(null);
-  const [user, setUser] = useState(null);
+  const [ setUser] = useState(null);
 
   // Get User
   const getUser = async () => {
@@ -26,6 +26,12 @@ const Navbar = () => {
       getUser();
     }
   }, [token]);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token"); // si tu stockes le token dans localStorage
+    window.location.reload(); // recharge la page
+  };
+  
   return (
     <div className="py-5 w-full h-[70px] px-[40px] flex items-center bg-second border-b border-fourth justify-between">
       <div className="flex items-center gap-8">
@@ -43,13 +49,36 @@ const Navbar = () => {
         </p> 
         </Link>
       </div>
+
       {/* UserProfile */}
       <div className='relative group w-[40px] h-[40px] '>
         <img
-              src={user?.image}
+              src={userImage}
               alt="user-profile"
               className="w-10 h-10 object-cover rounded-full border-2 border-primary cursor-pointer"
         />
+        <div className="hidden font-inter font-medium group-hover:block absolute top-[100%] right-[-5px] bg-transition z-[3000] p-5 w-[230px]">
+                    <div className="bg-third text-fifth flex flex-col items-start p-3 rounded-md gap-2">
+                      <NavLink
+                        to={"/my-profile"}
+                        className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                      >
+                        Mon Profile
+                      </NavLink>
+                      <NavLink
+                        to={"/my-orders"}
+                        className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                      >
+                        Commandes
+                      </NavLink>
+                      <button
+                        onClick={logoutHandler}
+                        className="py-1 transition-all duration-300 hover:text-primary block w-full text-left"
+                      >
+                        Se deconnecter
+                      </button>
+                    </div>
+                  </div>
       </div>
     </div>
   );

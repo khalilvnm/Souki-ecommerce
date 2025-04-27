@@ -97,62 +97,58 @@ const AddProduct = () => {
             <input type='file' id='image2' hidden onChange={(event) => { setImage2(event.target.files[0]); }} />
           </label>
           <label htmlFor="image3" className='cursor-pointer'>
-            <img src={image3 ? URL.createObjectURL(image3) : assets.upload_area} alt='upload-image' className='w-20 h-20 sm:w-32 sm:h-32' />
+            <img src={image3 ? URL.createObjectURL(image3) : assets.upload_area} alt='upload-image' className='w-20 h-20 sm:w-32 sm:h-32 ' />
             <input type='file' id='image3' hidden onChange={(event) => { setImage3(event.target.files[0]); }} />
-          </label>
-          <label htmlFor="image4" className='cursor-pointer'>
-            <img src={image4 ? URL.createObjectURL(image4) : assets.upload_area} alt='upload-image' className='w-20 h-20 sm:w-32 sm:h-32' onChange={(event) => { setImage4(event.target.files[0]); }} />
-            <input type='file' id='image4' hidden />
           </label>
         </div>
         
         {/* Title */}
         <div>
-          <label htmlFor='title' className='block text-gray-800 font-Semibold text-base mb-1 ml-1'>Titre</label>
+          <label htmlFor='title' className='block text-third font-bold text-base mb-1 ml-1'>Titre</label>
           <input required type='text' placeholder='Tapez ici.' id='title' value={title}
-            className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'
+            className='block w-full border border-third py-1.5 px-3 rounded-md outline-primary'
             onChange={(event) => { setTitle(event.target.value); }} />
         </div>
         
         {/* Description */}
         <div>
-          <label htmlFor='description' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Description</label>
+          <label htmlFor='description' className="block text-third font-bold text-base mb-1 ml-1">Description</label>
           <input type='text' placeholder='Tapez ici.' id='description' value={description}
             onChange={(event) => { setDescription(event.target.value); }}
-            className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
+            className='block w-full border border-third py-1.5 px-3 rounded-md outline-primary' />
         </div>
         
         {/* Price And Discount */}
         <div className='flex gap-2 items-center'>
           <div className='w-1/2'>
-            <label htmlFor='price' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Prix</label>
+            <label htmlFor='price' className="block text-third font-bold text-base mb-1 ml-1">Prix</label>
             <input required type='number' placeholder='Tapez ici.' id='price'
               onChange={(event) => { setPrice(event.target.value); }} value={price}
-              className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
+              className='block w-full border border-third py-1.5 px-3 rounded-md outline-primary' />
           </div>
           <div className='w-1/2'>
-            <label htmlFor='discount' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Remise</label>
+            <label htmlFor='discount' className="block text-third font-bold text-base mb-1 ml-1">Remise</label>
             <input type='number' placeholder='Tapez ici.' id='discount' value={discount}
               onChange={(event) => { setDiscount(event.target.value); }}
-              className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
+              className='block w-full border border-third py-1.5 px-3 rounded-md outline-primary' />
           </div>
         </div>
         
         {/* Quantity */}
         <div>
-          <label htmlFor='quantity' className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Quantité</label>
+          <label htmlFor='quantity' className="block text-third font-bold text-base mb-1 ml-1">Quantité</label>
           <input required type='number' min="1" placeholder='Enter available quantity' id='quantity' value={quantity}
             onChange={(event) => { setQuantity(event.target.value); }}
-            className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary' />
+            className='block w-full border border-third py-1.5 px-3 rounded-md outline-primary' />
         </div>
         
         {/* Type And Category */}
         <div className='flex items-center gap-2'>
           <div className='w-1/2'>
-            <label className="block text-gray-800 font-Semibold text-base mb-1 ml-1">Categorie</label>
+            <label className="block text-third font-bold text-base mb-1 ml-1">Categorie</label>
             <select value={type} onChange={(event) => { setType(event.target.value); }}
-              className='block w-full border border-gray-400 py-1.5 px-3 rounded-md outline-primary'>
-              <option value={"Select Type"} className='text-gray-600 text-sm'>Sélectionnez le Categorie</option>
+              className='block w-full border border-third text-third py-1.5 px-3 rounded-md outline-primary'>
+              <option value={"Select Type"} className='text-third text-sm'>Sélectionnez le Categorie</option>
               <option value={"Vêtements"}>Vêtements</option>
               <option value={"decoration"}>Decoration</option>
               <option value={"Cuisine"}>Cuisine</option>
@@ -167,9 +163,9 @@ const AddProduct = () => {
         {
           loading
             ?
-            <button disabled className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>Processing .....</button>
+            <button disabled className='w-fit block text-fifth bg-third py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>Processing...</button>
             :
-            <button type='submit' className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center'>Ajouter Produit</button>
+            <button type='submit' className='w-fit block text-fifth bg-third py-1.5 px-5 rounded-md text-center'>Ajouter Produit</button>
         }
 
       </form>

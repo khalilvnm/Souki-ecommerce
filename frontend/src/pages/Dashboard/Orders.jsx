@@ -79,7 +79,7 @@ const Orders = () => {
   };
 
   const OrderCard = ({ order }) => (
-    <div key={order._id} className="border p-4 rounded-lg shadow relative">
+    <div key={order._id} className="border border-second bg-fifth text-third p-4 rounded-lg shadow relative">
       <button
         onClick={() => handleDeleteOrder(order._id)}
         className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors duration-300"
@@ -88,34 +88,34 @@ const Orders = () => {
         <FaTrash size={18} />
       </button>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base">
-        <div className="bg-white p-3 rounded-lg">
+        <div className="bg-fifth p-3 rounded-lg">
           <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Détails de la commande</h3>
           <div className="space-y-1">
-            <p className="break-all"><span className="font-medium">Commande ID:</span> {order._id}</p>
-            <p><span className="font-medium">Montant total:</span> {order.amount} DZ</p>
-            <p><span className="font-medium">Date:</span> {new Date(order.createdAt).toLocaleDateString()}</p>
+            <p className="break-all"><span className="font-semibold">Commande ID:</span> {order._id}</p>
+            <p><span className="font-semibold">Montant total:</span> {order.amount} DZ</p>
+            <p><span className="font-semibold">Date:</span> {new Date(order.createdAt).toLocaleDateString()}</p>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-lg">
+        <div className="bg-fifth p-3 rounded-lg">
           <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Informations client</h3>
           <div className="space-y-1">
-            <p><span className="font-medium">Nom:</span> {order.infos?.nomprenom || 'N/A'}</p>
-            <p><span className="font-medium">Numero:</span> {order.infos?.phone || 'N/A'}</p>
-            <p><span className="font-medium">Addresse:</span> {order.infos?.adresse || 'N/A'}</p>
+            <p><span className="font-semibold">Nom:</span> {order.infos?.nomprenom || 'N/A'}</p>
+            <p><span className="font-semibold">Numero:</span> {order.infos?.phone || 'N/A'}</p>
+            <p><span className="font-semibold">Addresse:</span> {order.infos?.adresse || 'N/A'}</p>
             {order.userId?.email && (
-              <p><span className="font-medium">Email:</span> {order.userId.email}</p>
+              <p><span className="font-semibold">Email:</span> {order.userId.email}</p>
             )}
           </div>
         </div>
-        <div className="bg-white p-3 rounded-lg">
+        <div className="bg-fifth p-3 rounded-lg">
           <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Ordered Products</h3>
           <div className="space-y-2">
             {order.items.map((item, index) => (
-              <div key={index} className="bg-gray-50 p-2 rounded">
-                <p className="font-medium text-sm sm:text-base">{item.productId?.title || 'Produit inconnu'}</p>
+              <div key={index} className="bg-fifth p-2 rounded">
+                <p className="font-medium text-sm sm:text-base pb-2">{item.productId?.title || 'Produit inconnu'}</p>
                 <div className="text-sm grid grid-cols-2 gap-2 mt-1">
-                  <p><span className="font-medium">Quantité:</span> {item.quantity}</p>
-                  <p><span className="font-medium">Prix:</span> {item.price} DZ</p>
+                  <p><span className="font-semibold">Quantité:</span> {item.quantity}</p>
+                  <p><span className="font-semibold">Prix:</span> {item.price} DZ</p>
                 </div>
                 {isAdmin && item.productOwnerId && (
                   <p className="text-xs text-gray-500 mt-1">Vendeur ID: {item.productOwnerId}</p>
@@ -130,7 +130,7 @@ const Orders = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">
+      <h2 className="text-2xl font-bold mb-4 text-center text-third">
         {isAdmin ? "Tous les Commandes" : "Commandes pour vos produits"}
       </h2>
       {orders.length === 0 ? (

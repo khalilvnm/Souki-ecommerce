@@ -84,7 +84,7 @@ const Messages = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Messages</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center text-third">Messages</h2>
       {messages.length === 0 ? (
         <p className="text-gray-500 text-center">Aucun message pour le moment</p>
       ) : (
@@ -92,16 +92,16 @@ const Messages = () => {
           {messages.map((message) => (
             <div  
               key={message._id} 
-              className={`border p-4 rounded-lg shadow relative ${
-                message.status === 'unread' ? 'bg-blue-50' : 'bg-white'
+              className={`border border-second p-4 rounded-lg shadow relative ${
+                message.status === 'unread' ? 'bg-fifth' : 'bg-fifth'
               }`}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-third">
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Informations sur l'expéditeur</h3>
-                  <p><span className="font-medium">Nom:</span> {message.name}</p>
-                  <p><span className="font-medium">Email:</span> {message.email}</p>
-                  <p><span className="font-medium">Date:</span> {new Date(message.createdAt).toLocaleString()}</p>
+                  <p><span className="font-semibold">Nom:</span> {message.name}</p>
+                  <p><span className="font-semibold">Email:</span> {message.email}</p>
+                  <p><span className="font-semibold">Date:</span> {new Date(message.createdAt).toLocaleString()}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Message</h3>
@@ -113,7 +113,7 @@ const Messages = () => {
                 {message.status === 'unread' ? (
                   <button
                     onClick={() => handleMarkAsRead(message._id)}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-second hover:text-third"
                     title="Marquer comme lu"
                   >
                     <FaEnvelope className="text-xl" />

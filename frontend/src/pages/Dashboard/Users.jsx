@@ -49,19 +49,19 @@ const Users = () => {
 
 
   return (
-    <div className="h-full w-full py-10 px-[3vw]">
-      <div className="grid md:grid-cols-[1fr_1fr] gap-4">
+    <div className="h-full w-full py-10 px-[3vw] ">
+      <div className="grid md:grid-cols-[1fr_1fr] gap-4 ">
         {
           users.map((user, index) => (
-            <div className="relative pl-3 lg:pl-8 flex gap-3 bg-gray-50 py-5 pr-2 border border-gray-300 roumded-md items-center" key={index}>
-              <p className="absolute top-0 left-0 bg-gray-900 py-2 px-3 rounded-br-3xl text-white">{index + 1}</p>
+            <div className="relative pl-3 lg:pl-8 flex gap-3 bg-fifth py-5 pr-2 border border-second rounded-lg items-center text-third" key={index}>
+              <p className="absolute top-0 left-0 bg-third py-2 px-3 rounded-tl-lg rounded-br-3xl text-fifth">{index + 1}</p>
               <div className="w-[80px]">
                 <img src={user.image} alt="user-image" className="w-[80px] p-1 bg-white border-2 border-primary rounded-full" />
               </div>
               <div className="mt-2 w-full">
-                <p className="text-gray-700">Username: <span className="text-gray-900 font-medium">{user.username}</span></p>
-                <p className="text-gray-700">Email: <span className="text-gray-900 font-medium">{user.email}</span></p>
-                <button onClick={() => { deleteUserHandler(user._id); }} className="mt-2 text-[15px] bg-black text-white py-1 px-4 rounded-full">Rejeter</button>
+                <p className="font-semibold">Username: <span className=" font-medium">{user.username}</span></p>
+                <p className="font-semibold">Email: <span className=" font-medium">{user.email}</span></p>
+                <button onClick={() => { deleteUserHandler(user._id); }} className="mt-2 text-[15px] bg-third text-fifth py-1 px-4 rounded-full">Rejeter</button>
               </div>
             </div>
           ))

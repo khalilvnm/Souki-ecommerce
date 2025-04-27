@@ -32,7 +32,7 @@ const SellerOrders = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Commandes pour vos produits</h2>
+      <h2 className="text-2xl font-bold mb-4">Tous les commandes</h2>
       {orders.length === 0 ? (
         <p className="text-gray-500">Aucune commande pour le moment</p>
       ) : (

@@ -267,18 +267,18 @@ const ModifyProduct = ({ productId, onClose }) => {
         {/* Buttons */}
         <div className="flex gap-4">
           {loading ? (
-            <button disabled className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>
+            <button disabled className='w-fit block text-fifth bg-third py-1.5 px-5 rounded-md text-center opacity-70 cursor-not-allowed'>
               Traitement .....
             </button>
           ) : (
             <>
-              <button type='submit' className='w-fit block text-white bg-black py-1.5 px-5 rounded-md text-center'>
+              <button type='submit' className='w-fit block text-fifth bg-third py-1.5 px-5 rounded-md text-center'>
                 Modifier le produit
               </button>
               <button 
                 type='button' 
                 onClick={onClose}
-                className='w-fit block text-black bg-gray-200 py-1.5 px-5 rounded-md text-center'
+                className='w-fit block text-third bg-fifth py-1.5 px-5 rounded-md text-center'
               >
                 Annuler
               </button>

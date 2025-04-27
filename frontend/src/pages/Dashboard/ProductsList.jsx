@@ -3,6 +3,7 @@ import { AppContext } from './../../context/AppContext';
 import axios from "axios";
 import { toast } from "react-toastify";
 import ModifyProduct from "./ModifyProduct";
+import { GoXCircleFill } from "react-icons/go";
 
 const ProductsList = () => {
   const { token, allProductsDashboard, getAllProductsDashboard,
@@ -29,7 +30,7 @@ const ProductsList = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message || error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
@@ -49,7 +50,7 @@ const ProductsList = () => {
   return (
     <div className="h-full w-full py-10 px-[3vw] overflow-y-scroll">
       {/* Head */}
-      <div className="hidden sm:grid grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] border border-gray-200 rounded-md py-2 px-2 bg-gray-50 text-sm font-semibold mb-2">
+      <div className="hidden sm:grid grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr]  rounded-md py-2 px-2 border border-primary bg-fifth text-sm font-bold text-[#6E3919] mb-2">
         <p>#</p>
         <p>Image</p>
         <p>Titre</p>
@@ -65,23 +66,27 @@ const ProductsList = () => {
       <div className="flex flex-col gap-2">
         {
           allProductsDashboard.reverse().map((product, index) => (
-            <div key={index} className="grid gap-3 sm:grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] items-center border border-gray-200 rounded-md py-2 px-2 bg-gray-50 text-sm font-semibold mb-2">
-              <p>{index + 1}</p>
+            <div key={index} className="grid gap-3 sm:grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr_1fr_0.5fr] items-center border border-primary rounded-md py-2 px-2 bg-fifth text-sm font-semibold text-[#6E3919] mb-2">
+              <p className="font-bold">{index + 1}</p>
               <p><img src={product.images[0]} alt="product-image" className="w-20" /></p>
-              <p>{product.title}</p>
-              <p>{product.price}{currency}</p>
-              <p>{product.type}</p>
-              <p>{product.quantity}</p>
-              <p>{product.userId?.username || 'Unknown'}</p>
+              <p className="font-semibold text-base">{product.title}</p>
+              <p className="font-semibold text-sm">{product.price}{currency}</p>
+              <p className="font-medium text-sm">{product.type}</p>
+              <p className="font-medium text-sm">{product.quantity}</p>
+              <p className="font-medium text-sm">{product.userId?.username || 'Unknown'}</p>
               <p>
                 <button 
                   onClick={() => setSelectedProductId(product._id)}
-                  className="w-fit block text-white bg-blue-600 py-1 px-3 rounded-md text-center hover:bg-blue-700"
+                  className="w-fit block text-fifth bg-third py-1 px-3 rounded-md text-center hover:text-third hover:bg-primary text-sm font-semibold"
                 >
                   Modifier
                 </button>
               </p>
-              <p onClick={() => { removeProduct(product._id); }} className="w-8 mx-auto h-8 bg-white cursor-pointer transition-all duration-300 hover:bg-red-700 hover:text-white border border-gray-300 rounded-full flex items-center justify-center">X</p>
+              <GoXCircleFill
+                onClick={() => { removeProduct(product._id); }} 
+                className="w-8 mx-auto h-8 bg-primary cursor-pointer transition-all duration-300 hover:bg-third hover:text-white rounded-full flex items-center justify-center font-bold"
+              />
+              
             </div>
           ))
         }

@@ -16,15 +16,15 @@ const Footer = () => {
       {/* Social Media */}
       <div className="flex items-center justify-left gap-3 text-4xl">
       <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-        <FaFacebook className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" /></a>
+        <FaFacebook className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" /></a>
       <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">  
-        <FaInstagram className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+        <FaInstagram className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
       </a>
       <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-        <FaXTwitter className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+        <FaXTwitter className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
       </a>
       <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">  
-        <FaLinkedinIn className="border border-fourth text-fourth rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
+        <FaLinkedinIn className="border border-fourth text-fourth hover:border-third hover:text-third rounded-full p-[5px] cursor-pointer transition-all duration-300 hover:scale-105" />
       </a>
       </div>
     </div>
