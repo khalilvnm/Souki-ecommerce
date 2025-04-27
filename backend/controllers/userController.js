@@ -392,6 +392,48 @@ const getPendingSellers = async (req, res) => {
   }
 };
 
+// Remove Seller Privileges
+const removeSellerPrivileges = async (req, res) => {
+  try {
+    const { userDetails, userId } = req.body;
+
+    // Check if user is admin
+    const admin = await UserModel.findById(userDetails.id);
+    const isAdmin = admin && 
+      admin.email === process.env.ADMIN_EMAIL && 
+      await bcrypt.compare(process.env.ADMIN_PASSWORD, admin.password);
+
+    if (!isAdmin) {
+      return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Update user to remove seller privileges
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      {
+        isSeller: false,
+        sellerStatus: null,
+        sellerInfo: {
+          phoneNumber: null,
+          address: null,
+          description: null
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { password, ...other } = updatedUser._doc;
+    return res.status(200).json({ success: true, user: other });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
+
 export {
   userSignUp,
   userSignIn,
@@ -404,5 +446,6 @@ export {
   removeProfilePicture,
   becomeSeller,
   updateSellerStatus,
-  getPendingSellers
+  getPendingSellers,
+  removeSellerPrivileges
 };
