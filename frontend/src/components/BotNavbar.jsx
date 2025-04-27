@@ -5,7 +5,7 @@ import { RiMenu3Fill } from "react-icons/ri";
 const BotNavbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   return (
-    <div className='fixed top-[80px] left-0 right-0 z-[999] botnavbar py-3 px-[3vw] sm:px-[3vw] md:px-[7vw] lg:px-[9vw] bg-primary shadow-xl'>
+    <div className='fixed top-[79px] sm:top-[80px] left-0 right-0 z-[999] botnavbar py-3 px-[3vw] sm:px-[3vw] md:px-[7vw] lg:px-[9vw] bg-primary shadow-xl'>
       <div className='hidden text-xl font-inter font-semibold md:flex max-lg:gap-x-1 text-third items-center gap-6 justify-center'>
         <NavLink to={"/"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Accueil</NavLink>
         <NavLink to={"/shop"} className="drop-shadow-lg py-1 px-2 transition-all duration-300 hover:text-fifth hover:underline max-lg:text-sm">Magasin</NavLink>
