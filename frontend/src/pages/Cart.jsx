@@ -68,46 +68,93 @@ const Cart = () => {
           <p className='mb-6 pt-10 text-2xl font-extrabold text-third font-inter'>Votre panier</p>
           <div className='flex flex-col gap-4 drop-shadow-lg'>
             {productsCart.map((product) => (
-              <div key={product._id} className='bg-primary mr-10 rounded-md drop-shadow-lg transform hover:scale-105 transition-all duration-300 flex flex-col gap-3  sm:grid sm:grid-cols-[1.2fr_1.5fr_1.2fr_1.2fr_2fr_auto]'>
-                <div className="flex gap-4 sm:block">
-                  {/* Product Image */}
+              <div key={product._id} className='bg-primary rounded-md drop-shadow-lg transform hover:scale-105 transition-all duration-300 flex flex-col gap-3 p-2 sm:grid sm:grid-cols-[1.2fr_1.5fr_1.2fr_1.2fr_2fr_auto] sm:mr-10 sm:p-0'>
+                {/* Mobile Layout - Stacked */}
+                <div className="flex flex-col sm:hidden gap-2">
+                  <div className="flex justify-between items-start">
+                    <img 
+                      src={product.images[0]} 
+                      alt={product.title} 
+                      className='h-[90px] w-[90px] rounded-md object-cover flex-shrink-0 border border-third'
+                    />
+                    <button 
+                      onClick={() => deleteProductFromCart(product._id)}
+                      className='ml-2 text-third hover:text-second transition-all duration-300 cursor-pointer text-2xl flex items-center justify-center'
+                      aria-label="Remove item"
+                    >
+                      <GoXCircleFill />
+                    </button>
+                  </div>
+                  <p className='text-base text-third font-bold font-inter line-clamp-2 mt-1'>{product.title}</p>
+                  <div className='text-gray-800 text-[15px] font-semibold'>
+                    {product.discount > 0 ? (
+                      <>
+                        <span className="text-red-600">
+                          {currency}{calculateProductDiscount(product.price, product.discount)}
+                        </span>
+                        <span className="text-sm text-gray-500 line-through ml-2">
+                          {currency}{product.price}
+                        </span>
+                        <span className="text-xs text-red-600 ml-2">
+                          ({product.discount}% OFF)
+                        </span>
+                      </>
+                    ) : (
+                      `${currency}${product.price}`
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-xs text-third font-bold">Stock:</span>
+                    <span className="text-xs text-black font-bold">{product.quantity}</span>
+                  </div>
+                  <div className='flex items-center text-center overflow-hidden gap-2 border border-second bg-fifth rounded-md w-full max-w-[140px] mt-2'>
+                    <button 
+                      className='flex-1 p-1 bg-second text-black font-md hover:bg-third transition text-lg'
+                      onClick={() => removeToCartItems(product._id)}
+                    >
+                      -
+                    </button>
+                    <p className='flex-1 p-1 text-third font-inter text-lg'>
+                      {product.cartQuantity}
+                    </p>
+                    <button 
+                      className={`flex-1 p-1 bg-second transition text-black font-md text-lg ${
+                        product.cartQuantity >= product.quantity 
+                          ? 'opacity-50 cursor-not-allowed' 
+                          : 'hover:bg-third'
+                      }`}
+                      onClick={() => {
+                        if (product.cartQuantity >= product.quantity) {
+                          toast.error(`Quantité maximale atteinte. Seul ${product.quantity} les articles disponibles en stock.`);
+                          return;
+                        }
+                        addToCartItems(product._id);
+                      }}
+                      disabled={product.cartQuantity >= product.quantity}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <p className='text-[17px] font-inter font-bold text-third pt-2'>
+                    Total: <span className='text-black'>{(
+                      product.cartQuantity * 
+                      calculateProductDiscount(product.price, product.discount)
+                    ).toFixed(2)}{currency}
+                  </span>
+                  </p>
+                </div>
+
+                {/* Desktop Only - Product Info */}
+                <div className="hidden sm:block">
                   <img 
                     src={product.images[0]} 
                     alt={product.title} 
                     className=' h-[140px] w-[400px] rounded-l-md object-cover'
                   />
-                  
-                  {/* Mobile Product Info */}
-                  <div className="flex flex-col justify-between sm:hidden">
-                    <p className='text-sm text-third font-bold font-inter line-clamp-2'>
-                      {product.title}
-                    </p>
-                    <div className='text-gray-800 text-[15px] font-semibold'>
-                      {product.discount > 0 ? (
-                        <>
-                          <span className="text-red-600">
-                            {currency}{calculateProductDiscount(product.price, product.discount)}
-                          </span>
-                          <span className="text-sm text-gray-500 line-through ml-2">
-                            {currency}{product.price}
-                          </span>
-                          <span className="text-xs text-red-600 ml-2">
-                            ({product.discount}% OFF)
-                          </span>
-                        </>
-                      ) : (
-                        `${currency}${product.price}`
-                      )}
-                    </div>
-                  </div>
                 </div>
-
-                {/* Desktop Only - Product Title */}
                 <p className='hidden sm:block pt-3 text-xl text-third font-bold font-inter line-clamp-2'>
                   {product.title}
                 </p>
-                
-                {/* Desktop Only - Price */}
                 <p className='hidden sm:block font-bold font-inter text-[15px] pt-3 text-third text-xl'>
                   Prix:
                   <div>
@@ -131,21 +178,14 @@ const Cart = () => {
                       </span>
                   )}</div>
                 </p>
-
-                {/* Stock Status */}
-                <div className="text-xl text-third pt-3 font-inter font-bold">
+                <div className="hidden sm:block text-xl text-third pt-3 font-inter font-bold">
                   {product.quantity > 0 ? (
                     <p>en Stock: <div className='pl-10 text-black'>{product.quantity}</div></p>
                   ) : (
                     <span className="text-red-500">En rupture de stock</span>
                   )}
                   </div>
-
-                {/* Mobile Layout - Bottom Section */}
-                <div className="flex justify-between items-center sm:block mt-4 sm:mt-0">
-                  
-                  
-                  {/* Total Price */}
+                <div className="hidden sm:block">
                   <p className='text-[20px] font-inter font-bold text-third pt-3 pb-6'>
                     Total: <span className='text-black'>{(
                       product.cartQuantity * 
@@ -153,8 +193,6 @@ const Cart = () => {
                     ).toFixed(2)}{currency}
                   </span>
                   </p>
-                  
-                  {/* Quantity Controls */}
                   <div className='flex items-center text-center overflow-hidden gap-2 border border-second mr-10 bg-fifth rounded-md w-[120px] sm:w-auto'>
                     <button 
                       className='flex-1 p-1 bg-second text-black font-md hover:bg-third transition'
@@ -184,15 +222,11 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-
-
-
-                {/* Remove Button */}
                 <button 
                   onClick={() => {
                     deleteProductFromCart(product._id);
                   }}
-                  className='pt-2 pr-2 sm:static sm:mx-auto w-[35px] h-[35px] flex items-center justify-center text-third  hover:text-second transition-all duration-300 cursor-pointer text-4xl'
+                  className='hidden sm:flex pt-2 pr-2 sm:static sm:mx-auto w-[35px] h-[35px] items-center justify-center text-third  hover:text-second transition-all duration-300 cursor-pointer text-4xl'
                   aria-label="Remove item"
                 >
                   <GoXCircleFill />
@@ -202,7 +236,7 @@ const Cart = () => {
           </div>
           
           {/* Cart Total Section */}
-          <div className='w-full sm:w-[450px] p-5 rounded-md bg-primary my-10'>
+          <div className='w-full p-4 rounded-md bg-primary my-10 sm:w-[450px] sm:p-5'>
             <p className='text-2xl font-bold font-inter text-third mb-5'>Total du panier</p>
             <div className='flex flex-col gap-2'>
               <div className='flex items-center justify-between'>

@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoArrowBackCircle } from "react-icons/io5";
 
 
 const Navbar = () => {
-  const { token, backend_url } = useContext(AppContext);
+  const { token, backend_url, setToken } = useContext(AppContext);
   const [userImage, setUserImage] = useState(null);
   const [ setUser] = useState(null);
+  const navigate = useNavigate();
 
   // Get User
   const getUser = async () => {
@@ -28,8 +29,9 @@ const Navbar = () => {
   }, [token]);
 
   const logoutHandler = () => {
-    localStorage.removeItem("token"); // si tu stockes le token dans localStorage
-    window.location.reload(); // recharge la page
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
   };
   
   return (

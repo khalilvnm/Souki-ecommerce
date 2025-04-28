@@ -91,14 +91,14 @@ const Users = () => {
       ) : (
         <div className="grid gap-6">
           {users.map((user) => (
-            <div key={user._id} className="bg-fifth p-6 rounded-lg shadow">
-              <div className="flex items-center gap-4 mb-4">
+            <div key={user._id} className="bg-fifth p-4 sm:p-6 rounded-lg shadow">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4">
                 <img
                   src={user.image}
                   alt={user.username}
                   className="w-16 h-16 rounded-full object-cover"
                 />
-                <div>
+                <div className="text-center sm:text-left">
                   <h3 className="font-bold text-[#6E3919]">{user.username}</h3>
                   <p className="text-gray-600">{user.email}</p>
                   {user.isSeller && (
@@ -109,18 +109,18 @@ const Users = () => {
                 </div>
               </div>
               
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 {user.isSeller && (
                   <button
                     onClick={() => handleRemoveSeller(user._id)}
-                    className="px-6 py-2 bg-red-600 text-white hover:bg-red-300 hover:text-red-700 rounded hover:opacity-90 transition-all flex items-center gap-2"
+                    className="w-full sm:w-auto px-6 py-2 bg-red-600 text-white hover:bg-red-300 hover:text-red-700 rounded hover:opacity-90 transition-all flex items-center justify-center gap-2"
                   >
                     <FaUserMinus /> Retirer les privilèges de vendeur
                   </button>
                 )}
                 <button
                   onClick={() => deleteUserHandler(user._id)}
-                  className="px-6 py-2 bg-red-600 text-white hover:bg-red-300 hover:text-red-700 rounded hover:opacity-90 transition-all flex items-center gap-2"
+                  className="w-full sm:w-auto px-6 py-2 bg-red-600 text-white hover:bg-red-300 hover:text-red-700 rounded hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
                   <FaTrash /> Supprimer
                 </button>

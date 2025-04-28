@@ -79,7 +79,11 @@ const Messages = () => {
   }, [backend_url, token]);
 
   if (loading) {
-    return <div className="text-center p-8">Chargement...</div>;
+    return (
+      <div className="p-4 flex justify-center items-center h-[70vh]">
+        <p className="text-[#6E3919] font-semibold text-xl">Chargement...</p>
+      </div>
+    );
   }
 
   return (
