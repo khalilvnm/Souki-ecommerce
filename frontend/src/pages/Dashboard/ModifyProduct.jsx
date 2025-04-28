@@ -50,7 +50,7 @@ const ModifyProduct = ({ productId, onClose }) => {
         }
       } catch (error) {
         console.log(error);
-        toast.error("Failed to fetch product details");
+        toast.error("Échec de la récupération des détails du produit");
       }
     };
 
@@ -65,13 +65,13 @@ const ModifyProduct = ({ productId, onClose }) => {
     setLoading(true);
 
     if (type === "Select Type") {
-      toast.info("Please Select Your Product Type.");
+      toast.info("Veuillez sélectionner votre Categorie de produit..");
       setLoading(false);
       return;
     }
 
     if (!quantity || quantity < 1) {
-      toast.info("Please enter a valid quantity.");
+      toast.info("Veuillez saisir une quantité valide.");
       setLoading(false);
       return;
     }

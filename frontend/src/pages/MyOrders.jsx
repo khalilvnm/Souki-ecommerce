@@ -50,12 +50,12 @@ const MyOrders = () => {
         );
 
         if (response.data.success) {
-          toast.success('Order deleted successfully');
+          toast.success('Commande supprimée avec succès');
           getOrders(); // Refresh orders list
         }
       } catch (error) {
         console.error('Error deleting order:', error);
-        toast.error(error.response?.data?.message || 'Failed to delete order');
+        toast.error(error.response?.data?.message || 'Échec de la suppression de la commande');
       }
     }
   };

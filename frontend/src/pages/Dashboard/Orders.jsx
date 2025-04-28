@@ -40,7 +40,7 @@ const Orders = () => {
       }
     } catch (error) {
       console.error('Error fetching orders:', error);
-      toast.error('Failed to fetch orders');
+      toast.error('Échec de la récupération des commandes');
     }
   };
 
@@ -68,12 +68,12 @@ const Orders = () => {
         );
 
         if (response.data.success) {
-          toast.success('Order deleted successfully');
+          toast.success('Commande supprimée avec succès');
           fetchOrders(); // Refresh orders list
         }
       } catch (error) {
         console.error('Error deleting order:', error);
-        toast.error(error.response?.data?.message || 'Failed to delete order');
+        toast.error(error.response?.data?.message || 'Échec de la suppression de la commande');
       }
     }
   };

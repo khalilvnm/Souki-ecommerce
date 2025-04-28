@@ -20,7 +20,7 @@ const Cart = () => {
       if (cartQuantity > product.quantity) {
         // Automatically adjust cart quantity if it exceeds available
         setTimeout(() => {
-          toast.warning(`Quantity adjusted for ${product.title} due to stock availability`);
+          toast.warning(`Quantité ajustée pour ${product.title} en raison de la disponibilité des stocks`);
           // Update to maximum available
           addToCartItems(product._id, product.quantity);
         }, 0);

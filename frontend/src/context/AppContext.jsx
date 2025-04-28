@@ -55,13 +55,13 @@ const AppContextProvider = (props) => {
       // First check if we can add the item
       const product = allProducts.find(p => p._id === productId);
       if (!product) {
-        toast.error("Product not found");
+        toast.error("Produit non trouvé");
         return;
       }
 
       const currentQuantity = cartItems[productId] || 0;
       if (currentQuantity + 1 > product.quantity) {
-        toast.error(`Only ${product.quantity} items available. You already have ${currentQuantity} in your cart.`);
+        toast.error(`seulement ${product.quantity} articles disponibles. Vous avez déjà ${currentQuantity} dans votre panier.`);
         return;
       }
 
@@ -113,7 +113,7 @@ const AppContextProvider = (props) => {
       }
     } catch (error) {
       console.error("Delete failed:", error);
-      toast.error("Failed to update cart");
+      toast.error("Échec de la mise à jour du panier");
     }
   };
 
@@ -135,7 +135,7 @@ const AppContextProvider = (props) => {
       toast.success("Produit retiré du panier");
     } catch (error) {
       console.error("Delete failed:", error);
-      toast.error("Failed to remove product from cart");
+      toast.error("Impossible de supprimer le produit du panier");
     }
   };
 

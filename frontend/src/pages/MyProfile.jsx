@@ -48,7 +48,7 @@ const MyProfile = () => {
 
       if (response.data.success) {
         setUser(response.data.user);
-        toast.success("Profile picture updated successfully");
+        toast.success("Photo de profil mise à jour avec succès");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
@@ -69,7 +69,7 @@ const MyProfile = () => {
       if (response.data.success) {
         setUser(response.data.user);
         setIsEditingUsername(false);
-        toast.success("Username updated successfully");
+        toast.success("Nom d'utilisateur mis à jour avec succès");
       }
     } catch (error) {
       toast.error(error.response.data.message || error.message);
@@ -88,7 +88,7 @@ const MyProfile = () => {
           window.localStorage.removeItem("token");
           setToken("");
           navigate("/");
-          toast.success("Account deleted successfully");
+          toast.success("Compte supprimé avec succès");
         }
       } catch (error) {
         toast.error(error.response.data.message || error.message);
@@ -115,10 +115,10 @@ const MyProfile = () => {
       );
       if (response.data.success) {
         setUser(response.data.user);
-        toast.success("Profile picture removed successfully");
+        toast.success("La photo de profil a été supprimée avec succès");
       } 
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to remove profile picture");
+      toast.error(error.response?.data?.message || "Échec de la suppression de la photo de profil");
     }
   };
 

@@ -34,14 +34,14 @@ const ContactUs = () => {
         toast.success("Message envoyé avec succès!");
         setFormData({ name: "", email: "", message: "" }); // Clear form
       } else {
-        toast.error(response.data.message || "Failed to send message");
+        toast.error(response.data.message || "Échec de l'envoi du message");
       }
     } catch (error) {
       console.error("Error details:", error.response || error);
       toast.error(
         error.response?.data?.message || 
         error.message || 
-        "Failed to send message"
+        "Échec de l'envoi du message"
       );
     } finally {
       setLoading(false);

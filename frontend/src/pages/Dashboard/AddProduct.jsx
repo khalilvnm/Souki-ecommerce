@@ -25,19 +25,19 @@ const AddProduct = () => {
     setLoading(true);
     
     if (!image1 && !image2 && !image3 && !image4) {
-      toast.info("Please Select Your Product Image.");
+      toast.info("Veuillez sélectionner l'image de votre produit.");
       setLoading(false);
       return null;
     }
 
     if (type === "Select Type") {
-      toast.info("Please Select Your Product Type.");
+      toast.info("Veuillez sélectionner votre categorie de produit.");
       setLoading(false);
       return;
     }
 
     if (!quantity || quantity < 1) {
-      toast.info("Please enter a valid quantity.");
+      toast.info("Veuillez saisir une quantité valide.");
       setLoading(false);
       return;
     }

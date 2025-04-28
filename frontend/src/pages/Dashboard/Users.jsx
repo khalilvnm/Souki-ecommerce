@@ -59,12 +59,12 @@ const Users = () => {
         }
       );
       if (response.data.success) {
-        toast.success('Seller privileges removed successfully');
+        toast.success('Les privilèges du vendeur ont été supprimés avec succès');
         getUsersDashboard();
       }
     } catch (error) {
       console.error('Error removing seller privileges:', error);
-      toast.error(error.response?.data?.message || 'Failed to remove seller privileges');
+      toast.error(error.response?.data?.message || 'Échec de la suppression des privilèges du vendeur');
     }
   };
 

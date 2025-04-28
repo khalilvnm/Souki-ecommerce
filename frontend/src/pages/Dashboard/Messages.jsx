@@ -24,7 +24,7 @@ const Messages = () => {
       }
     } catch (error) {
       console.error('Error fetching messages:', error);
-      toast.error('Failed to fetch messages');
+      toast.error('Échec de la récupération des messages');
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ const Messages = () => {
       }
     } catch (error) {
       console.error('Error marking message as read:', error);
-      toast.error('Failed to mark message as read');
+      toast.error('Impossible de marquer le message comme lu');
     }
   };
 
@@ -65,11 +65,11 @@ const Messages = () => {
 
         if (response.data.success) {
           setMessages(messages.filter(msg => msg._id !== messageId));
-          toast.success('Message deleted successfully');
+          toast.success('Message supprimé avec succès');
         }
       } catch (error) {
         console.error('Error deleting message:', error);
-        toast.error('Failed to delete message');
+        toast.error('Échec de la suppression du message');
       }
     }
   };
