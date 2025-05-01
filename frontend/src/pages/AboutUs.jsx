@@ -1,6 +1,6 @@
 import { FaHandHoldingHeart, FaUsers } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa6";
-import logo from '../assets/LOGO.png';
+import logo from '../assets/logo2.png';
 
 const AboutUs = () => {
   return (

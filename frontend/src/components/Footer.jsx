@@ -6,7 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaHouse } from "react-icons/fa6";
-import logo from '../assets/LOGO.png';
+import logo from '../assets/logo2.png';
 
 
 const Footer = () => {
