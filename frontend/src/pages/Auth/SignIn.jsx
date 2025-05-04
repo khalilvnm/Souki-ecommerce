@@ -47,6 +47,9 @@ const SignIn = () => {
       const response = await axios.post(backend_url + "/api/users/signin", userDetails);
       if (response.data.success) {
         window.localStorage.setItem("token", response.data.user.token);
+        window.localStorage.setItem("userId", response.data.user._id);
+        window.localStorage.setItem("isSeller", response.data.user.isSeller);
+        window.localStorage.setItem("email", response.data.user.email);
         setToken(response.data.user.token);
         navigate("/");
         setLoading(false);

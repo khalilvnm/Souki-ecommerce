@@ -180,10 +180,57 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+// Unified endpoint for role-based order fetching
+const getOrdersByRole = async (req, res) => {
+  try {
+    const { userDetails, isSeller, email } = req.body;
+    const user = await UserModel.findById(userDetails.id);
+    const isAdmin = user && user.email === process.env.ADMIN_EMAIL && await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+
+    let orders = [];
+    let role = 'user';
+    if (isAdmin) {
+      // Admin: all orders
+      orders = await OrderModel.find({})
+        .populate({
+          path: 'userId',
+          model: 'User',
+          select: 'name email'
+        })
+        .populate({
+          path: 'items.productId',
+          model: 'Product',
+          select: 'title price images userId'
+        })
+        .sort({ createdAt: -1 });
+      role = 'admin';
+    } else if (isSeller || user.isSeller) {
+      // Seller: orders for their products
+      orders = await OrderModel.find({
+        'items.productOwnerId': userDetails.id
+      }).populate('items.productId', 'title price images userId');
+      role = 'seller';
+    } else {
+      // User: their own orders
+      orders = await OrderModel.find({ userId: userDetails.id })
+        .populate({
+          path: 'items.productId',
+          select: 'title price images userId'
+        });
+      role = 'user';
+    }
+    return res.status(200).json({ success: true, orders, role });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });
+  }
+};
+
 export {
   placeOrder,
   getOrdersForUsers,
   getOrdersDashboard,
   getOrdersForProductOwners,
   deleteOrder,
+  getOrdersByRole,
 };

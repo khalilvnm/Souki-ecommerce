@@ -116,7 +116,7 @@ const userSignIn = async (req, res) => {
     // Destructured User For Response Without Password
     const { password, ...other } = user._doc;
 
-    return res.status(201).json({ success: true, user: { ...other, token: token } });
+    return res.status(201).json({ success: true, user: { ...other, token: token, isSeller: user.isSeller, email: user.email } });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: `Internal Server Error => ${error.message}` });

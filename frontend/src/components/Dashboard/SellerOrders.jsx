@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const SellerOrders = () => {
   const { backend_url, token } = useContext(AppContext);
@@ -9,7 +8,7 @@ const SellerOrders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      try {
+      
         const response = await axios.post(
           backend_url + "/api/order/product-owner-orders",
           { userDetails: { id: localStorage.getItem('userId') } },
@@ -21,10 +20,7 @@ const SellerOrders = () => {
         if (response.data.success) {
           setOrders(response.data.orders);
         }
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-        toast.error('Échec de la récupération des commandes');
-      }
+      
     };
 
     fetchOrders();

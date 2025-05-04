@@ -7,41 +7,23 @@ import { FaTrash } from 'react-icons/fa';
 const Orders = () => {
   const { backend_url, token } = useContext(AppContext);
   const [orders, setOrders] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState('user');
 
   const fetchOrders = async () => {
-    try {
-      // First try to fetch all orders (admin view)
-      const adminResponse = await axios.post(
-        backend_url + "/api/order/list-dashboard",
-        { userDetails: { id: localStorage.getItem('userId') } },
+      const userId = localStorage.getItem('userId');
+      const isSeller = localStorage.getItem('isSeller') === 'true';
+      const email = localStorage.getItem('email');
+      const response = await axios.post(
+        backend_url + "/api/order/orders-by-role",
+        { userDetails: { id: userId }, isSeller, email },
         {
           headers: { authorization: "Bearer " + token }
         }
       );
-      
-      if (adminResponse.data.success) {
-        setOrders(adminResponse.data.orders);
-        setIsAdmin(adminResponse.data.message === "Admin");
-        return;
+      if (response.data.success) {
+        setOrders(response.data.orders);
+        setRole(response.data.role);
       }
-
-      // If not admin, fetch seller-specific orders
-      const sellerResponse = await axios.post(
-        backend_url + "/api/order/product-owner-orders",
-        { userDetails: { id: localStorage.getItem('userId') } },
-        {
-          headers: { authorization: "Bearer " + token }
-        }
-      );
-      
-      if (sellerResponse.data.success) {
-        setOrders(sellerResponse.data.orders);
-      }
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-      toast.error('Échec de la récupération des commandes');
-    }
   };
 
   useEffect(() => {
@@ -117,7 +99,7 @@ const Orders = () => {
                   <p><span className="font-semibold">Quantité:</span> {item.quantity}</p>
                   <p><span className="font-semibold">Prix:</span> {item.price} DZ</p>
                 </div>
-                {isAdmin && item.productOwnerId && (
+                {role === 'admin' && item.productOwnerId && (
                   <p className="text-xs text-gray-500 mt-1">Vendeur ID: {item.productOwnerId}</p>
                 )}
               </div>
@@ -131,11 +113,11 @@ const Orders = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 text-center text-third">
-        {isAdmin ? "Tous les Commandes" : "Commandes pour vos produits"}
+        {role === 'admin' ? "Tous les Commandes" : role === 'seller' ? "Commandes pour vos produits" : "Vos Commandes"}
       </h2>
       {orders.length === 0 ? (
         <p className="text-gray-500 text-center">
-          {isAdmin ? "No orders in the system yet" : "Aucune commande pour le moment"}
+          {role === 'admin' ? "No orders in the system yet" : role === 'seller' ? "Aucune commande pour le moment" : "Vous n'avez passé aucune commande"}
         </p>
       ) : (
         <div className="space-y-4">
