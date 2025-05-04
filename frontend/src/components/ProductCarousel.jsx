@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductItem from './ProductItem';
 import { AppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 
 const ProductCarousel = () => {
   const { allProducts } = useContext(AppContext);
@@ -31,9 +32,8 @@ const ProductCarousel = () => {
   }
 
   return (
-
     <div className="py-8 ">
-      <h2 className="text-[36px] font-semibold drop-shadow-lg text-center text-third font-inter">Tous les Produits</h2>
+      <h2 className="text-[36px] font-semibold drop-shadow-lg text-center text-third font-inter">Produits suggérés</h2>
       <div className="w-full h-[2px] bg-third mx-auto mb-8 rounded-full" />
 
       <Carousel
@@ -51,7 +51,7 @@ const ProductCarousel = () => {
         itemClass="px-2"
         className="relative z-0"
       >
-        {allProducts.map((product) => (
+        {allProducts.slice(0, 10).map((product) => (
           <div key={product._id}>
             <ProductItem
               id={product._id}
@@ -64,6 +64,11 @@ const ProductCarousel = () => {
           </div>
         ))}
       </Carousel>
+      <div className="flex justify-end mt-4">
+      <Link to="/shop" className="bg-third text-fifth font-semibold py-2 px-6 rounded-full hover:bg-second transition-all duration-300 shadow-md">
+            Voir tout
+          </Link>
+      </div>
     </div>
   );
 };

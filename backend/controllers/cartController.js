@@ -22,7 +22,7 @@ const addToCartItems = async (req, res) => {
 
     // Get User
     const user = await UserModel.findById(userDetails.id);
-    let cartItemsData = await user.cartData; // {a:1, b:1}
+    let cartItemsData = await user.cartData; 
 
     // Check if adding this item would exceed available quantity
     const currentCartQuantity = cartItemsData[productId] || 0;

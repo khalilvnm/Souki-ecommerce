@@ -1,10 +1,10 @@
-
 import { useContext, useEffect, useState } from 'react';
 import { productResponsive } from '../assets/assets';
 import { AppContext } from '../context/AppContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductItem from './ProductItem';
+import { Link } from 'react-router-dom';
 
 const AccessoireSection = () => {
   const { allProducts } = useContext(AppContext);
@@ -23,7 +23,7 @@ const AccessoireSection = () => {
       {/* Shop accessoire Products */}
       <div>
         <Carousel responsive={productResponsive} className="z-0">
-          {accessoireProducts.map((product, index) => (
+          {accessoireProducts.slice(0, 5).map((product, index) => (
             <div className='mr-3' key={index}>
               <ProductItem 
                 id={product._id} 
@@ -38,6 +38,11 @@ const AccessoireSection = () => {
             </div>
           ))}
         </Carousel>
+        <div className="flex justify-end mt-4">
+          <Link to="/accessoire" className="bg-third text-fifth font-semibold py-2 px-6 rounded-full hover:bg-second transition-all duration-300 shadow-md">
+            Voir tout
+          </Link>
+        </div>
       </div>
     </div>
   );

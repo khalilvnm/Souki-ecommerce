@@ -9,7 +9,11 @@ const AppContextProvider = (props) => {
   const currency = " DZD";
   const [allProducts, setAllProducts] = useState([]);
   const [allProductsDashboard, setAllProductsDashboard] = useState([]);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(() => {
+    // Initialize cart from localStorage if available
+    const savedCart = localStorage.getItem("cartItems");
+    return savedCart ? JSON.parse(savedCart) : {};
+  });
   const [ordersDashboard, setOrdersDashboard] = useState([]);
   const [orderMessage, setOrderMessage] = useState("");
 
@@ -78,12 +82,14 @@ const AppContextProvider = (props) => {
         });
         if (response.data.success) {
           setCartItems(cartData);
+          localStorage.setItem("cartItems", JSON.stringify(cartData));
           toast.success(response.data.message);
         } else {
           toast.error(response.data.message);
         }
       } else {
         setCartItems(cartData);
+        localStorage.setItem("cartItems", JSON.stringify(cartData));
       }
     } catch (error) {
       console.error(error);
@@ -103,6 +109,7 @@ const AppContextProvider = (props) => {
       }
   
       setCartItems(updatedCart);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   
       if (token) {
         await axios.post(
@@ -132,6 +139,7 @@ const AppContextProvider = (props) => {
       }
       
       setCartItems(productData);
+      localStorage.setItem("cartItems", JSON.stringify(productData));
       toast.success("Produit retiré du panier");
     } catch (error) {
       console.error("Delete failed:", error);
@@ -156,12 +164,16 @@ const AppContextProvider = (props) => {
         headers: { authorization: "Bearer " + token }
       });
       if (response.data.success) {
-        setCartItems(response.data.cart.cartData);
+        // Get local cart data
+        const localCart = JSON.parse(localStorage.getItem("cartItems") || "{}");
+        // Merge backend cart with local cart
+        const mergedCart = { ...localCart, ...response.data.cart.cartData };
+        setCartItems(mergedCart);
+        localStorage.setItem("cartItems", JSON.stringify(mergedCart));
       }
     } catch (error) {
       console.log(error);
-      // eslint-disable-next-line no-undef
-      return toast.error(error.response.data.message || response.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
@@ -183,11 +195,15 @@ const AppContextProvider = (props) => {
 
   useEffect(() => {
     if (token) {
+      // When logging in, get cart data from backend and merge with local cart
       getCartData();
       getOrdersDashboard();
+    } else {
+      // When logging out, keep the local cart but clear the backend cart
+      const localCart = JSON.parse(localStorage.getItem("cartItems") || "{}");
+      setCartItems(localCart);
     }
   }, [token]);
-
 
   useEffect(() => {
     getAllProducts();

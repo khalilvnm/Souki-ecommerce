@@ -11,6 +11,9 @@ const Shop = () => {
   const [searchParams] = useSearchParams();
   const searchValue = searchParams.get('search');
   const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   // Add Type
   const addType = (productType) => {
@@ -61,6 +64,17 @@ const Shop = () => {
   useEffect(() => {
     applyProductFilter();
   }, [allProducts, types, searchValue, priceRange]);
+
+  // Reset to first page when filters/search change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [allProducts, types, searchValue, priceRange]);
+
+  // Pagination calculations
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = productsFiltering.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(productsFiltering.length / productsPerPage);
 
   return (
     <div className=' my-20 flex flex-col sm:flex-row gap-10 min-h-[70vh] px-[3vw] sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
@@ -142,7 +156,7 @@ const Shop = () => {
         <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {
-            productsFiltering.map((product, index) => (
+            currentProducts.map((product, index) => (
               <ShopProductItem 
                 key={index} 
                 id={product._id} 
@@ -156,6 +170,34 @@ const Shop = () => {
             ))
           }
         </div>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 gap-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="rounded-full px-4 py-2 bg-gray-200 disabled:opacity-50"
+            >
+              &larr;
+            </button>
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`rounded-full px-4 py-2 ${currentPage === i + 1 ? 'border-2 border-black bg-white' : 'bg-gray-200'}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="rounded-full px-4 py-2 bg-gray-200 disabled:opacity-50"
+            >
+              &rarr;
+            </button>
+          </div>
+        )}
       </div>
 
     </div>

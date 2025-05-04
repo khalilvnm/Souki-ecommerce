@@ -37,7 +37,7 @@ const getAllMessages = async (req, res) => {
     // Check if user is admin
     const user = await UserModel.findById(userDetails.id);
     const isAdmin = user && user.email === process.env.ADMIN_EMAIL && 
-                   await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+    await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
 
     if (!isAdmin) {
       return res.status(403).json({ 
