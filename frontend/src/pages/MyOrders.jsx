@@ -38,28 +38,7 @@ const MyOrders = () => {
     }
   };
 
-  // Delete Order
-  const handleDeleteOrder = async (orderId) => {
-    if (window.confirm('Are you sure you want to delete this order?')) {
-      try {
-        const response = await axios.delete(
-          `${backend_url}/api/order/delete-order/${orderId}`,
-          {
-            headers: { authorization: "Bearer " + token },
-            data: { userDetails: { id: localStorage.getItem('userId') } }
-          }
-        );
-
-        if (response.data.success) {
-          toast.success('Commande supprimée avec succès');
-          getOrders(); // Refresh orders list
-        }
-      } catch (error) {
-        console.error('Error deleting order:', error);
-        toast.error(error.response?.data?.message || 'Échec de la suppression de la commande');
-      }
-    }
-  };
+  // Delete Order functionality removed - only admins can delete orders
 
   // Get status icon based on status
   const getStatusIcon = (status) => {
@@ -129,13 +108,7 @@ const MyOrders = () => {
               
               return (
                 <div key={order._id} className="relative bg-primary p-4 rounded-lg transform hover:scale-105 transition-all duration-300">
-                <button
-                  onClick={() => handleDeleteOrder(order._id)}
-                  className="absolute top-4 right-4 text-red-500 hover:text-red-700"
-                  title="Supprimer la commande"
-                >
-                  <FaTrash />
-                </button>
+                {/* Delete button removed - only admins can delete orders */}
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <h3 className="font-bold font-inter text-third drop-shadow-lg text-xl mb-2 ">Commande ID</h3>

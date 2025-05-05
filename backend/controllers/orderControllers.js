@@ -148,18 +148,12 @@ const deleteOrder = async (req, res) => {
     // Check if user is admin
     const user = await UserModel.findById(userDetails.id);
     const isAdmin = user && user.email === process.env.ADMIN_EMAIL && 
-                   await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+     await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
 
-    // Check if user is authorized to delete (admin, buyer, or seller of any product in the order)
-    const isAuthorized = 
-      isAdmin || // Admin
-      order.userId.toString() === userDetails.id || // Buyer
-      order.items.some(item => item.productOwnerId.toString() === userDetails.id); // Seller
-
-    if (!isAuthorized) {
+    if (!isAdmin) {
       return res.status(403).json({ 
         success: false, 
-        message: "Not authorized to delete this order" 
+        message: "Only administrators can delete orders" 
       });
     }
 

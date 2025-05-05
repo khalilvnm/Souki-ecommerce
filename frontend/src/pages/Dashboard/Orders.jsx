@@ -127,13 +127,15 @@ const Orders = () => {
     
     return (
       <div key={order._id} className="border border-second bg-fifth text-third p-4 rounded-lg shadow relative">
-        <button
-          onClick={() => handleDeleteOrder(order._id)}
-          className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors duration-300"
-          title="Supprimer la commande"
-        >
-          <FaTrash size={18} />
-        </button>
+        {role === 'admin' && (
+          <button
+            onClick={() => handleDeleteOrder(order._id)}
+            className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors duration-300"
+            title="Supprimer la commande"
+          >
+            <FaTrash size={18} />
+          </button>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base">
           <div className="bg-fifth p-3 rounded-lg">
             <h3 className="font-semibold text-base sm:text-lg mb-2 text-primary">Détails de la commande</h3>
