@@ -7,13 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #606c38;
+  background-color: #dda15e;
   z-index: 9999;
 }
 
 .loading .spin {
   font-size: 55px;
-  color: #dda15e;
+  color: #6E3919;
   animation: spinner 1s infinite linear;
 }
 
