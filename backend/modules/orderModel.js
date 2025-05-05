@@ -13,7 +13,8 @@ const orderSchema = new mongoose.Schema({
     }], 
     required: true 
   },
-  amount: { type: Number, required: true }
+  amount: { type: Number, required: true },
+  status: { type: String, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], default: 'pending' }
 }, { minimize: false, timestamps: true });
 
 // Order Model 

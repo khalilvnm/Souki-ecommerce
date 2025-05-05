@@ -57,7 +57,13 @@ const TopNavbar = () => {
   // logout Handler
   const logoutHandler = () => {
     window.localStorage.removeItem("token");
+    // Don't remove cartItems to persist cart across sessions
+    // window.localStorage.removeItem("cartItems");
+    window.localStorage.removeItem("userId");
     setToken("");
+    setIsAdmin(false);
+    setIsSeller(false);
+    setSellerStatus(null);
     navigate("/signin");
   };
 

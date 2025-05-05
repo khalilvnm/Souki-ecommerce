@@ -226,6 +226,58 @@ const getOrdersByRole = async (req, res) => {
   }
 };
 
+// Update Order Status
+const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { userDetails, status } = req.body;
+
+    // Find the order
+    const order = await OrderModel.findById(orderId);
+    
+    if (!order) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Order not found" 
+      });
+    }
+
+    // Check if user is admin
+    const user = await UserModel.findById(userDetails.id);
+    const isAdmin = user && user.email === process.env.ADMIN_EMAIL && 
+    await bcrypt.compare(process.env.ADMIN_PASSWORD, user.password);
+
+    // Check if user is authorized to update (admin or seller of any product in the order)
+    const isAuthorized = 
+      isAdmin || // Admin
+      order.items.some(item => item.productOwnerId.toString() === userDetails.id); // Seller
+
+    if (!isAuthorized) {
+      return res.status(403).json({ 
+        success: false, 
+        message: "Not authorized to update this order" 
+      });
+    }
+
+    // Update the order status
+    order.status = status;
+    await order.save();
+
+    return res.status(200).json({ 
+      success: true, 
+      message: "Order status updated successfully",
+      order: order
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ 
+      success: false, 
+      message: `Internal Server Error => ${error.message}` 
+    });
+  }
+};
+
 export {
   placeOrder,
   getOrdersForUsers,
@@ -233,4 +285,5 @@ export {
   getOrdersForProductOwners,
   deleteOrder,
   getOrdersByRole,
+  updateOrderStatus,
 };

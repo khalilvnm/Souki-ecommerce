@@ -1,6 +1,6 @@
 import express from "express";
 import userAuth from './../middlewares/UserAuth.js';
-import { getOrdersDashboard, getOrdersForUsers, placeOrder, getOrdersForProductOwners, deleteOrder, getOrdersByRole } from "../controllers/orderControllers.js";
+import { getOrdersDashboard, getOrdersForUsers, placeOrder, getOrdersForProductOwners, deleteOrder, getOrdersByRole, updateOrderStatus } from "../controllers/orderControllers.js";
 
 const orderRouter = express.Router();
 
@@ -15,5 +15,7 @@ orderRouter.post("/product-owner-orders", userAuth, getOrdersForProductOwners);
 orderRouter.post("/orders-by-role", userAuth, getOrdersByRole);
 
 orderRouter.delete("/delete-order/:orderId", userAuth, deleteOrder);
+
+orderRouter.put("/update-status/:orderId", userAuth, updateOrderStatus);
 
 export default orderRouter;

@@ -98,7 +98,8 @@ const MyProfile = () => {
 
   // Logout Handler
   const logoutHandler = () => {
-    window.localStorage.removeItem("token");  
+    window.localStorage.removeItem("token");
+    // Keeping cartItems in localStorage to persist cart across sessions
     setToken("");
     navigate("/");
   };
