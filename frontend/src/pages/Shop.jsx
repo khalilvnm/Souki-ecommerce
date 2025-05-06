@@ -151,7 +151,7 @@ const Shop = () => {
       {/* Right Side */}
       <div className="flex-1">
         <p className="text-3xl font-bold font-inter text-third pb-1">
-          {searchValue ? `Search Results for "${searchValue}"` : "Tous les produits"}
+          {searchValue ? `Résultats de recherche pour "${searchValue}"` : "Tous les produits"}
         </p>
         <div className="w-full h-[2px] bg-third mb-6 rounded-full" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">

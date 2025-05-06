@@ -31,6 +31,7 @@ import Bijoux from './pages/Bijoux';
 import BainBeaute from './pages/BainBeaute';
 import BecomeSeller from './pages/BecomeSeller';
 import SellerApplications from './pages/Dashboard/SellerApplications';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   const isDashboard = useMatch("/dashboard/*");
@@ -40,21 +41,25 @@ const App = () => {
       <ToastContainer position='top-right' theme='colored' />
       {
         isDashboard ? (
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route index element={<Details />} />
-              <Route path="add-product" element={<AddProduct />} />
-              <Route path="products-list" element={<ProductsList />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="users" element={<Users />} />
-              <Route path="messages" element={<Messages />} />
-              <Route path="seller-applications" element={<SellerApplications />} />
-            </Route>
-          </Routes>
+          <>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route index element={<Details />} />
+                <Route path="add-product" element={<AddProduct />} />
+                <Route path="products-list" element={<ProductsList />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="users" element={<Users />} />
+                <Route path="messages" element={<Messages />} />
+                <Route path="seller-applications" element={<SellerApplications />} />
+              </Route>
+            </Routes>
+          </>
         ) : (
           <div className="flex flex-col flex-grow">
             <TopNavbar />
             <BotNavbar />
+            <ScrollToTop />
             <div className="pt-[136px] flex-grow">
               <Routes>
                 <Route path='/' element={<Home />} />
