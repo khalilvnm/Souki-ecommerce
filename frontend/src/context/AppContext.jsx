@@ -177,6 +177,12 @@ const AppContextProvider = (props) => {
     }
   };
 
+  // Clear cart items (used after order placement)
+  const clearCart = () => {
+    setCartItems({});
+    localStorage.setItem("cartItems", JSON.stringify({}));
+  };
+
   // Get Orders Dashboard
   const getOrdersDashboard = async () => {
     try {
@@ -226,7 +232,8 @@ const AppContextProvider = (props) => {
     deleteProductFromCart: deleteProductFromCart,
     getOrdersDashboard: getOrdersDashboard,
     ordersDashboard: ordersDashboard,
-    orderMessage: orderMessage
+    orderMessage: orderMessage,
+    clearCart: clearCart
   };
 
   return (

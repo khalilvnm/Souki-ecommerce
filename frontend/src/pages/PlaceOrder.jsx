@@ -11,7 +11,8 @@ const PlaceOrder = () => {
     cartItems,
     currency,
     backend_url,
-    token
+    token,
+    clearCart
   } = useContext(AppContext);
 
   const [productsOrder, setProductsOrder] = useState([]);
@@ -91,6 +92,8 @@ const PlaceOrder = () => {
         }
       );
       if (response.data.success) {
+        // Clear cart items after successful order
+        clearCart();
         toast.success(response.data.message);
         window.location.replace("/my-orders");
       }
